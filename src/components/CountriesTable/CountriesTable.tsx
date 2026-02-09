@@ -7,16 +7,21 @@ type CountriesTableProps = {
 
 export default function CountriesTable({ countries }: CountriesTableProps) {
   return (
-    <table>
+    <table className={'table'}>
       <thead>
         <tr>
+          <th>#</th>
           <th>Name</th>
           <th>Capital</th>
+          <th>Flag</th>
+          <th>Population</th>
+          <th>Continents</th>
+          <th>URL</th>
         </tr>
       </thead>
       <tbody>
-        {countries.map((c) => (
-          <CountryRow key={c.name} country={c} />
+        {countries.map((c, i) => (
+          <CountryRow key={c.name} country={c} index={i} />
         ))}
       </tbody>
     </table>

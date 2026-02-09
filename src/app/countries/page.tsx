@@ -16,7 +16,11 @@ export default function CountriesPage() {
       .catch(console.error);
   }, []);
 
-  const filteredCountries = countries;
+  const filteredCountries = [...countries]
+    // .filter((c) =>
+    //   selectedLetter ? c.name.startsWith(selectedLetter) : true
+    // )
+    .sort((a, b) => a.name.localeCompare(b.name));
 
   return (
     <>
