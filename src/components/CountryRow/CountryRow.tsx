@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import { CountryResponse } from '@/types/country';
 import { formatList, formatPopulation } from '@/utils/utils';
+import styles from './CountryRow.module.css';
 
 type CountryRowProps = {
   country: CountryResponse;
@@ -9,24 +10,39 @@ type CountryRowProps = {
 
 export default function CountryRow({ country, index }: CountryRowProps) {
   return (
-    <tr>
-      <td>{index + 1}</td>
-      <td>{country.name}</td>
-      <td>{country.capital ?? '—'}</td>
-      <td style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+    <tr className={styles.countryRow}>
+      <td className={styles.countryIndex}>{index + 1}</td>
+      <td className={styles.countryName}>{country.name}</td>
+      <td className={styles.countryCapital}>{country.capital ?? '—'}</td>
+
+      <td className={styles.countryFlag}>
         {country.flag && (
           <Image
             src={country.flag}
             alt={`${country.name} flag`}
             width={24}
             height={16}
-            style={{ objectFit: 'cover' }}
           />
         )}
       </td>
-      <td>{formatPopulation(country.population ?? 0)}</td>
-      <td>{formatList(country.continents) ?? '—'}</td>
-      <td>{country.mapUrl ?? '—'}</td>
+
+      <td className={styles.countryPopulation}>
+        {formatPopulation(country.population ?? 0)}
+      </td>
+
+      <td className={styles.countryContinents}>
+        {formatList(country.continents) ?? '—'}
+      </td>
+
+      <td className={styles.countryMap}>
+        {country.mapUrl ? (
+          <a href={country.mapUrl} target="_blank" rel="noopener noreferrer">
+            Link
+          </a>
+        ) : (
+          '—'
+        )}
+      </td>
     </tr>
   );
 }

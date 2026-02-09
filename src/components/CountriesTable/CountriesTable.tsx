@@ -1,4 +1,8 @@
+'use client';
+
+import { useState } from 'react';
 import { CountryResponse } from '@/types/country';
+import styles from './CountriesTable.module.css';
 import CountryRow from '@/components/CountryRow/CountryRow';
 
 type CountriesTableProps = {
@@ -6,21 +10,47 @@ type CountriesTableProps = {
 };
 
 export default function CountriesTable({ countries }: CountriesTableProps) {
+  const [sortOrder, setSortOrder] = useState<'asc' | 'desc' | null>(null);
+
+  const handleSortClick = () => {
+    setSortOrder((prev) =>
+      prev === 'asc' ? 'desc' : prev === 'desc' ? null : 'asc'
+    );
+  };
+
+  const displayedCountries =
+    sortOrder === null
+      ? countries
+      : [...countries].sort((a, b) => {
+          const popA = a.population ?? 0;
+          const popB = b.population ?? 0;
+          return sortOrder === 'asc' ? popA - popB : popB - popA;
+        });
+
   return (
-    <table className={'table'}>
+    <table className={`table ${styles.all_countries_table}`}>
       <thead>
         <tr>
           <th>#</th>
           <th>Name</th>
           <th>Capital</th>
           <th>Flag</th>
-          <th>Population</th>
+          <th
+            style={{ cursor: 'pointer', userSelect: 'none' }}
+            onClick={handleSortClick}
+            title="Click to sort"
+          >
+            Population{' '}
+            <span style={{ opacity: 0.4 }}>
+              {sortOrder === 'asc' ? '↑' : sortOrder === 'desc' ? '↓' : '⇅'}
+            </span>
+          </th>
           <th>Continents</th>
           <th>URL</th>
         </tr>
       </thead>
       <tbody>
-        {countries.map((c, i) => (
+        {displayedCountries.map((c, i) => (
           <CountryRow key={c.name} country={c} index={i} />
         ))}
       </tbody>
