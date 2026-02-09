@@ -1,0 +1,28 @@
+.alphabet {
+    display: flex;
+    gap: var(--space-sm);
+    flex-wrap: wrap;
+    margin: 0 auto;
+    justify-content: space-between;
+    padding: var(--space-sm) 0;
+}
+
+.letter {
+    padding: 4px 8px;
+    border-radius: var(--radius-sm);
+    text-decoration: underline;
+    font-weight: var(--fw-medium);
+    cursor: pointer;
+    color: var(--color-accent);
+    transition: background-color 0.2s ease, var(--transition-color);
+}
+
+.letter:hover {
+    color: var(--color-bg);
+    background-color: var(--color-accent);
+}
+
+.active {
+    color: white;
+    background-color: var(--color-accent);
+}
