@@ -1,0 +1,35 @@
+.all_countries_table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: var(--fs-sm);
+    background-color: var(--color-surface);
+}
+
+.all_countries_table thead {
+    background-color: var(--color-bg);
+}
+
+.all_countries_table th,
+.all_countries_table td {
+    padding: var(--space-sm) var(--space-md);
+    text-align: left;
+    border: 1px solid var(--color-border);
+    vertical-align: middle;
+}
+
+.all_countries_table th {
+    font-weight: var(--fw-bold);
+    color: var(--color-text-secondary);
+}
+
+.all_countries_table tbody tr:nth-child(odd) {
+    background-color: var(--color-surface);
+}
+
+.all_countries_table tbody tr:nth-child(even) {
+    background-color: var(--color-bg);
+}
+
+.all_countries_table tbody tr:hover {
+    background-color: var(--color-border);
+}

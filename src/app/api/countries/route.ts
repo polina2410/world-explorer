@@ -1,11 +1,10 @@
-import { CountriesSchema } from '@/schemas/country';
-import { CountryResponse } from '@/types/country';
+import { CountriesResponseSchema, CountriesSchema } from '@/schemas/country';
 
 export async function GET() {
   try {
     const res = await fetch(
-      'https://restcountries.com/v3.1/all?fields=name,capital',
-      { cache: 'no-store' }
+      'https://restcountries.com/v3.1/all?fields=name,capital,flags,population,continents,maps,independent',
+      { headers: { Accept: 'application/json' }, cache: 'no-store' }
     );
 
     if (!res.ok) {
@@ -15,24 +14,25 @@ export async function GET() {
       );
     }
 
-    const json = await res.json();
+    const raw = CountriesSchema.parse(await res.json());
+    const independentCountries = raw.filter((c) => c.independent === true);
 
-    const parsed = CountriesSchema.safeParse(json);
-
-    if (!parsed.success) {
-      return Response.json(
-        { error: 'Invalid countries data' },
-        { status: 500 }
-      );
-    }
-
-    const countries: CountryResponse[] = parsed.data.map((c) => ({
+    const countries = independentCountries.map((c) => ({
       name: c.name.common,
-      capital: c.capital?.[0] ?? '—',
+      capital: Array.isArray(c.capital) ? c.capital[0] : '—',
+      flag: c.flags?.svg ?? '',
+      population: c.population ?? 0,
+      continents: c.continents ?? '',
+      mapUrl: c.maps?.googleMaps ?? '',
     }));
+
+    CountriesResponseSchema.parse(countries);
 
     return Response.json(countries);
   } catch (err) {
-    return Response.json({ error: 'Internal server error' }, { status: 500 });
+    return Response.json(
+      { error: `Internal server error ${err}` },
+      { status: 500 }
+    );
   }
 }

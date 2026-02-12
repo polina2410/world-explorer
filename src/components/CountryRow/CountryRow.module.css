@@ -1,0 +1,39 @@
+.countryRow td {
+    white-space: nowrap;
+}
+
+.countryIndex {
+    text-align: left;
+}
+
+.countryName {
+    font-weight: var(--fw-semibold);
+}
+
+.countryFlag {
+    text-align: center;
+}
+
+.countryFlag img {
+    border-radius: 2px;
+    display: block;
+    margin: 0 auto;
+    object-fit: cover;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
+}
+
+.countryPopulation {
+    text-align: right;
+}
+
+.countryContinents {
+    white-space: normal;
+}
+
+.countryMap a {
+    font-weight: var(--fw-semibold);
+}
+
+.countryMap a:hover {
+    text-decoration: underline;
+}
