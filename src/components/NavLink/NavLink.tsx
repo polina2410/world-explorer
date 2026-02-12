@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { ReactNode } from 'react';
 import { usePathname } from 'next/navigation';
 import styles from './NavLink.module.css';
-import { AppRoute } from '@/styles/routes';
+import { AppRoute } from '@/routes/apiRoutes';
 
 type NavLinkProps = {
   href: AppRoute;

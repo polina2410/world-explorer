@@ -3,7 +3,7 @@ import { CountriesResponseSchema, CountriesSchema } from '@/schemas/country';
 export async function GET() {
   try {
     const res = await fetch(
-      'https://restcountries.com/v3.1/all?fields=name,capital,flags,population,continents,maps',
+      'https://restcountries.com/v3.1/all?fields=name,capital,flags,population,continents,maps,independent',
       { headers: { Accept: 'application/json' }, cache: 'no-store' }
     );
 
@@ -15,8 +15,9 @@ export async function GET() {
     }
 
     const raw = CountriesSchema.parse(await res.json());
+    const independentCountries = raw.filter((c) => c.independent === true);
 
-    const countries = raw.map((c) => ({
+    const countries = independentCountries.map((c) => ({
       name: c.name.common,
       capital: Array.isArray(c.capital) ? c.capital[0] : '—',
       flag: c.flags?.svg ?? '',

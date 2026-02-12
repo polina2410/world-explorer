@@ -12,9 +12,10 @@ type AlphabetProps = {
 export default function Alphabet({ onSelectAction }: AlphabetProps) {
   const [activeLetter, setActiveLetter] = useState<string | null>(null);
 
-  const handleClick = (letter: string | null) => {
-    setActiveLetter(letter);
-    onSelectAction?.(letter);
+  const handleClick = (letter: string) => {
+    const newLetter = activeLetter === letter ? null : letter;
+    setActiveLetter(newLetter);
+    onSelectAction?.(newLetter);
   };
 
   return (

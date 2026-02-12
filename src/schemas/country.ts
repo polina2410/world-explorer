@@ -17,6 +17,7 @@ export const CountrySchema = z.object({
       googleMaps: z.string().url().optional(),
     })
     .optional(),
+  independent: z.boolean().optional(),
 });
 
 export const CountriesSchema = z.array(CountrySchema);
@@ -28,6 +29,7 @@ export const CountryResponseSchema = z.object({
   population: z.number().optional(),
   continents: z.array(z.string()),
   mapUrl: z.string().optional(),
+  independent: z.boolean().optional(),
 });
 
 export const CountriesResponseSchema = z.array(CountryResponseSchema);

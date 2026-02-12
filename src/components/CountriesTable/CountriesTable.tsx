@@ -7,9 +7,13 @@ import CountryRow from '@/components/CountryRow/CountryRow';
 
 type CountriesTableProps = {
   countries: CountryResponse[];
+  selectedLetter: string | null;
 };
 
-export default function CountriesTable({ countries }: CountriesTableProps) {
+export default function CountriesTable({
+  countries,
+  selectedLetter,
+}: CountriesTableProps) {
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc' | null>(null);
 
   const handleSortClick = () => {
@@ -50,9 +54,18 @@ export default function CountriesTable({ countries }: CountriesTableProps) {
         </tr>
       </thead>
       <tbody>
-        {displayedCountries.map((c, i) => (
-          <CountryRow key={c.name} country={c} index={i} />
-        ))}
+        {displayedCountries.length === 0 ? (
+          <tr>
+            <td colSpan={7} style={{ textAlign: 'center', padding: '2rem' }}>
+              No countries found
+              {selectedLetter && ` starting with "${selectedLetter}"`}.
+            </td>
+          </tr>
+        ) : (
+          displayedCountries.map((c, i) => (
+            <CountryRow key={c.name} country={c} index={i} />
+          ))
+        )}
       </tbody>
     </table>
   );
