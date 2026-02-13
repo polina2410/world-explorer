@@ -1,5 +1,6 @@
 .all_countries_table {
     width: 100%;
+    table-layout: fixed;
     border-collapse: collapse;
     font-size: var(--fs-sm);
     background-color: var(--color-surface);
@@ -17,6 +18,12 @@
     vertical-align: middle;
 }
 
+.all_countries_table td {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
 .all_countries_table th {
     font-weight: var(--fw-bold);
     color: var(--color-text-secondary);
@@ -32,4 +39,39 @@
 
 .all_countries_table tbody tr:hover {
     background-color: var(--color-border);
+}
+
+.all_countries_table th:nth-child(1),
+.all_countries_table td:nth-child(1) {
+    width: 60px;
+}
+
+.all_countries_table th:nth-child(2),
+.all_countries_table td:nth-child(2) {
+    width: 180px;
+}
+
+.all_countries_table th:nth-child(3),
+.all_countries_table td:nth-child(3) {
+    width: 160px;
+}
+
+.all_countries_table th:nth-child(4),
+.all_countries_table td:nth-child(4) {
+    width: 100px;
+}
+
+.all_countries_table th:nth-child(5),
+.all_countries_table td:nth-child(5) {
+    width: 140px;
+}
+
+.all_countries_table th:nth-child(6),
+.all_countries_table td:nth-child(6) {
+    width: 180px;
+}
+
+.all_countries_table th:nth-child(7),
+.all_countries_table td:nth-child(7) {
+    width: 120px;
 }
