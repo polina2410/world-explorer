@@ -17,7 +17,7 @@ export default function Tooltip({ content, children }: TooltipProps) {
     const rect = wrapperRef.current.getBoundingClientRect();
     setCoords({
       top: rect.top + window.scrollY,
-      left: rect.left + window.scrollX,
+      left: rect.left + rect.width / 2 + window.scrollX,
     });
   }, [hovered]);
 
@@ -34,7 +34,7 @@ export default function Tooltip({ content, children }: TooltipProps) {
           <div
             className={styles.tooltip}
             style={{
-              top: coords.top - 40,
+              top: coords.top,
               left: coords.left,
             }}
           >

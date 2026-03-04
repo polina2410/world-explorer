@@ -1,12 +1,12 @@
 'use client';
 
-import Alphabet from '@/components/Alphabet/Alphabet';
+import Alphabet from '@/components/Countries/Alphabet/Alphabet';
 import MainTitle from '@/components/MainTitle/MainTitle';
-import CountriesTable from '@/components/CountriesTable/CountriesTable';
+import CountriesTable from '@/components/Countries/CountriesTable/CountriesTable';
 import { useEffect, useState } from 'react';
 import { CountryResponse } from '@/types/country';
 import { API_ROUTES } from '@/routes/apiRoutes';
-import Loading from '@/components/Loader/Loader';
+import Loading from '@/components/Loading/Loading';
 
 export default function CountriesPage() {
   const [countries, setCountries] = useState<CountryResponse[] | null>(null);

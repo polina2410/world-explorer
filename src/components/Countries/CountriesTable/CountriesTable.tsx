@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { CountryResponse } from '@/types/country';
 import styles from './CountriesTable.module.css';
-import CountryRow from '@/components/CountryRow/CountryRow';
+import CountryRow from '@/components/Countries/CountriesTable/CountryRow/CountryRow';
 
 type CountriesTableProps = {
   countries: CountryResponse[];
