@@ -2,6 +2,7 @@ import type { ReactNode } from 'react';
 import '@/styles/globals.css';
 import Header from '@/components/Header/Header';
 import type { Metadata } from 'next';
+import { CountriesProvider } from '@/hooks/CountriesProvider';
 
 type RootLayoutProps = {
   children: ReactNode;
@@ -19,7 +20,9 @@ export default function RootLayout({ children }: RootLayoutProps) {
     <html lang="en">
       <body>
         <Header />
-        <main className="container">{children}</main>
+        <CountriesProvider>
+          <main className="container">{children}</main>
+        </CountriesProvider>
       </body>
     </html>
   );

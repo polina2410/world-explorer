@@ -3,25 +3,17 @@
 import Alphabet from '@/components/Countries/Alphabet/Alphabet';
 import MainTitle from '@/components/MainTitle/MainTitle';
 import CountriesTable from '@/components/Countries/CountriesTable/CountriesTable';
-import { useEffect, useState } from 'react';
-import { CountryResponse } from '@/types/country';
-import { API_ROUTES } from '@/routes/apiRoutes';
+import { useState } from 'react';
 import Loading from '@/components/Loading/Loading';
+import { useCountries } from '@/hooks/CountriesProvider';
 
 export default function CountriesPage() {
-  const [countries, setCountries] = useState<CountryResponse[] | null>(null);
+  const { countries, loading, error } = useCountries();
   const [selectedLetter, setSelectedLetter] = useState<string | null>(null);
 
-  useEffect(() => {
-    fetch(API_ROUTES.countries)
-      .then((res) => res.json())
-      .then((data) => setCountries(data))
-      .catch(console.error);
-  }, []);
-
-  if (!countries) {
-    return <Loading />;
-  }
+  if (loading) return <Loading />;
+  if (error) return <p>Error: {error}</p>;
+  if (!countries) return <p>No countries available</p>;
 
   const filteredCountries = [...countries]
     .filter((country) =>
