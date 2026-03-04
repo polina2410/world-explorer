@@ -4,6 +4,7 @@
     border-collapse: collapse;
     font-size: var(--fs-sm);
     background-color: var(--color-surface);
+    margin-bottom: 3rem;
 }
 
 .all_countries_table thead {

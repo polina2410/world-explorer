@@ -4,5 +4,5 @@
     margin: var(--space-lg) 0;
     line-height: var(--lh-base);
     color: var(--color-text-primary);
-    text-align: left;
+    text-align: center;
 }
