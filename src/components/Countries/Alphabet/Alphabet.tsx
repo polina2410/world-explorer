@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import styles from './Alphabet.module.css';
+import Tooltip from '@/components/Tooltip/Tooltip';
 
 const ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
 
@@ -21,17 +22,21 @@ export default function Alphabet({ onSelectAction }: AlphabetProps) {
   return (
     <div className={`${styles.alphabet} table`}>
       {ALPHABET.map((letter) => (
-        <a
+        <Tooltip
           key={letter}
-          href="#"
-          onClick={(e) => {
-            e.preventDefault();
-            handleClick(letter);
-          }}
-          className={`${styles.letter} ${activeLetter === letter ? styles.active : ''}`}
+          content={`Click to show countries that start with the letter "${letter}"`}
         >
-          {letter}
-        </a>
+          <a
+            href="#"
+            onClick={(e) => {
+              e.preventDefault();
+              handleClick(letter);
+            }}
+            className={`${styles.letter} ${activeLetter === letter ? styles.active : ''}`}
+          >
+            {letter}
+          </a>
+        </Tooltip>
       ))}
     </div>
   );

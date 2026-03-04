@@ -2,6 +2,7 @@ import Image from 'next/image';
 import { CountryResponse } from '@/types/country';
 import { formatList, formatPopulation } from '@/utils/utils';
 import styles from './CountryRow.module.css';
+import Tooltip from '@/components/Tooltip/Tooltip';
 
 type CountryRowProps = {
   country: CountryResponse;
@@ -36,9 +37,16 @@ export default function CountryRow({ country, index }: CountryRowProps) {
 
       <td className={styles.countryMap}>
         {country.mapUrl ? (
-          <a href={country.mapUrl} target="_blank" rel="noopener noreferrer">
-            Link
-          </a>
+          <Tooltip content={`View ${country.name} on the map`}>
+            <a
+              href={country.mapUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.truncated}
+            >
+              Link
+            </a>
+          </Tooltip>
         ) : (
           '—'
         )}

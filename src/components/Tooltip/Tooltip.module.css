@@ -1,0 +1,20 @@
+.wrapper {
+    display: inline-block;
+    position: relative;
+}
+
+.tooltip {
+    position: absolute;
+    background: var(--color-text-secondary);
+    color: var(--color-bg);
+    padding: 10px 14px;
+    border-radius: var(--radius-md);
+    font-size: var(--fs-base);
+    font-weight: var(--fw-medium);
+    white-space: normal;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--color-border);
+    z-index: var(--z-modal);
+    pointer-events: none;
+    transform: translate(-50%, -120%);
+}
