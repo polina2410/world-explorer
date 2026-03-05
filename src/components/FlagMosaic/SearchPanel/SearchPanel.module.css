@@ -1,16 +1,17 @@
-.button {
+.searchInput {
     padding: 6px 12px;
     border-radius: var(--radius-sm);
     border: 1px solid var(--color-border);
     background: var(--color-surface);
-    cursor: pointer;
+    min-width: 180px;
     font-size: var(--fs-sm);
     font-weight: var(--fw-regular);
-    color: var(--color-text-primary);
+    color: var(--color-text);
     transition: background 0.2s ease, color 0.2s ease;
 }
 
-.button:hover {
-    background: var(--color-accent);
-    color: var(--color-surface);
+.searchInput:focus {
+    outline: none;
+    border-color: var(--color-accent);
+    background: var(--color-surface);
 }
