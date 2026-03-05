@@ -81,8 +81,8 @@ export default function CountryRow({ country, index }: CountryRowProps) {
             <Image
               src={zoomedFlag}
               alt="Zoomed flag"
-              width={0} // width will scale automatically
-              height={0} // height auto
+              width={0}
+              height={0}
               style={{
                 maxWidth: '90%',
                 maxHeight: '80%',

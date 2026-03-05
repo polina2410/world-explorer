@@ -36,6 +36,13 @@ export default function FlagMosaic() {
 
   useCloseOnAnyClick({ onCloseAction: closeCard, ignoreRef: containerRef });
 
+  const getFlagStyle = (countryName: string) => {
+    const specialFlags = ['Nepal', 'Switzerland', 'Vatican City'];
+    return specialFlags.includes(countryName)
+      ? { transform: 'scale(0.85)' }
+      : {};
+  };
+
   return (
     <DataLoader
       data={countries}
@@ -63,13 +70,17 @@ export default function FlagMosaic() {
                   className={`${styles.flagInner} ${isFlipped ? styles.flipped : ''}`}
                 >
                   <div className={styles.flagFront}>
-                    <Image
-                      src={country.flag}
-                      alt={country.name}
-                      width={90}
-                      height={60}
-                      className={styles.flagImage}
-                    />
+                    <div className={`${styles.flagImageWrapper} flex-center`}>
+                      <Image
+                        src={country.flag}
+                        alt={country.name}
+                        width={90}
+                        height={60}
+                        className={styles.flagImage}
+                        style={getFlagStyle(country.name)}
+                        sizes="90px"
+                      />
+                    </div>
                   </div>
 
                   <div className={`${styles.flagBack} flex-center`}>
