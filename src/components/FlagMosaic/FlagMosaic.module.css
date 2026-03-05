@@ -84,17 +84,17 @@
 
 .flagImage[alt*="Nepal"] {
     transform: scale(0.85);
+}
 
-    .dimmed {
-        opacity: 0.35;
-        filter: grayscale(80%) blur(1px);
-    }
+.dimmed {
+    opacity: 0.35;
+    filter: grayscale(80%) blur(1px);
+}
 
-    .active {
-        transform: scale(1.25);
-        z-index: 10;
-        position: relative;
-    }
+.active {
+    transform: scale(1.25);
+    z-index: 10;
+    position: relative;
 }
 
 .controls {

@@ -7,6 +7,7 @@ import styles from './FlagMosaic.module.css';
 import { useCloseOnAnyClick } from '@/hooks/useCloseOnAnyClick';
 import DataLoader from '@/components/DataLoader/DataLoader';
 import { EMPTY_COUNTRIES_MESSAGE } from '@/constants';
+import SearchPanel from '@/components/FlagMosaic/SearchPanel/SearchPanel';
 
 export default function FlagMosaic() {
   const { countries, loading, error } = useCountries();
@@ -71,15 +72,12 @@ export default function FlagMosaic() {
   return (
     <>
       <div className={styles.controls}>
-        <input
-          type="text"
-          placeholder="Search country..."
+        <SearchPanel
           value={searchTerm}
-          onChange={(e) => {
-            setSearchTerm(e.target.value);
+          onChangeAction={(value) => {
+            setSearchTerm(value);
             setFlipped(null);
           }}
-          className={styles.searchInput}
         />
 
         <button
@@ -116,7 +114,9 @@ export default function FlagMosaic() {
         {() =>
           hasNoResults ? (
             <div className={styles.noResults}>
-              No countries found matching "{searchTerm}"
+              {searchTerm
+                ? `No countries found matching "${searchTerm}"`
+                : 'No countries found. Try adjusting your filters.'}
             </div>
           ) : (
             <div ref={containerRef} className={styles.mosaicContainer}>
