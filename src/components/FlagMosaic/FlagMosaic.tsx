@@ -8,6 +8,8 @@ import { useCloseOnAnyClick } from '@/hooks/useCloseOnAnyClick';
 import DataLoader from '@/components/DataLoader/DataLoader';
 import { EMPTY_COUNTRIES_MESSAGE } from '@/constants';
 import SearchPanel from '@/components/FlagMosaic/SearchPanel/SearchPanel';
+import Button from '../Button/Button';
+import Dropdown from '@/components/FlagMosaic/Dropdown/Dropdown';
 
 export default function FlagMosaic() {
   const { countries, loading, error } = useCountries();
@@ -80,29 +82,23 @@ export default function FlagMosaic() {
           }}
         />
 
-        <button
+        <Button
           onClick={() => {
             setSortOrder((prev) => (prev === 'asc' ? 'desc' : 'asc'));
             setFlipped(null);
           }}
         >
-          Sort: {sortOrder === 'asc' ? 'A–Z' : 'Z–A'}
-        </button>
+          Sort: {sortOrder === 'asc' ? 'A – Z' : 'Z – A'}
+        </Button>
 
-        <select
+        <Dropdown
           value={selectedContinent}
-          onChange={(e) => {
-            setSelectedContinent(e.target.value);
+          options={['All', ...continents]}
+          onChangeAction={(value) => {
+            setSelectedContinent(value);
             setFlipped(null);
           }}
-        >
-          <option value="All">All Continents</option>
-          {continents.map((continent) => (
-            <option key={continent} value={continent}>
-              {continent}
-            </option>
-          ))}
-        </select>
+        />
       </div>
 
       <DataLoader
