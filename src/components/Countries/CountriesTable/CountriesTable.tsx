@@ -40,12 +40,12 @@ export default function CountriesTable({
           <th>Capital</th>
           <th>Flag</th>
           <th
-            style={{ cursor: 'pointer', userSelect: 'none' }}
+            className={styles.sortColumn}
             onClick={handleSortClick}
             title="Click to sort"
           >
             Population{' '}
-            <span style={{ opacity: 0.4 }}>
+            <span className={styles.sortArrow}>
               {sortOrder === 'asc' ? '↑' : sortOrder === 'desc' ? '↓' : '⇅'}
             </span>
           </th>

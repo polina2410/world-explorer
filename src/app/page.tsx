@@ -12,7 +12,7 @@ export default function HomePage() {
         their capitals, population, flags, continents, and even access their
         location on Google Maps.
       </PageDescription>
-      <SectionTitle>Learn world flags here:</SectionTitle>
+      <SectionTitle>Click to see the country&#39;s name:</SectionTitle>
       <FlagMosaic />
     </main>
   );
