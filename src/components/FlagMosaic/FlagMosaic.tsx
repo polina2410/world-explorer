@@ -6,10 +6,11 @@ import Image from 'next/image';
 import styles from './FlagMosaic.module.css';
 import { useCloseOnAnyClick } from '@/hooks/useCloseOnAnyClick';
 import DataLoader from '@/components/DataLoader/DataLoader';
-import { EMPTY_COUNTRIES_MESSAGE } from '@/constants';
+import { EMPTY_COUNTRIES_MESSAGE, SPECIAL_FLAGS } from '@/constants';
 import SearchPanel from '@/components/FlagMosaic/SearchPanel/SearchPanel';
 import Button from '../Button/Button';
 import Dropdown from '@/components/FlagMosaic/Dropdown/Dropdown';
+import { getContinents } from '@/utils/getContinents';
 
 export default function FlagMosaic() {
   const { countries, loading, error } = useCountries();
@@ -42,9 +43,7 @@ export default function FlagMosaic() {
 
   useCloseOnAnyClick({ onCloseAction: closeCard, ignoreRef: containerRef });
 
-  const continents = Array.from(
-    new Set((countries ?? []).flatMap((c) => c.continents))
-  ).sort();
+  const continents = getContinents(countries);
 
   const processedCountries = (countries ?? [])
     .filter((country) =>
@@ -65,8 +64,7 @@ export default function FlagMosaic() {
     !loading && processedCountries.length === 0 && (countries ?? []).length > 0;
 
   const getFlagStyle = (countryName: string) => {
-    const specialFlags = ['Nepal', 'Switzerland', 'Vatican City'];
-    return specialFlags.includes(countryName)
+    return SPECIAL_FLAGS.includes(countryName)
       ? { transform: 'scale(0.85)' }
       : {};
   };

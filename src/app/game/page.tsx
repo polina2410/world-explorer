@@ -1,24 +1,21 @@
 'use client';
 
-import { useState } from 'react';
-import ContinentSelector from '@/components/Game/ContinentSelector/ContinentSelector';
 import MainTitle from '@/components/MainTitle/MainTitle';
 import { useCountries } from '@/hooks/CountriesProvider';
 import DataLoader from '@/components/DataLoader/DataLoader';
-import { EMPTY_COUNTRIES_MESSAGE } from '@/constants';
+import { EMPTY_COUNTRIES_MESSAGE, QUESTION_OPTIONS } from '@/constants';
+import { getContinents } from '@/utils/getContinents';
+import { useState } from 'react';
+import Button from '@/components/Button/Button';
+import ContinentSelector from '@/components/Game/ContinentSelector/ContinentSelector';
 
 export default function GamePage() {
   const { countries, loading, error } = useCountries();
   const [selectedContinent, setSelectedContinent] = useState<string>('All');
+  const [questionCount, setQuestionCount] = useState<number>(5);
+  const [gameStarted, setGameStarted] = useState(false);
 
-  const continents = Array.from(
-    new Set(countries?.flatMap((c) => c.continents) ?? [])
-  ).sort();
-
-  // const filteredCountries =
-  //   selectedContinent === 'All'
-  //     ? countries
-  //     : countries.filter((c) => c.continents.includes(selectedContinent));
+  const continents = getContinents(countries);
 
   return (
     <DataLoader
@@ -31,11 +28,26 @@ export default function GamePage() {
         <>
           <MainTitle>Guess The Capital</MainTitle>
 
-          <ContinentSelector
-            continents={continents}
-            selectedContinent={selectedContinent}
-            onSelect={setSelectedContinent}
-          />
+          {!gameStarted && (
+            <>
+              <ContinentSelector
+                continents={continents}
+                selectedContinent={selectedContinent}
+                onSelectAction={setSelectedContinent}
+              />
+
+              {QUESTION_OPTIONS.map((count) => (
+                <Button
+                  key={count}
+                  onClick={() => setQuestionCount(count)}
+                  active={questionCount === count}
+                >
+                  {count} questions
+                </Button>
+              ))}
+              <Button onClick={() => setGameStarted(true)}>Start Game</Button>
+            </>
+          )}
         </>
       )}
     </DataLoader>

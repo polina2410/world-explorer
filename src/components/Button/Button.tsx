@@ -5,11 +5,20 @@ import styles from './Button.module.css';
 
 type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   children: React.ReactNode;
+  active?: boolean;
 };
 
-export default function Button({ children, ...props }: ButtonProps) {
+export default function Button({
+  children,
+  active = false,
+  className = '',
+  ...props
+}: ButtonProps) {
   return (
-    <button className={styles.button} {...props}>
+    <button
+      className={`${styles.button} ${active ? styles.active : ''} ${className}`}
+      {...props}
+    >
       {children}
     </button>
   );

@@ -14,3 +14,9 @@
     background: var(--color-accent);
     color: var(--color-surface);
 }
+
+.active {
+    background: var(--color-accent);
+    color: var(--color-surface);
+    border-color: var(--color-accent);
+}

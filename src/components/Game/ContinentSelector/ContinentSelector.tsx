@@ -1,35 +1,36 @@
 'use client';
 
 import styles from './ContinentSelector.module.css';
+import Button from '@/components/Button/Button';
 
 type ContinentSelectorProps = {
   continents: string[];
   selectedContinent: string;
-  onSelect: (continent: string) => void;
+  onSelectAction: (continent: string) => void;
 };
 
 export default function ContinentSelector({
   continents,
   selectedContinent,
-  onSelect,
+  onSelectAction,
 }: ContinentSelectorProps) {
   return (
     <div className={styles.container}>
-      <button
-        className={`${styles.button} ${selectedContinent === 'All' ? styles.active : ''}`}
-        onClick={() => onSelect('All')}
+      <Button
+        active={selectedContinent === 'All'}
+        onClick={() => onSelectAction('All')}
       >
         All
-      </button>
+      </Button>
 
       {continents.map((continent) => (
-        <button
+        <Button
           key={continent}
-          className={`${styles.button} ${selectedContinent === continent ? styles.active : ''}`}
-          onClick={() => onSelect(continent)}
+          active={selectedContinent === continent}
+          onClick={() => onSelectAction(continent)}
         >
           {continent}
-        </button>
+        </Button>
       ))}
     </div>
   );
