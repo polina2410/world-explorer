@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useState } from 'react';
+import { useMemo, useRef, useState } from 'react';
 import { useCountries } from '@/hooks/CountriesProvider';
 import Image from 'next/image';
 import styles from './FlagMosaic.module.css';
@@ -45,20 +45,22 @@ export default function FlagMosaic() {
 
   const continents = getContinents(countries);
 
-  const processedCountries = (countries ?? [])
-    .filter((country) =>
-      selectedContinent === 'All'
-        ? true
-        : country.continents.includes(selectedContinent)
-    )
-    .filter((country) =>
-      country.name.toLowerCase().includes(searchTerm.toLowerCase())
-    )
-    .sort((a, b) =>
-      sortOrder === 'asc'
-        ? a.name.localeCompare(b.name)
-        : b.name.localeCompare(a.name)
-    );
+  const processedCountries = useMemo(() => {
+    return (countries ?? [])
+      .filter((country) =>
+        selectedContinent === 'All'
+          ? true
+          : country.continents.includes(selectedContinent)
+      )
+      .filter((country) =>
+        country.name.toLowerCase().includes(searchTerm.toLowerCase())
+      )
+      .sort((a, b) =>
+        sortOrder === 'asc'
+          ? a.name.localeCompare(b.name)
+          : b.name.localeCompare(a.name)
+      );
+  }, [countries, selectedContinent, searchTerm, sortOrder]);
 
   const hasNoResults =
     !loading && processedCountries.length === 0 && (countries ?? []).length > 0;

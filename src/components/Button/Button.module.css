@@ -21,3 +21,17 @@
     color: var(--color-surface);
     border-color: var(--color-accent);
 }
+
+.large {
+    background: var(--color-accent);
+    padding: 64px 86px;
+    font-size: var(--fs-lg);
+    font-weight: var(--fw-medium);
+    min-width: 220px;
+    transform: scale(1);
+    transition: transform 0.15s ease;
+}
+
+.large:hover {
+    transform: scale(1.05);
+}
