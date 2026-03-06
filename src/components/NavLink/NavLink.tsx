@@ -4,10 +4,10 @@ import Link from 'next/link';
 import { ReactNode } from 'react';
 import { usePathname } from 'next/navigation';
 import styles from './NavLink.module.css';
-import { AppRoute } from '@/routes/apiRoutes';
+import { APP_ROUTES } from '@/routes/appRoutes';
 
 type NavLinkProps = {
-  href: AppRoute;
+  href: (typeof APP_ROUTES)[keyof typeof APP_ROUTES];
   children: ReactNode;
   variant?: 'nav' | 'logo';
 };

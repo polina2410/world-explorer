@@ -20,6 +20,8 @@ export default function GamePage() {
       loading={loading}
       error={error}
       emptyMessage={EMPTY_COUNTRIES_MESSAGE}
-    ></DataLoader>
+    >
+      {() => <div>123</div>}
+    </DataLoader>
   );
 }

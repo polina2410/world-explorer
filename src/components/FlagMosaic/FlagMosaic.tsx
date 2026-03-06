@@ -65,12 +65,6 @@ export default function FlagMosaic() {
   const hasNoResults =
     !loading && processedCountries.length === 0 && (countries ?? []).length > 0;
 
-  const getFlagStyle = (countryName: string) => {
-    return SPECIAL_FLAGS.includes(countryName)
-      ? { transform: 'scale(0.85)' }
-      : {};
-  };
-
   return (
     <>
       <div className={styles.controls}>
@@ -145,7 +139,6 @@ export default function FlagMosaic() {
                             width={90}
                             height={60}
                             className={styles.flagImage}
-                            style={getFlagStyle(country.name)}
                             sizes="90px"
                           />
                         </div>

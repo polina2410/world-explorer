@@ -28,10 +28,10 @@
     font-size: var(--fs-lg);
     font-weight: var(--fw-medium);
     min-width: 220px;
-    transform: scale(1);
+    transform: var(--scale-basic);
     transition: transform 0.15s ease;
 }
 
 .large:hover {
-    transform: scale(1.05);
+    transform: var(--scale-md);
 }

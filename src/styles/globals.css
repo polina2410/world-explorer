@@ -45,6 +45,11 @@
     --z-sticky: 200;
     --z-modal: 300;
     --z-toast: 400;
+
+    --scale-basic: scale(1);
+    --scale-md: scale(1.05);
+    --scale-lg: scale(1.15);
+    --scale-xl: scale(1.3);
 }
 
 *,
