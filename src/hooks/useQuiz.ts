@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { QuizQuestion } from '../utils/generateQuestions';
+import { QuizQuestion } from '@/utils/generateQuestions';
 
 type QuizHook = {
   current: QuizQuestion;

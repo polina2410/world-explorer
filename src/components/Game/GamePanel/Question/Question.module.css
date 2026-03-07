@@ -8,19 +8,21 @@
     display: flex;
     gap: 12px;
     flex-wrap: wrap;
+    margin-top: 16px;
 }
 
-.progressBarContainer {
+.progressWrapper {
     height: 8px;
-    width: 100%;
-    background: #e5e7eb;
+    background: var(--color-border);
     border-radius: 4px;
-    margin: 8px 0 16px;
     overflow: hidden;
+    margin: 12px 0 24px 0;
 }
 
-.progressBarFill {
+.progressBar {
     height: 100%;
-    background: var(--color-accent);
-    transition: width 0.5s ease;
+    width: 0;
+    border-radius: 4px;
+    transition: width 0.5s ease-in-out;
+    background: linear-gradient(90deg, #cce7ff, var(--color-great));
 }

@@ -1,10 +1,16 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Button from '@/components/Button/Button';
 import PageDescription from '@/components/PageDescription/PageDescription';
 import SecondaryTitle from '@/components/SecondaryTitle/SecondaryTitle';
-import { QuizQuestion } from '@/utils/generateQuestions';
+import styles from './Question.module.css';
+
+export type QuizQuestion = {
+  country: string;
+  correct: string;
+  options: string[];
+};
 
 type QuestionProps = {
   question: QuizQuestion;
@@ -20,6 +26,11 @@ export default function Question({
   onAnswer,
 }: QuestionProps) {
   const [selected, setSelected] = useState<string | null>(null);
+  const [progress, setProgress] = useState(0);
+
+  useEffect(() => {
+    setProgress(Math.round((questionNumber / totalQuestions) * 100));
+  }, [questionNumber, totalQuestions]);
 
   function handleClick(option: string) {
     setSelected(option);
@@ -43,10 +54,16 @@ export default function Question({
       <PageDescription>
         Question {questionNumber} / {totalQuestions}
       </PageDescription>
+
+      <div className={styles.progressWrapper}>
+        <div className={styles.progressBar} style={{ width: `${progress}%` }} />
+      </div>
+
       <SecondaryTitle>
         What is the capital of {question.country}?
       </SecondaryTitle>
-      <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
+
+      <div className={styles.optionsWrapper}>
         {question.options.map((option) => (
           <Button
             key={option}
