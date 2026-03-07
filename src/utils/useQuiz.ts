@@ -1,7 +1,15 @@
 import { useState } from 'react';
 import { QuizQuestion } from '@/utils/generateQuestions';
 
-export function useQuiz(questions: QuizQuestion[]) {
+export function useQuiz(
+  questions:
+    | any[]
+    | {
+        country: string;
+        correct: string | undefined;
+        options: (string | undefined)[];
+      }[]
+) {
   const [index, setIndex] = useState(0);
   const [score, setScore] = useState(0);
 

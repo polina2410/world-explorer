@@ -1,3 +1,5 @@
+import { CountryResponse } from '@/types/country';
+
 export type QuizQuestion = {
   country: string;
   correct: string;
@@ -16,10 +18,14 @@ function shuffle<T>(arr: T[]) {
 }
 
 export function generateQuestions(
-  countries: any[],
+  countries: CountryResponse[],
   continent: string,
   count: number
-): QuizQuestion[] {
+): {
+  country: string;
+  correct: string | undefined;
+  options: (string | undefined)[];
+}[] {
   const filtered = countries.filter(
     (c) =>
       c.capital && (continent === 'All' || c.continents.includes(continent))

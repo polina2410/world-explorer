@@ -3,7 +3,6 @@
 import Button from '@/components/Button/Button';
 import styles from './GameSetup.module.css';
 import { QUESTION_OPTIONS } from '@/constants';
-import PageDescription from '@/components/PageDescription/PageDescription';
 import SecondaryTitle from '@/components/SecondaryTitle/SecondaryTitle';
 
 type GameSetupProps = {
