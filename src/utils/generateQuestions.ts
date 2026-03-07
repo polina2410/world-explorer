@@ -1,4 +1,8 @@
-import { CountryResponse } from '@/types/country';
+export type Country = {
+  name: string;
+  capital?: string;
+  continents: string[];
+};
 
 export type QuizQuestion = {
   country: string;
@@ -6,44 +10,38 @@ export type QuizQuestion = {
   options: string[];
 };
 
-function shuffle<T>(arr: T[]) {
+function shuffle<T>(arr: T[]): T[] {
   const copy = [...arr];
-
   for (let i = copy.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
     [copy[i], copy[j]] = [copy[j], copy[i]];
   }
-
   return copy;
 }
 
 export function generateQuestions(
-  countries: CountryResponse[],
+  countries: Country[],
   continent: string,
   count: number
-): {
-  country: string;
-  correct: string | undefined;
-  options: (string | undefined)[];
-}[] {
+): QuizQuestion[] {
+  // only countries with a capital
   const filtered = countries.filter(
-    (c) =>
-      c.capital && (continent === 'All' || c.continents.includes(continent))
+    (c): c is Required<Pick<Country, 'name' | 'capital' | 'continents'>> =>
+      !!c.capital && (continent === 'All' || c.continents.includes(continent))
   );
 
   const selected = shuffle(filtered).slice(0, count);
 
   return selected.map((country) => {
-    const wrong = shuffle(
-      filtered.filter((c) => c.name !== country.name && c.capital)
-    )
-      .slice(0, 3)
-      .map((c) => c.capital);
+    // pick 3 wrong capitals
+    const wrongCapitals = shuffle(
+      filtered.filter((c) => c.name !== country.name).map((c) => c.capital)
+    ).slice(0, 3);
 
     return {
       country: country.name,
       correct: country.capital,
-      options: shuffle([...wrong, country.capital]),
+      options: shuffle([country.capital, ...wrongCapitals]),
     };
   });
 }

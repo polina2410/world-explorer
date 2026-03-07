@@ -40,7 +40,6 @@
     letter-spacing: 0.06em;
     min-width: 260px;
     margin: var(--space-xl) 0;
-    border-radius: var(--radius-lg);
     box-shadow: var(--shadow-md);
     transform: var(--scale-basic);
 }

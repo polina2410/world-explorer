@@ -3,10 +3,12 @@
 import SecondaryTitle from '@/components/SecondaryTitle/SecondaryTitle';
 import styles from './Result.module.css';
 import { useConfetti } from '@/hooks/useConfetti';
+import Button from '@/components/Button/Button';
 
-type Props = {
+type ResultProps = {
   score: number;
   total: number;
+  onRestart: () => void;
 };
 
 type ResultThreshold = {
@@ -24,19 +26,13 @@ const RESULT_THRESHOLDS: ResultThreshold[] = [
     className: styles.excellent,
   },
   { min: 70, max: 99, message: 'Great Job!', className: styles.great },
-  {
-    min: 0,
-    max: 69,
-    message: 'Keep Practicing!',
-    className: styles.tryAgain,
-  },
+  { min: 0, max: 69, message: 'Keep Practicing!', className: styles.tryAgain },
 ];
 
-export default function Result({ score, total }: Props) {
+export default function Result({ score, total, onRestart }: ResultProps) {
   useConfetti(3000);
 
   const percentage = Math.round((score / total) * 100);
-
   const threshold = RESULT_THRESHOLDS.find(
     (t) => percentage >= t.min && percentage <= t.max
   );
@@ -50,6 +46,9 @@ export default function Result({ score, total }: Props) {
         <strong className={styles.highlight}>{percentage}%</strong>)
       </p>
       {threshold && <p className={threshold.className}>{threshold.message}</p>}
+      <Button variant="start" size="md" onClick={onRestart}>
+        Start again
+      </Button>
     </div>
   );
 }

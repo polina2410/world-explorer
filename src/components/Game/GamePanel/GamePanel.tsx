@@ -2,22 +2,26 @@
 
 import { useCountries } from '@/hooks/CountriesProvider';
 import { useMemo } from 'react';
-import { generateQuestions } from '@/utils/generateQuestions';
-
+import { generateQuestions, QuizQuestion } from '@/utils/generateQuestions';
 import Question from './Question/Question';
 import Loading from '@/components/Loading/Loading';
-import { useQuiz } from '@/utils/useQuiz';
-import Result from '@/components/Game/GamePanel/Result/Result';
+import { useQuiz } from '@/hooks/useQuiz';
+import Result from './Result/Result';
 
-type Props = {
+type GamePanelProps = {
   continent: string;
   questionCount: number;
+  onRestart: () => void;
 };
 
-export default function GamePanel({ continent, questionCount }: Props) {
+export default function GamePanel({
+  continent,
+  questionCount,
+  onRestart,
+}: GamePanelProps) {
   const { countries } = useCountries();
 
-  const questions = useMemo(() => {
+  const questions: QuizQuestion[] = useMemo(() => {
     if (!countries) return [];
     return generateQuestions(countries, continent, questionCount);
   }, [countries, continent, questionCount]);
@@ -27,7 +31,9 @@ export default function GamePanel({ continent, questionCount }: Props) {
   if (!countries || questions.length === 0) return <Loading />;
 
   if (quiz.finished) {
-    return <Result score={quiz.score} total={quiz.total} />;
+    return (
+      <Result score={quiz.score} total={quiz.total} onRestart={onRestart} />
+    );
   }
 
   return (

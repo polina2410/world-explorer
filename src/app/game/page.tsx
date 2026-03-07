@@ -23,6 +23,12 @@ export default function GamePage() {
 
   const continents = getContinents(countries);
 
+  function handleRestart() {
+    setSelectedContinent(null);
+    setQuestionCount(null);
+    setPhase('setup');
+  }
+
   return (
     <DataLoader
       data={countries}
@@ -35,12 +41,10 @@ export default function GamePage() {
           {phase === 'start' && (
             <>
               <MainTitle>Countries Quiz 🌍</MainTitle>
-
               <PageDescription>
                 Choose a continent and number of questions. Then guess the
                 correct capital of each country.
               </PageDescription>
-
               <Button
                 variant="start"
                 size="lg"
@@ -69,6 +73,7 @@ export default function GamePage() {
               <GamePanel
                 continent={selectedContinent}
                 questionCount={questionCount}
+                onRestart={handleRestart}
               />
             )}
         </div>
