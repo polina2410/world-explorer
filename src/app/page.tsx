@@ -1,6 +1,6 @@
-import MainTitle from '@/components/MainTitle/MainTitle';
-import PageDescription from '@/components/PageDescription/PageDescription';
-import FlagMosaic from '@/components/FlagMosaic/FlagMosaic';
+import MainTitle from '@/components/UI/MainTitle/MainTitle';
+import PageDescription from '@/components/UI/PageDescription/PageDescription';
+import FlagMosaic from '@/components/pages/FlagMosaic/FlagMosaic';
 
 export default function HomePage() {
   return (

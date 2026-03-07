@@ -1,11 +1,11 @@
 'use client';
 
-import Alphabet from '@/components/Countries/Alphabet/Alphabet';
-import MainTitle from '@/components/MainTitle/MainTitle';
-import CountriesTable from '@/components/Countries/CountriesTable/CountriesTable';
+import Alphabet from '@/components/pages/Alphabet/Alphabet';
+import MainTitle from '@/components/UI/MainTitle/MainTitle';
+import CountriesTable from '@/components/pages/CountriesTable/CountriesTable';
 import { useState } from 'react';
 import { useCountries } from '@/hooks/CountriesProvider';
-import DataLoader from '@/components/DataLoader/DataLoader';
+import DataLoader from '@/components/UI/DataLoader/DataLoader';
 import { EMPTY_COUNTRIES_MESSAGE } from '@/constants';
 
 export default function CountriesPage() {

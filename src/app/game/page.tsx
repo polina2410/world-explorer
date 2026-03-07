@@ -1,15 +1,15 @@
 'use client';
 
 import { useCountries } from '@/hooks/CountriesProvider';
-import DataLoader from '@/components/DataLoader/DataLoader';
+import DataLoader from '@/components/UI/DataLoader/DataLoader';
 import { EMPTY_COUNTRIES_MESSAGE } from '@/constants';
 import { getContinents } from '@/utils/getContinents';
 import { useState } from 'react';
-import Button from '@/components/Button/Button';
-import PageDescription from '@/components/PageDescription/PageDescription';
-import MainTitle from '@/components/MainTitle/MainTitle';
-import GameSetup from '@/components/Game/GameSetup/GameSetup';
-import GamePanel from '@/components/Game/GamePanel/GamePanel';
+import Button from '@/components/UI/Button/Button';
+import PageDescription from '@/components/UI/PageDescription/PageDescription';
+import MainTitle from '@/components/UI/MainTitle/MainTitle';
+import GameSetup from '@/components/pages/Game/GameSetup/GameSetup';
+import GamePanel from '@/components/pages/Game/GamePanel/GamePanel';
 
 export default function GamePage() {
   type GamePhase = 'start' | 'setup' | 'quiz';

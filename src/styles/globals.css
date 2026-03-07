@@ -1,20 +1,20 @@
 @import url("https://unpkg.com/leaflet@1.9.5/dist/leaflet.css");
 
 :root {
-    --color-bg: #f0f4f8;
+    --color-bg: #f9f9f9;
     --color-surface: #ffffff;
     --color-danger: #64748b;
     --color-great: #3b82f6;
     --color-success: #0f766e;
     --color-text-primary: #1f2937;
     --color-text-secondary: #4b5563;
-    --color-border: #e0e6ed;
-    --color-accent: #2563eb;
+    --color-border: #d1d5db;
+    --color-accent: #3b82f6;
 
-    --font-sans: system-ui;
+    --font-sans: 'Inter', system-ui, sans-serif;
 
-    --lh-base: 1.5;
-    --lh-tight: 1.25;
+    --lh-base: 1.6;
+    --lh-tight: 1.4;
 
     --fw-light: 300;
     --fw-regular: 400;
@@ -31,15 +31,15 @@
     --space-xs: 4px;
     --space-sm: 8px;
     --space-md: 16px;
-    --space-lg: 24px;
-    --space-xl: 32px;
+    --space-lg: 32px;
+    --space-xl: 48px;
 
     --radius-sm: 4px;
     --radius-md: 8px;
     --radius-lg: 12px;
 
-    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
-    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.06);
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.02);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.03);
 
     --transition-color: color 0.2s ease;
 
@@ -107,7 +107,6 @@ p {
 a {
     text-decoration: none;
     color: var(--color-accent);
-    transition: var(--transition-color);
 }
 
 a:hover {
@@ -130,12 +129,19 @@ a.active {
     width: 100%;
     display: flex;
     flex-direction: column;
+    padding-inline: var(--space-md);
 }
 
 .table {
     max-width: 1000px;
     margin-inline: auto;
     margin-top: var(--space-lg);
+}
+
+.table th, .table td {
+    padding: var(--space-sm) var(--space-md);
+    border-bottom: 1px solid var(--color-border);
+    text-align: left;
 }
 
 .flex-between {
