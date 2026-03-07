@@ -6,7 +6,7 @@
     min-width: 180px;
     font-size: var(--fs-sm);
     font-weight: var(--fw-regular);
-    color: var(--color-text);
+    color: var(--color-text-primary);
     transition: background 0.2s ease, color 0.2s ease;
 }
 

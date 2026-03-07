@@ -1,15 +1,16 @@
 'use client';
 
-import { useRef, useState } from 'react';
+import { useMemo, useRef, useState } from 'react';
 import { useCountries } from '@/hooks/CountriesProvider';
 import Image from 'next/image';
 import styles from './FlagMosaic.module.css';
 import { useCloseOnAnyClick } from '@/hooks/useCloseOnAnyClick';
 import DataLoader from '@/components/DataLoader/DataLoader';
-import { EMPTY_COUNTRIES_MESSAGE } from '@/constants';
+import { EMPTY_COUNTRIES_MESSAGE, SPECIAL_FLAGS } from '@/constants';
 import SearchPanel from '@/components/FlagMosaic/SearchPanel/SearchPanel';
 import Button from '../Button/Button';
 import Dropdown from '@/components/FlagMosaic/Dropdown/Dropdown';
+import { getContinents } from '@/utils/getContinents';
 
 export default function FlagMosaic() {
   const { countries, loading, error } = useCountries();
@@ -42,34 +43,27 @@ export default function FlagMosaic() {
 
   useCloseOnAnyClick({ onCloseAction: closeCard, ignoreRef: containerRef });
 
-  const continents = Array.from(
-    new Set((countries ?? []).flatMap((c) => c.continents))
-  ).sort();
+  const continents = getContinents(countries);
 
-  const processedCountries = (countries ?? [])
-    .filter((country) =>
-      selectedContinent === 'All'
-        ? true
-        : country.continents.includes(selectedContinent)
-    )
-    .filter((country) =>
-      country.name.toLowerCase().includes(searchTerm.toLowerCase())
-    )
-    .sort((a, b) =>
-      sortOrder === 'asc'
-        ? a.name.localeCompare(b.name)
-        : b.name.localeCompare(a.name)
-    );
+  const processedCountries = useMemo(() => {
+    return (countries ?? [])
+      .filter((country) =>
+        selectedContinent === 'All'
+          ? true
+          : country.continents.includes(selectedContinent)
+      )
+      .filter((country) =>
+        country.name.toLowerCase().includes(searchTerm.toLowerCase())
+      )
+      .sort((a, b) =>
+        sortOrder === 'asc'
+          ? a.name.localeCompare(b.name)
+          : b.name.localeCompare(a.name)
+      );
+  }, [countries, selectedContinent, searchTerm, sortOrder]);
 
   const hasNoResults =
     !loading && processedCountries.length === 0 && (countries ?? []).length > 0;
-
-  const getFlagStyle = (countryName: string) => {
-    const specialFlags = ['Nepal', 'Switzerland', 'Vatican City'];
-    return specialFlags.includes(countryName)
-      ? { transform: 'scale(0.85)' }
-      : {};
-  };
 
   return (
     <>
@@ -145,7 +139,6 @@ export default function FlagMosaic() {
                             width={90}
                             height={60}
                             className={styles.flagImage}
-                            style={getFlagStyle(country.name)}
                             sizes="90px"
                           />
                         </div>

@@ -28,7 +28,7 @@
 }
 
 .flagImage:hover {
-    transform: scale(1.3);
+    transform: var(--scale-xl);
 }
 
 .flagOverlay {

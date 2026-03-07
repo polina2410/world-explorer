@@ -3,8 +3,7 @@
 import { useState } from 'react';
 import styles from './Alphabet.module.css';
 import Tooltip from '@/components/Tooltip/Tooltip';
-
-const ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+import { ALPHABET } from '@/constants';
 
 type AlphabetProps = {
   onSelectAction?: (letter: string | null) => void;

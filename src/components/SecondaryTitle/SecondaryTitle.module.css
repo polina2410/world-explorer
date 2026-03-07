@@ -1,5 +1,5 @@
 .title {
-    font-size: var(--fs-xxl);
+    font-size: var(--fs-lg);
     font-weight: var(--fw-medium);
     margin: var(--space-md) 0;
     line-height: var(--lh-base);
