@@ -74,6 +74,13 @@ body {
     font-size: var(--fs-base);
 }
 
+button,
+input,
+select,
+textarea {
+    font-family: inherit;
+}
+
 h1 {
     font-size: var(--fs-xl);
     line-height: var(--lh-tight);

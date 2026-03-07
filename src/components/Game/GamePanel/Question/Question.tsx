@@ -2,6 +2,10 @@
 
 import { useState } from 'react';
 import Button from '@/components/Button/Button';
+import PageDescription from '@/components/PageDescription/PageDescription';
+import SecondaryTitle from '@/components/SecondaryTitle/SecondaryTitle';
+import styles from './Question.module.css';
+import { ANSWER_DELAY } from '@/constants';
 
 export type QuizQuestion = {
   country: string;
@@ -32,22 +36,46 @@ export default function Question({
     setTimeout(() => {
       setSelected(null);
       onAnswer(correct);
-    }, 600);
+    }, ANSWER_DELAY);
   }
 
+  function getVariant(option: string) {
+    if (!selected) return 'default';
+
+    if (option === question.correct) return 'success';
+
+    if (option === selected && option !== question.correct) return 'danger';
+
+    return 'default';
+  }
+
+  const progressPercent = (questionNumber / totalQuestions) * 100;
+
   return (
-    <div>
-      <h3>
+    <div className={styles.questionContainer}>
+      <PageDescription>
         Question {questionNumber} / {totalQuestions}
-      </h3>
+      </PageDescription>
 
-      <h2>What is the capital of {question.country}?</h2>
+      <div className={styles.progressBarContainer}>
+        <div
+          className={styles.progressBarFill}
+          style={{ width: `${progressPercent}%` }}
+        />
+      </div>
 
-      <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
+      <SecondaryTitle>
+        What is the capital of {question.country}?
+      </SecondaryTitle>
+
+      <div className={styles.optionsWrapper}>
         {question.options.map((option) => (
           <Button
             key={option}
+            variant={getVariant(option)}
+            size="md"
             active={selected === option}
+            disabled={!!selected}
             onClick={() => handleClick(option)}
           >
             {option}

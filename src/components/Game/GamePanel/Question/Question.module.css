@@ -1,0 +1,26 @@
+.questionContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.optionsWrapper {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.progressBarContainer {
+    height: 8px;
+    width: 100%;
+    background: #e5e7eb;
+    border-radius: 4px;
+    margin: 8px 0 16px;
+    overflow: hidden;
+}
+
+.progressBarFill {
+    height: 100%;
+    background: var(--color-accent);
+    transition: width 0.5s ease;
+}
