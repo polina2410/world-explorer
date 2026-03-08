@@ -23,15 +23,18 @@ export default function Tooltip({ content, children }: TooltipProps) {
 
   return (
     <span
+      id="tooltip-trigger"
       ref={wrapperRef}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       className={styles.wrapper}
     >
       {children}
+
       {hovered &&
         createPortal(
           <div
+            id="tooltip-portal"
             className={styles.tooltip}
             style={{
               top: coords.top,

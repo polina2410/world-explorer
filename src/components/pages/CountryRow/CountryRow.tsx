@@ -22,15 +22,21 @@ export default function CountryRow({ country, index }: CountryRowProps) {
 
   return (
     <>
-      <tr className={styles.countryRow}>
+      <tr
+        id={`country-row-${country.name.toLowerCase().replace(/\s/g, '-')}`}
+        className={styles.countryRow}
+      >
         <td className={styles.countryIndex}>{index + 1}</td>
+
         <td className={styles.countryName}>{country.name}</td>
+
         <td className={styles.countryCapital}>{country.capital ?? '—'}</td>
 
         <td className={styles.countryFlag}>
           {country.flag && (
             <div className={styles.countryFlag}>
               <Image
+                id={`flag-${country.name.toLowerCase().replace(/\s/g, '-')}`}
                 src={country.flag}
                 alt={`${country.name} flag`}
                 height={16}
@@ -74,11 +80,13 @@ export default function CountryRow({ country, index }: CountryRowProps) {
       {zoomedFlag &&
         createPortal(
           <div
+            id="flag-overlay"
             ref={overlayRef}
             className={styles.flagOverlay}
             onClick={() => setZoomedFlag(null)}
           >
             <Image
+              id="flag-zoomed-image"
               src={zoomedFlag}
               alt="Zoomed flag"
               width={0}

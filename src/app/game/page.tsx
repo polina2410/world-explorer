@@ -37,7 +37,7 @@ export default function GamePage() {
       emptyMessage={EMPTY_COUNTRIES_MESSAGE}
     >
       {() => (
-        <div className="container flex-center startScreen">
+        <div className="container flex-center">
           {phase === 'start' && (
             <>
               <MainTitle>Countries Quiz 🌍</MainTitle>

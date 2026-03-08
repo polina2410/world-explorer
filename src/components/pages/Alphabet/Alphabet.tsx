@@ -1,9 +1,12 @@
 'use client';
 
 import { useState } from 'react';
-import styles from './Alphabet.module.css';
 import Tooltip from '@/components/UI/Tooltip/Tooltip';
-import { ALPHABET } from '@/constants';
+import styles from './Alphabet.module.css';
+
+const ALPHABET = Array.from({ length: 26 }, (_, i) =>
+  String.fromCharCode(65 + i)
+);
 
 type AlphabetProps = {
   onSelectAction?: (letter: string | null) => void;
@@ -13,29 +16,29 @@ export default function Alphabet({ onSelectAction }: AlphabetProps) {
   const [activeLetter, setActiveLetter] = useState<string | null>(null);
 
   const handleClick = (letter: string) => {
-    const newLetter = activeLetter === letter ? null : letter;
+    const newLetter = activeLetter === letter ? null : letter; // toggle selection
     setActiveLetter(newLetter);
     onSelectAction?.(newLetter);
   };
 
   return (
-    <div className={`${styles.alphabet} table`}>
+    <div className={styles.alphabet} role="group" aria-label="Alphabet filter">
       {ALPHABET.map((letter) => (
         <Tooltip
           key={letter}
           content={`Click to show countries that start with the letter "${letter}"`}
         >
-          <a
-            href="#"
+          <button
+            type="button"
+            id={`alphabet-letter-${letter}`} // optional id for easier dev tools / testing
             aria-pressed={activeLetter === letter}
-            onClick={(e) => {
-              e.preventDefault();
-              handleClick(letter);
-            }}
-            className={`${styles.letter} ${activeLetter === letter ? styles.active : ''}`}
+            onClick={() => handleClick(letter)}
+            className={`${styles.letter} ${
+              activeLetter === letter ? styles.active : ''
+            }`}
           >
             {letter}
-          </a>
+          </button>
         </Tooltip>
       ))}
     </div>

@@ -50,22 +50,27 @@ export default function Question({
   }
 
   return (
-    <div>
-      <PageDescription>
+    <div id="question-panel">
+      <PageDescription id="question-number">
         Question {questionNumber} / {totalQuestions}
       </PageDescription>
 
-      <div className={styles.progressWrapper}>
-        <div className={styles.progressBar} style={{ width: `${progress}%` }} />
+      <div className={styles.progressWrapper} id="question-progress-wrapper">
+        <div
+          id="question-progress-bar"
+          className={styles.progressBar}
+          style={{ width: `${progress}%` }}
+        />
       </div>
 
-      <SecondaryTitle>
+      <SecondaryTitle id="question-text">
         What is the capital of {question.country}?
       </SecondaryTitle>
 
-      <div className={styles.optionsWrapper}>
+      <div className={styles.optionsWrapper} id="question-options">
         {question.options.map((option) => (
           <Button
+            id={`question-option-${option}`}
             key={option}
             variant={getVariant(option)}
             size="md"

@@ -26,7 +26,7 @@
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    line-height: 1.5;
+    line-height: var(--lh-base);
 }
 
 .all_countries_table th {

@@ -8,6 +8,7 @@ interface DropdownProps {
   options: string[];
   onChangeAction: (value: string) => void;
   placeholder?: string;
+  id?: string;
 }
 
 export default function Dropdown({
@@ -15,6 +16,7 @@ export default function Dropdown({
   options,
   onChangeAction,
   placeholder = 'Select...',
+  id,
 }: DropdownProps) {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -38,7 +40,7 @@ export default function Dropdown({
   };
 
   return (
-    <div className={styles.dropdown} ref={dropdownRef}>
+    <div className={styles.dropdown} ref={dropdownRef} id={id}>
       <div
         className={styles.selected}
         onClick={() => setIsOpen((prev) => !prev)}

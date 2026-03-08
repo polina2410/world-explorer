@@ -3,8 +3,13 @@ import styles from './SecondaryTitle.module.css';
 
 type SecondaryTitleProps = {
   children: ReactNode;
+  id?: string;
 };
 
-export default function SecondaryTitle({ children }: SecondaryTitleProps) {
-  return <h3 className={styles.secondaryTitle}>{children}</h3>;
+export default function SecondaryTitle({ children, id }: SecondaryTitleProps) {
+  return (
+    <h3 id={id} className={styles.secondaryTitle}>
+      {children}
+    </h3>
+  );
 }

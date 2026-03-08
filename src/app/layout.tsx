@@ -21,7 +21,9 @@ export default function RootLayout({ children }: RootLayoutProps) {
       <body>
         <Header />
         <CountriesProvider>
-          <main className="container">{children}</main>
+          <main id="app-main" className="container">
+            {children}
+          </main>
         </CountriesProvider>
       </body>
     </html>

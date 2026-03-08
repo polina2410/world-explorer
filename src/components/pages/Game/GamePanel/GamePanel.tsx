@@ -37,7 +37,7 @@ export default function GamePanel({
   }
 
   return (
-    <div className="container">
+    <div className="container" id="game-panel">
       <Question
         question={quiz.current}
         questionNumber={quiz.index + 1}
