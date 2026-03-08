@@ -3,7 +3,10 @@
 import { useState } from 'react';
 import styles from './Alphabet.module.css';
 import Tooltip from '@/components/UI/Tooltip/Tooltip';
-import { ALPHABET } from '@/constants';
+
+const ALPHABET = Array.from({ length: 26 }, (_, i) =>
+  String.fromCharCode(65 + i)
+);
 
 type AlphabetProps = {
   onSelectAction?: (letter: string | null) => void;
@@ -18,8 +21,22 @@ export default function Alphabet({ onSelectAction }: AlphabetProps) {
     onSelectAction?.(newLetter);
   };
 
+  const handleKeyDown = (
+    e: React.KeyboardEvent<HTMLAnchorElement>,
+    letter: string
+  ) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      handleClick(letter);
+    }
+  };
+
   return (
-    <div className={`${styles.alphabet} table`}>
+    <div
+      className={`${styles.alphabet} table`}
+      role="group"
+      aria-label="Select a letter to filter countries"
+    >
       {ALPHABET.map((letter) => (
         <Tooltip
           key={letter}
@@ -27,11 +44,14 @@ export default function Alphabet({ onSelectAction }: AlphabetProps) {
         >
           <a
             href="#"
+            role="button"
             aria-pressed={activeLetter === letter}
+            tabIndex={0}
             onClick={(e) => {
               e.preventDefault();
               handleClick(letter);
             }}
+            onKeyDown={(e) => handleKeyDown(e, letter)}
             className={`${styles.letter} ${activeLetter === letter ? styles.active : ''}`}
           >
             {letter}

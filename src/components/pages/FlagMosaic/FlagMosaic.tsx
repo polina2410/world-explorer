@@ -1,18 +1,21 @@
 'use client';
 
-import { useMemo, useRef, useState } from 'react';
-import { useCountries } from '@/hooks/CountriesProvider';
+import { useState, useRef, useMemo } from 'react';
 import Image from 'next/image';
-import styles from './FlagMosaic.module.css';
-import { useCloseOnAnyClick } from '@/hooks/useCloseOnAnyClick';
+import { useCountries } from '@/hooks/CountriesProvider';
 import DataLoader from '@/components/UI/DataLoader/DataLoader';
-import { EMPTY_COUNTRIES_MESSAGE, SPECIAL_FLAGS } from '@/constants';
-import SearchPanel from '@/components/pages/SearchPanel/SearchPanel';
 import Button from '@/components/UI/Button/Button';
 import Dropdown from '@/components/UI/Dropdown/Dropdown';
+import { useCloseOnAnyClick } from '@/hooks/useCloseOnAnyClick';
+import styles from './FlagMosaic.module.css';
+import SearchPanel from '@/components/pages/SearchPanel/SearchPanel';
 import { getContinents } from '@/utils/getContinents';
 
-export default function FlagMosaic() {
+type FlagMosaicProps = {
+  id?: string;
+};
+
+export default function FlagMosaic({ id }: FlagMosaicProps) {
   const { countries, loading, error } = useCountries();
   const [flipped, setFlipped] = useState<string | null>(null);
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc');
@@ -31,14 +34,9 @@ export default function FlagMosaic() {
       closeCard();
       return;
     }
-
     if (timeoutRef.current) clearTimeout(timeoutRef.current);
-
     setFlipped(name);
-
-    timeoutRef.current = setTimeout(() => {
-      setFlipped(null);
-    }, 2500);
+    timeoutRef.current = setTimeout(() => setFlipped(null), 2500);
   };
 
   useCloseOnAnyClick({ onCloseAction: closeCard, ignoreRef: containerRef });
@@ -66,9 +64,10 @@ export default function FlagMosaic() {
     !loading && processedCountries.length === 0 && (countries ?? []).length > 0;
 
   return (
-    <>
-      <div className={styles.controls}>
+    <div id={id ?? 'flag-mosaic'} className={styles.wrapper}>
+      <div className={styles.controls} id="flag-mosaic-controls">
         <SearchPanel
+          id="flag-mosaic-search"
           value={searchTerm}
           onChangeAction={(value) => {
             setSearchTerm(value);
@@ -77,6 +76,7 @@ export default function FlagMosaic() {
         />
 
         <Button
+          id="flag-mosaic-sort"
           onClick={() => {
             setSortOrder((prev) => (prev === 'asc' ? 'desc' : 'asc'));
             setFlipped(null);
@@ -86,6 +86,7 @@ export default function FlagMosaic() {
         </Button>
 
         <Dropdown
+          id="flag-mosaic-dropdown"
           value={selectedContinent}
           options={['All', ...continents]}
           onChangeAction={(value) => {
@@ -99,17 +100,21 @@ export default function FlagMosaic() {
         data={countries}
         loading={loading}
         error={error}
-        emptyMessage={EMPTY_COUNTRIES_MESSAGE}
+        emptyMessage="No countries available"
       >
         {() =>
           hasNoResults ? (
-            <div className={styles.noResults}>
+            <div className={styles.noResults} id="flag-mosaic-no-results">
               {searchTerm
                 ? `No countries found matching "${searchTerm}"`
                 : 'No countries found. Try adjusting your filters.'}
             </div>
           ) : (
-            <div ref={containerRef} className={styles.mosaicContainer}>
+            <div
+              ref={containerRef}
+              className={styles.mosaicContainer}
+              id="flag-mosaic-container"
+            >
               {processedCountries.map((country) => {
                 const isFlipped = flipped === country.name;
                 const isDimmed = flipped && flipped !== country.name;
@@ -117,23 +122,45 @@ export default function FlagMosaic() {
                 return (
                   <div
                     key={country.name}
-                    className={`${styles.flagCard}
-                    ${isFlipped ? styles.active : ''}
-                    ${isDimmed ? styles.dimmed : ''}`}
-                    onClick={() =>
-                      isFlipped ? closeCard() : handleClick(country.name)
-                    }
+                    id={`flag-card-${country.name}`}
+                    className={`${styles.flagCard} ${
+                      isFlipped ? styles.active : ''
+                    } ${isDimmed ? styles.dimmed : ''}`}
+                    onClick={() => {
+                      if (isFlipped) {
+                        closeCard();
+                      } else {
+                        handleClick(country.name);
+                      }
+                    }}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        if (isFlipped) {
+                          closeCard();
+                        } else {
+                          handleClick(country.name);
+                        }
+                      }
+                    }}
+                    role="button"
+                    tabIndex={0}
+                    aria-pressed={isFlipped}
                   >
                     <div
                       className={`${styles.flagInner} ${
                         isFlipped ? styles.flipped : ''
                       }`}
                     >
-                      <div className={styles.flagFront}>
+                      <div
+                        className={styles.flagFront}
+                        id={`flag-front-${country.name}`}
+                      >
                         <div
                           className={`${styles.flagImageWrapper} flex-center`}
                         >
                           <Image
+                            id={`flag-image-${country.name}`}
                             src={country.flag}
                             alt={country.name}
                             width={90}
@@ -144,7 +171,10 @@ export default function FlagMosaic() {
                         </div>
                       </div>
 
-                      <div className={`${styles.flagBack} flex-center`}>
+                      <div
+                        className={`${styles.flagBack} flex-center`}
+                        id={`flag-back-${country.name}`}
+                      >
                         {country.name}
                       </div>
                     </div>
@@ -155,6 +185,6 @@ export default function FlagMosaic() {
           )
         }
       </DataLoader>
-    </>
+    </div>
   );
 }

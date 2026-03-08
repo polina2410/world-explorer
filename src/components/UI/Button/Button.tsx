@@ -17,15 +17,18 @@ export default function Button({
   children,
   active = false,
   variant = 'default',
-  size,
+  size = 'sm',
   ...props
 }: ButtonProps) {
+  const variantClass = variant !== 'default' ? styles[variant] : '';
+
   return (
     <button
+      aria-pressed={active || undefined}
       className={[
         styles.button,
         active && styles.active,
-        variant !== 'default' && styles[variant],
+        variantClass,
         size && styles[size],
       ]
         .filter(Boolean)

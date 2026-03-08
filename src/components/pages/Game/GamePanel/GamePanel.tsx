@@ -28,22 +28,37 @@ export default function GamePanel({
 
   const quiz = useQuiz(questions);
 
-  if (!countries || questions.length === 0) return <Loading />;
+  if (!countries || questions.length === 0)
+    return <Loading aria-label="Loading quiz questions" />;
 
   if (quiz.finished) {
     return (
-      <Result score={quiz.score} total={quiz.total} onRestart={onRestart} />
+      <Result
+        score={quiz.score}
+        total={quiz.total}
+        onRestart={onRestart}
+        aria-label={`Quiz finished. Your score is ${quiz.score} out of ${quiz.total}`}
+      />
     );
   }
 
   return (
-    <div className="container">
+    <main
+      className="container"
+      id="game-panel"
+      role="region"
+      aria-labelledby="quiz-heading"
+    >
+      <h2 id="quiz-heading" className="sr-only">
+        {continent} Quiz
+      </h2>
+
       <Question
         question={quiz.current}
         questionNumber={quiz.index + 1}
         totalQuestions={quiz.total}
         onAnswer={quiz.answer}
       />
-    </div>
+    </main>
   );
 }

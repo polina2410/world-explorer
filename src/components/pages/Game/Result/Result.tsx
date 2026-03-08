@@ -39,15 +39,37 @@ export default function Result({ score, total, onRestart }: ResultProps) {
   );
 
   return (
-    <div className={`${styles.resultWrapper} flex-center`}>
-      <SecondaryTitle>🎉 Quiz Finished!</SecondaryTitle>
-      <p className={styles.score}>
+    <div id="quiz-result" className={`${styles.resultWrapper} flex-center`}>
+      <SecondaryTitle id="quiz-result-title">🎉 Quiz Finished!</SecondaryTitle>
+
+      <p
+        id="quiz-score"
+        className={styles.score}
+        role="status"
+        aria-live="polite"
+      >
         Score: <strong className={styles.highlight}>{score}</strong> /{' '}
         <strong className={styles.highlight}>{total}</strong> (
         <strong className={styles.highlight}>{percentage}%</strong>)
       </p>
-      {threshold && <p className={threshold.className}>{threshold.message}</p>}
-      <Button variant="start" size="md" onClick={onRestart}>
+
+      {threshold && (
+        <p
+          id="quiz-result-message"
+          className={threshold.className}
+          aria-label={`Result feedback: ${threshold.message}`}
+        >
+          {threshold.message}
+        </p>
+      )}
+
+      <Button
+        id="quiz-restart-button"
+        variant="start"
+        size="md"
+        onClick={onRestart}
+        aria-label="Restart quiz"
+      >
         Start again
       </Button>
     </div>

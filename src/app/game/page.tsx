@@ -37,22 +37,29 @@ export default function GamePage() {
       emptyMessage={EMPTY_COUNTRIES_MESSAGE}
     >
       {() => (
-        <div className="container flex-center startScreen">
+        <main id="game-page-main">
           {phase === 'start' && (
-            <>
-              <MainTitle>Countries Quiz 🌍</MainTitle>
-              <PageDescription>
+            <section
+              role="region"
+              aria-labelledby="game-page-start-title"
+              className="container flex-center"
+            >
+              <MainTitle id="game-page-start-title">
+                Countries Quiz 🌍
+              </MainTitle>
+              <PageDescription id="game-page-start-desc">
                 Choose a continent and number of questions. Then guess the
                 correct capital of each country.
               </PageDescription>
               <Button
                 variant="start"
                 size="lg"
+                aria-label="Start countries quiz"
                 onClick={() => setPhase('setup')}
               >
                 Start
               </Button>
-            </>
+            </section>
           )}
 
           {phase === 'setup' && (
@@ -76,7 +83,7 @@ export default function GamePage() {
                 onRestart={handleRestart}
               />
             )}
-        </div>
+        </main>
       )}
     </DataLoader>
   );

@@ -26,6 +26,7 @@ export function NavLink({ href, children, variant = 'nav' }: NavLinkProps) {
       ]
         .filter(Boolean)
         .join(' ')}
+      aria-current={isActive ? 'page' : undefined}
     >
       {children}
     </Link>

@@ -11,7 +11,7 @@ export default function Header() {
             CountriesQuiz
           </NavLink>
 
-          <nav className={styles.nav}>
+          <nav className={styles.nav} aria-label="Main navigation">
             <NavLink href={APP_ROUTES.home}>Home</NavLink>
             <NavLink href={APP_ROUTES.game}>Game</NavLink>
             <NavLink href={APP_ROUTES.countries}>Countries</NavLink>

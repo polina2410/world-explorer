@@ -24,22 +24,43 @@ export default function CountriesPage() {
   );
 
   return (
-    <DataLoader
-      data={countries}
-      loading={loading}
-      error={error}
-      emptyMessage={EMPTY_COUNTRIES_MESSAGE}
-    >
-      {() => (
-        <>
-          <MainTitle>Alphabetical list of countries</MainTitle>
-          <Alphabet onSelectAction={setSelectedLetter} />
-          <CountriesTable
-            countries={sortedCountries}
-            selectedLetter={selectedLetter}
-          />
-        </>
-      )}
-    </DataLoader>
+    <section id="countries-page">
+      <DataLoader
+        data={countries}
+        loading={loading}
+        error={error}
+        emptyMessage={EMPTY_COUNTRIES_MESSAGE}
+      >
+        {() => (
+          <>
+            <MainTitle id="countries-page-title">
+              Alphabetical list of countries
+            </MainTitle>
+
+            <div
+              id="countries-alphabet-filter"
+              role="region"
+              aria-labelledby="countries-page-title"
+            >
+              <Alphabet
+                onSelectAction={setSelectedLetter}
+                aria-label="Filter countries by starting letter"
+              />
+            </div>
+
+            <div
+              id="countries-table-section"
+              role="region"
+              aria-labelledby="countries-page-title"
+            >
+              <CountriesTable
+                countries={sortedCountries}
+                selectedLetter={selectedLetter}
+              />
+            </div>
+          </>
+        )}
+      </DataLoader>
+    </section>
   );
 }

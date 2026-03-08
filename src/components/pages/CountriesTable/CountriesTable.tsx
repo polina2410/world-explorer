@@ -32,35 +32,58 @@ export default function CountriesTable({
           return sortOrder === 'asc' ? popA - popB : popB - popA;
         });
 
+  const ariaSort =
+    sortOrder === 'asc'
+      ? 'ascending'
+      : sortOrder === 'desc'
+        ? 'descending'
+        : 'none';
+
   return (
-    <div className={styles.tableWrapper}>
-      <table className={`table ${styles.all_countries_table}`}>
-        <thead>
+    <div id="countries-table-wrapper" className={styles.tableWrapper}>
+      <table
+        id="countries-table"
+        className={`table ${styles.all_countries_table}`}
+      >
+        <thead id="countries-table-head">
           <tr>
-            <th>#</th>
-            <th>Name</th>
-            <th>Capital</th>
-            <th>Flag</th>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Capital</th>
+            <th scope="col">Flag</th>
+
             <th
+              id="countries-table-sort-population"
               className={styles.sortColumn}
               onClick={handleSortClick}
-              title="Click to sort"
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault();
+                  handleSortClick();
+                }
+              }}
+              title="Click or press Enter/Space to sort"
+              role="button"
+              tabIndex={0}
+              aria-sort={ariaSort}
             >
               Population{' '}
               <span className={styles.sortArrow}>
                 {sortOrder === 'asc' ? '↑' : sortOrder === 'desc' ? '↓' : '⇅'}
               </span>
             </th>
-            <th>Continents</th>
-            <th>URL</th>
+
+            <th scope="col">Continents</th>
+            <th scope="col">URL</th>
           </tr>
         </thead>
-        <tbody>
+
+        <tbody id="countries-table-body">
           {displayedCountries.length === 0 ? (
-            <tr>
+            <tr id="countries-table-empty">
               <td colSpan={7} className={styles.noCountriesMessage}>
                 <PageDescription>
-                  No countries found
+                  No countries found{' '}
                   {selectedLetter && ` starting with "${selectedLetter}"`}.
                 </PageDescription>
               </td>
