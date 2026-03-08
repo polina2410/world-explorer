@@ -1,0 +1,9 @@
+.title {
+    font-size: var(--fs-xxl);
+    font-weight: var(--fw-medium);
+    margin: var(--space-md) 0;
+    line-height: var(--lh-base);
+    letter-spacing: 0.5px;
+    color: var(--color-text-primary);
+    text-align: center;
+}

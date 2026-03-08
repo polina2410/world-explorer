@@ -1,0 +1,28 @@
+.questionContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.optionsWrapper {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    margin-top: 16px;
+}
+
+.progressWrapper {
+    height: 8px;
+    background: var(--color-border);
+    border-radius: 4px;
+    overflow: hidden;
+    margin: 12px 0 24px 0;
+}
+
+.progressBar {
+    height: 100%;
+    width: 0;
+    border-radius: 4px;
+    transition: width 0.5s ease-in-out;
+    background: linear-gradient(90deg, #cce7ff, var(--color-great));
+}

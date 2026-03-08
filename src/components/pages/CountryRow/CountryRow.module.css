@@ -1,0 +1,88 @@
+.countryRow td {
+    white-space: nowrap;
+    transition: background-color 0.2s ease;
+}
+
+.countryIndex {
+    text-align: left;
+    color: var(--color-text-secondary);
+}
+
+.countryName {
+    font-weight: var(--fw-semibold);
+}
+
+.countryCapital {
+    color: var(--color-text-secondary);
+}
+
+.countryFlag {
+    text-align: center;
+}
+
+.flagImage {
+    height: 16px;
+    width: auto;
+    object-fit: contain;
+    border-radius: 2px;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.08),
+    0 2px 4px rgba(0, 0, 0, 0.12);
+
+    cursor: pointer;
+    transition: transform 0.25s ease;
+}
+
+.flagImage:hover {
+    transform: var(--scale-lg);
+}
+
+.countryPopulation {
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+}
+
+.countryContinents {
+    white-space: normal;
+    color: var(--color-text-secondary);
+}
+
+.countryMap a {
+    font-weight: var(--fw-semibold);
+    color: var(--color-accent);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.countryMap a:hover {
+    text-decoration: underline;
+}
+
+.flagOverlay {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.75);
+    z-index: var(--z-modal);
+    cursor: pointer;
+    animation: overlayFade 0.15s ease;
+}
+
+.flagZoomed {
+    max-width: 90%;
+    max-height: 80%;
+    object-fit: contain;
+    border-radius: var(--radius-md);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+    cursor: default;
+}
+
+@keyframes overlayFade {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
