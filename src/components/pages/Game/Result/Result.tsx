@@ -30,9 +30,10 @@ const RESULT_THRESHOLDS: ResultThreshold[] = [
 ];
 
 export default function Result({ score, total, onRestart }: ResultProps) {
-  useConfetti(3000);
-
   const percentage = Math.round((score / total) * 100);
+
+  useConfetti(percentage);
+
   const threshold = RESULT_THRESHOLDS.find(
     (t) => percentage >= t.min && percentage <= t.max
   );

@@ -27,6 +27,7 @@ export default function Alphabet({ onSelectAction }: AlphabetProps) {
         >
           <a
             href="#"
+            aria-pressed={activeLetter === letter}
             onClick={(e) => {
               e.preventDefault();
               handleClick(letter);

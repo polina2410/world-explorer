@@ -1,5 +1,5 @@
 import styles from './Header.module.css';
-import { NavLink } from '@/components/Header/NavLink/NavLink';
+import { NavLink } from '@/components/NavLink/NavLink';
 import { APP_ROUTES } from '@/routes/appRoutes';
 
 export default function Header() {

@@ -16,7 +16,7 @@
 }
 
 .button:hover:not(:disabled):not(.success):not(.danger) {
-    transform: var(--scale-md);
+    transform: var(--scale-md) translateY(-2px);
     box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
 }
 
@@ -55,16 +55,22 @@
     border-color: var(--color-danger);
 }
 
+.sm {
+    font-size: var(--fs-base);
+    padding: 10px 18px;
+    font-weight: var(--fw-medium);
+}
+
 .md {
     font-size: var(--fs-lg);
-    padding: 44px 88px;
+    padding: 14px 28px;
     font-weight: var(--fw-medium);
 }
 
 .lg {
     font-size: var(--fs-xl);
-    font-weight: var(--fw-medium);
-    padding: 88px 172px;
+    padding: 16px 36px;
+    font-weight: var(--fw-semibold);
 }
 
 @keyframes pulse {

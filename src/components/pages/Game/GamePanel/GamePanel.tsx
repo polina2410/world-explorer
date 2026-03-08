@@ -37,11 +37,13 @@ export default function GamePanel({
   }
 
   return (
-    <Question
-      question={quiz.current}
-      questionNumber={quiz.index + 1}
-      totalQuestions={quiz.total}
-      onAnswer={quiz.answer}
-    />
+    <div className="container">
+      <Question
+        question={quiz.current}
+        questionNumber={quiz.index + 1}
+        totalQuestions={quiz.total}
+        onAnswer={quiz.answer}
+      />
+    </div>
   );
 }

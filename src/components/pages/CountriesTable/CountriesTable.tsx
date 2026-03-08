@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { CountryResponse } from '@/types/country';
 import styles from './CountriesTable.module.css';
 import CountryRow from '@/components/pages/CountryRow/CountryRow';
+import PageDescription from '@/components/UI/PageDescription/PageDescription';
 
 type CountriesTableProps = {
   countries: CountryResponse[];
@@ -32,41 +33,45 @@ export default function CountriesTable({
         });
 
   return (
-    <table className={`table ${styles.all_countries_table}`}>
-      <thead>
-        <tr>
-          <th>#</th>
-          <th>Name</th>
-          <th>Capital</th>
-          <th>Flag</th>
-          <th
-            className={styles.sortColumn}
-            onClick={handleSortClick}
-            title="Click to sort"
-          >
-            Population{' '}
-            <span className={styles.sortArrow}>
-              {sortOrder === 'asc' ? '↑' : sortOrder === 'desc' ? '↓' : '⇅'}
-            </span>
-          </th>
-          <th>Continents</th>
-          <th>URL</th>
-        </tr>
-      </thead>
-      <tbody>
-        {displayedCountries.length === 0 ? (
+    <div className={styles.tableWrapper}>
+      <table className={`table ${styles.all_countries_table}`}>
+        <thead>
           <tr>
-            <td colSpan={7} style={{ textAlign: 'center', padding: '2rem' }}>
-              No countries found
-              {selectedLetter && ` starting with "${selectedLetter}"`}.
-            </td>
+            <th>#</th>
+            <th>Name</th>
+            <th>Capital</th>
+            <th>Flag</th>
+            <th
+              className={styles.sortColumn}
+              onClick={handleSortClick}
+              title="Click to sort"
+            >
+              Population{' '}
+              <span className={styles.sortArrow}>
+                {sortOrder === 'asc' ? '↑' : sortOrder === 'desc' ? '↓' : '⇅'}
+              </span>
+            </th>
+            <th>Continents</th>
+            <th>URL</th>
           </tr>
-        ) : (
-          displayedCountries.map((c, i) => (
-            <CountryRow key={c.name} country={c} index={i} />
-          ))
-        )}
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          {displayedCountries.length === 0 ? (
+            <tr>
+              <td colSpan={7} className={styles.noCountriesMessage}>
+                <PageDescription>
+                  No countries found
+                  {selectedLetter && ` starting with "${selectedLetter}"`}.
+                </PageDescription>
+              </td>
+            </tr>
+          ) : (
+            displayedCountries.map((c, i) => (
+              <CountryRow key={c.name} country={c} index={i} />
+            ))
+          )}
+        </tbody>
+      </table>
+    </div>
   );
 }

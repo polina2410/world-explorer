@@ -4,7 +4,7 @@ import React, { ButtonHTMLAttributes } from 'react';
 import styles from './Button.module.css';
 
 type ButtonVariant = 'default' | 'start' | 'success' | 'danger';
-type ButtonSize = 'md' | 'lg';
+type ButtonSize = 'sm' | 'md' | 'lg';
 
 type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   children: React.ReactNode;
