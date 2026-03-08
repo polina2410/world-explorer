@@ -14,15 +14,22 @@ export default function SearchPanel({
   onChangeAction,
   placeholder = 'Search country...',
   id,
-}: SearchPanelProps) {
+  label = 'Search for a country',
+}: SearchPanelProps & { label?: string }) {
   return (
-    <input
-      type="text"
-      id={id}
-      value={value}
-      placeholder={placeholder}
-      onChange={(e) => onChangeAction(e.target.value)}
-      className={styles.searchInput}
-    />
+    <div className={styles.searchWrapper}>
+      <label htmlFor={id} className="sr-only">
+        {label}
+      </label>
+      <input
+        type="search"
+        id={id}
+        value={value}
+        placeholder={placeholder}
+        onChange={(e) => onChangeAction(e.target.value)}
+        className={styles.searchInput}
+        aria-label={label}
+      />
+    </div>
   );
 }

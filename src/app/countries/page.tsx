@@ -37,11 +37,22 @@ export default function CountriesPage() {
               Alphabetical list of countries
             </MainTitle>
 
-            <div id="countries-alphabet-filter">
-              <Alphabet onSelectAction={setSelectedLetter} />
+            <div
+              id="countries-alphabet-filter"
+              role="region"
+              aria-labelledby="countries-page-title"
+            >
+              <Alphabet
+                onSelectAction={setSelectedLetter}
+                aria-label="Filter countries by starting letter"
+              />
             </div>
 
-            <div id="countries-table-section">
+            <div
+              id="countries-table-section"
+              role="region"
+              aria-labelledby="countries-page-title"
+            >
               <CountriesTable
                 countries={sortedCountries}
                 selectedLetter={selectedLetter}

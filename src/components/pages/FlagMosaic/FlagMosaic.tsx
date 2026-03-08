@@ -1,15 +1,15 @@
 'use client';
 
+import { useState, useRef, useMemo } from 'react';
+import Image from 'next/image';
 import { useCountries } from '@/hooks/CountriesProvider';
-import { useMemo, useRef, useState } from 'react';
-import { useCloseOnAnyClick } from '@/hooks/useCloseOnAnyClick';
-import { getContinents } from '@/utils/getContinents';
-import styles from './FlagMosaic.module.css';
-import SearchPanel from '@/components/pages/SearchPanel/SearchPanel';
+import DataLoader from '@/components/UI/DataLoader/DataLoader';
 import Button from '@/components/UI/Button/Button';
 import Dropdown from '@/components/UI/Dropdown/Dropdown';
-import DataLoader from '@/components/UI/DataLoader/DataLoader';
-import Image from 'next/image';
+import { useCloseOnAnyClick } from '@/hooks/useCloseOnAnyClick';
+import styles from './FlagMosaic.module.css';
+import SearchPanel from '@/components/pages/SearchPanel/SearchPanel';
+import { getContinents } from '@/utils/getContinents';
 
 type FlagMosaicProps = {
   id?: string;
@@ -96,7 +96,6 @@ export default function FlagMosaic({ id }: FlagMosaicProps) {
         />
       </div>
 
-      {/* Country Mosaic */}
       <DataLoader
         data={countries}
         loading={loading}
@@ -127,9 +126,26 @@ export default function FlagMosaic({ id }: FlagMosaicProps) {
                     className={`${styles.flagCard} ${
                       isFlipped ? styles.active : ''
                     } ${isDimmed ? styles.dimmed : ''}`}
-                    onClick={() =>
-                      isFlipped ? closeCard() : handleClick(country.name)
-                    }
+                    onClick={() => {
+                      if (isFlipped) {
+                        closeCard();
+                      } else {
+                        handleClick(country.name);
+                      }
+                    }}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        if (isFlipped) {
+                          closeCard();
+                        } else {
+                          handleClick(country.name);
+                        }
+                      }
+                    }}
+                    role="button"
+                    tabIndex={0}
+                    aria-pressed={isFlipped}
                   >
                     <div
                       className={`${styles.flagInner} ${

@@ -6,7 +6,7 @@ import FlagMosaic from '@/components/pages/FlagMosaic/FlagMosaic';
 
 export default function HomePage() {
   return (
-    <main id="home-page-main">
+    <main id="home-page-main" role="main">
       <MainTitle id="home-page-title">Welcome to Country Explorer</MainTitle>
 
       <PageDescription id="home-page-description-1">
@@ -21,7 +21,9 @@ export default function HomePage() {
         world.
       </PageDescription>
 
-      <FlagMosaic id="home-page-flag-mosaic" />
+      <section aria-labelledby="home-page-flag-mosaic-title">
+        <FlagMosaic />
+      </section>
     </main>
   );
 }

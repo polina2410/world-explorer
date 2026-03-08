@@ -20,12 +20,11 @@ export default function CountryRow({ country, index }: CountryRowProps) {
 
   useCloseOnAnyClick({ onCloseAction: () => setZoomedFlag(null) });
 
+  const countryId = country.name.toLowerCase().replace(/\s/g, '-');
+
   return (
     <>
-      <tr
-        id={`country-row-${country.name.toLowerCase().replace(/\s/g, '-')}`}
-        className={styles.countryRow}
-      >
+      <tr id={`country-row-${countryId}`} className={styles.countryRow}>
         <td className={styles.countryIndex}>{index + 1}</td>
 
         <td className={styles.countryName}>{country.name}</td>
@@ -36,16 +35,11 @@ export default function CountryRow({ country, index }: CountryRowProps) {
           {country.flag && (
             <div className={styles.countryFlag}>
               <Image
-                id={`flag-${country.name.toLowerCase().replace(/\s/g, '-')}`}
                 src={country.flag}
                 alt={`${country.name} flag`}
                 height={16}
                 width={0}
                 className={styles.flagImage}
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setZoomedFlag(country.flag);
-                }}
               />
             </div>
           )}
@@ -83,12 +77,15 @@ export default function CountryRow({ country, index }: CountryRowProps) {
             id="flag-overlay"
             ref={overlayRef}
             className={styles.flagOverlay}
+            role="dialog"
+            aria-modal="true"
+            aria-label={`Zoomed flag of ${country.name}`}
             onClick={() => setZoomedFlag(null)}
           >
             <Image
               id="flag-zoomed-image"
               src={zoomedFlag}
-              alt="Zoomed flag"
+              alt={`Zoomed flag of ${country.name}`}
               width={0}
               height={0}
               style={{

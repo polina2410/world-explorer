@@ -33,9 +33,15 @@ export default function GameSetup({
             Choose continent:
           </SecondaryTitle>
 
-          <div className={styles.buttons} id="continent-buttons">
+          <div
+            className={styles.buttons}
+            id="continent-buttons"
+            role="group"
+            aria-labelledby="secondary-title-continents"
+          >
             <Button
               id="continent-button-all"
+              aria-label="Select all continents"
               size="sm"
               active={selectedContinent === 'All'}
               onClick={() => setSelectedContinent('All')}
@@ -46,6 +52,7 @@ export default function GameSetup({
             {continents.map((continent) => (
               <Button
                 id={`continent-button-${continent}`}
+                aria-label={`Select continent ${continent}`}
                 size="sm"
                 key={continent}
                 active={selectedContinent === continent}
@@ -63,13 +70,19 @@ export default function GameSetup({
               Choose number of questions:
             </SecondaryTitle>
 
-            <div className={styles.buttons} id="question-count-buttons">
+            <div
+              className={styles.buttons}
+              id="question-count-buttons"
+              role="group"
+              aria-labelledby="secondary-title-questions"
+            >
               {QUESTION_OPTIONS.map((option) => (
                 <Button
                   id={`question-button-${option}`}
                   size="sm"
                   key={option}
                   active={questionCount === option}
+                  aria-label={`Select ${option} questions`}
                   onClick={() => setQuestionCount(option)}
                 >
                   {option}
@@ -83,6 +96,7 @@ export default function GameSetup({
           <div className={styles.startQuizButton} id="start-quiz-wrapper">
             <Button
               id="start-quiz-button"
+              aria-label="Start Quiz"
               size="lg"
               active
               onClick={onStartGame}

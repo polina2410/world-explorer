@@ -1,8 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import Tooltip from '@/components/UI/Tooltip/Tooltip';
 import styles from './Alphabet.module.css';
+import Tooltip from '@/components/UI/Tooltip/Tooltip';
 
 const ALPHABET = Array.from({ length: 26 }, (_, i) =>
   String.fromCharCode(65 + i)
@@ -16,29 +16,46 @@ export default function Alphabet({ onSelectAction }: AlphabetProps) {
   const [activeLetter, setActiveLetter] = useState<string | null>(null);
 
   const handleClick = (letter: string) => {
-    const newLetter = activeLetter === letter ? null : letter; // toggle selection
+    const newLetter = activeLetter === letter ? null : letter;
     setActiveLetter(newLetter);
     onSelectAction?.(newLetter);
   };
 
+  const handleKeyDown = (
+    e: React.KeyboardEvent<HTMLAnchorElement>,
+    letter: string
+  ) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      handleClick(letter);
+    }
+  };
+
   return (
-    <div className={styles.alphabet} role="group" aria-label="Alphabet filter">
+    <div
+      className={`${styles.alphabet} table`}
+      role="group"
+      aria-label="Select a letter to filter countries"
+    >
       {ALPHABET.map((letter) => (
         <Tooltip
           key={letter}
           content={`Click to show countries that start with the letter "${letter}"`}
         >
-          <button
-            type="button"
-            id={`alphabet-letter-${letter}`} // optional id for easier dev tools / testing
+          <a
+            href="#"
+            role="button"
             aria-pressed={activeLetter === letter}
-            onClick={() => handleClick(letter)}
-            className={`${styles.letter} ${
-              activeLetter === letter ? styles.active : ''
-            }`}
+            tabIndex={0}
+            onClick={(e) => {
+              e.preventDefault();
+              handleClick(letter);
+            }}
+            onKeyDown={(e) => handleKeyDown(e, letter)}
+            className={`${styles.letter} ${activeLetter === letter ? styles.active : ''}`}
           >
             {letter}
-          </button>
+          </a>
         </Tooltip>
       ))}
     </div>

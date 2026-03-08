@@ -39,7 +39,7 @@ export default function Question({
     setTimeout(() => {
       setSelected(null);
       onAnswer(correct);
-    }, 600);
+    }, 1000);
   }
 
   function getVariant(option: string) {
@@ -50,7 +50,7 @@ export default function Question({
   }
 
   return (
-    <div id="question-panel">
+    <div id="question-panel" className="container">
       <PageDescription id="question-number">
         Question {questionNumber} / {totalQuestions}
       </PageDescription>
@@ -67,11 +67,18 @@ export default function Question({
         What is the capital of {question.country}?
       </SecondaryTitle>
 
-      <div className={styles.optionsWrapper} id="question-options">
+      <div
+        className={styles.optionsWrapper}
+        id="question-options"
+        role="radiogroup"
+        aria-labelledby="question-text"
+      >
         {question.options.map((option) => (
           <Button
             id={`question-option-${option}`}
             key={option}
+            role="radio"
+            aria-checked={selected === option}
             variant={getVariant(option)}
             size="md"
             active={selected === option}

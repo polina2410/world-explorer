@@ -3,7 +3,7 @@ import styles from './MainTitle.module.css';
 
 type MainTitleProps = {
   children: ReactNode;
-  id?: string;
+  id: string;
 };
 
 export default function MainTitle({ children, id }: MainTitleProps) {
