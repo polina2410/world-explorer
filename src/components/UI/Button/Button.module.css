@@ -32,6 +32,11 @@
     border-color: var(--color-accent);
 }
 
+.confirm {
+    color: var(--color-surface);
+    background: var(--color-success);
+}
+
 .start {
     background: var(--color-accent);
     color: var(--color-surface);
@@ -53,6 +58,10 @@
     background: var(--color-danger);
     color: var(--color-surface);
     border-color: var(--color-danger);
+}
+
+.xs {
+    padding: 0.5rem 1.1rem;
 }
 
 .sm {
