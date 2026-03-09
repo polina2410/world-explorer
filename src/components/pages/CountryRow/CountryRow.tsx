@@ -25,10 +25,8 @@ export default function CountryRow({ country, index }: CountryRowProps) {
     <>
       <tr id={`country-row-${countryId}`} className={styles.countryRow}>
         <td className={styles.countryIndex}>{index + 1}</td>
-
         <td className={styles.countryName}>{country.name}</td>
-
-        <td className={styles.countryCapital}>{country.capital ?? '—'}</td>
+        <td>{country.capital ?? '—'}</td>
 
         <td>
           {country.flag && (
@@ -52,9 +50,7 @@ export default function CountryRow({ country, index }: CountryRowProps) {
           {formatPopulation(country.population ?? 0)}
         </td>
 
-        <td className={styles.countryContinents}>
-          {formatList(country.continents) ?? '—'}
-        </td>
+        <td>{formatList(country.continents) ?? '—'}</td>
 
         <td className={styles.countryMap}>
           {country.mapUrl ? (

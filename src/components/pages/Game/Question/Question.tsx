@@ -17,6 +17,7 @@ type QuestionProps = {
   questionNumber: number;
   totalQuestions: number;
   onAnswer: (correct: boolean) => void;
+  onRestart: () => void;
 };
 
 export default function Question({
@@ -24,6 +25,7 @@ export default function Question({
   questionNumber,
   totalQuestions,
   onAnswer,
+  onRestart,
 }: QuestionProps) {
   const [selected, setSelected] = useState<string | null>(null);
   const [progress, setProgress] = useState(0);
@@ -51,9 +53,20 @@ export default function Question({
 
   return (
     <div id="question-panel" className="container">
-      <PageDescription id="question-number">
-        Question {questionNumber} / {totalQuestions}
-      </PageDescription>
+      <div className="flex-between">
+        <PageDescription id="question-number">
+          Question {questionNumber} / {totalQuestions}
+        </PageDescription>
+
+        <button
+          type="button"
+          aria-label="Reset selection"
+          className={styles.resetButton}
+          onClick={onRestart}
+        >
+          ⟳
+        </button>
+      </div>
 
       <div className={styles.progressWrapper} id="question-progress-wrapper">
         <div

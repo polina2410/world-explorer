@@ -12,10 +12,6 @@
     font-weight: var(--fw-semibold);
 }
 
-.countryCapital {
-    color: var(--color-text-secondary);
-}
-
 .flagImage {
     height: 16px;
     width: auto;
@@ -34,11 +30,6 @@
 .countryPopulation {
     text-align: right;
     font-variant-numeric: tabular-nums;
-}
-
-.countryContinents {
-    white-space: normal;
-    color: var(--color-text-secondary);
 }
 
 .countryMap a {
