@@ -1,13 +1,13 @@
 'use client';
 
-import { useState, useRef } from 'react';
+import { useState } from 'react';
 import Image from 'next/image';
+import { createPortal } from 'react-dom';
 import { CountryResponse } from '@/types/country';
 import { formatList, formatPopulation } from '@/utils/utils';
 import styles from './CountryRow.module.css';
 import Tooltip from '@/components/UI/Tooltip/Tooltip';
 import { useCloseOnAnyClick } from '@/hooks/useCloseOnAnyClick';
-import { createPortal } from 'react-dom';
 
 type CountryRowProps = {
   country: CountryResponse;
@@ -16,7 +16,6 @@ type CountryRowProps = {
 
 export default function CountryRow({ country, index }: CountryRowProps) {
   const [zoomedFlag, setZoomedFlag] = useState<string | null>(null);
-  const overlayRef = useRef<HTMLDivElement>(null);
 
   useCloseOnAnyClick({ onCloseAction: () => setZoomedFlag(null) });
 
@@ -26,22 +25,24 @@ export default function CountryRow({ country, index }: CountryRowProps) {
     <>
       <tr id={`country-row-${countryId}`} className={styles.countryRow}>
         <td className={styles.countryIndex}>{index + 1}</td>
-
         <td className={styles.countryName}>{country.name}</td>
+        <td>{country.capital ?? '—'}</td>
 
-        <td className={styles.countryCapital}>{country.capital ?? '—'}</td>
-
-        <td className={styles.countryFlag}>
+        <td>
           {country.flag && (
-            <div className={styles.countryFlag}>
-              <Image
-                src={country.flag}
-                alt={`${country.name} flag`}
-                height={16}
-                width={0}
-                className={styles.flagImage}
-              />
-            </div>
+            <Image
+              id={`flag-${countryId}`}
+              src={country.flag}
+              alt={`${country.name} flag`}
+              width={24}
+              height={16}
+              style={{ display: 'block', margin: '0 auto' }}
+              className={styles.flagImage}
+              onClick={(e) => {
+                e.stopPropagation();
+                setZoomedFlag(country.flag);
+              }}
+            />
           )}
         </td>
 
@@ -49,9 +50,7 @@ export default function CountryRow({ country, index }: CountryRowProps) {
           {formatPopulation(country.population ?? 0)}
         </td>
 
-        <td className={styles.countryContinents}>
-          {formatList(country.continents) ?? '—'}
-        </td>
+        <td>{formatList(country.continents) ?? '—'}</td>
 
         <td className={styles.countryMap}>
           {country.mapUrl ? (
@@ -71,32 +70,26 @@ export default function CountryRow({ country, index }: CountryRowProps) {
         </td>
       </tr>
 
-      {zoomedFlag &&
+      {typeof document !== 'undefined' &&
+        zoomedFlag &&
         createPortal(
           <div
-            id="flag-overlay"
-            ref={overlayRef}
             className={styles.flagOverlay}
-            role="dialog"
-            aria-modal="true"
-            aria-label={`Zoomed flag of ${country.name}`}
             onClick={() => setZoomedFlag(null)}
           >
-            <Image
-              id="flag-zoomed-image"
-              src={zoomedFlag}
-              alt={`Zoomed flag of ${country.name}`}
-              width={0}
-              height={0}
-              style={{
-                maxWidth: '90%',
-                maxHeight: '80%',
-                width: 'auto',
-                height: 'auto',
-              }}
-              className={styles.flagZoomed}
+            <div
+              className={styles.flagZoomedWrapper}
               onClick={(e) => e.stopPropagation()}
-            />
+            >
+              <Image
+                id="flag-zoomed-image"
+                src={zoomedFlag}
+                alt={`Zoomed flag of ${country.name}`}
+                fill
+                sizes="90vw"
+                className={styles.flagZoomed}
+              />
+            </div>
           </div>,
           document.body
         )}

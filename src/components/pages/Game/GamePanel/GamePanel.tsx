@@ -58,6 +58,7 @@ export default function GamePanel({
         questionNumber={quiz.index + 1}
         totalQuestions={quiz.total}
         onAnswer={quiz.answer}
+        onRestart={onRestart}
       />
     </main>
   );

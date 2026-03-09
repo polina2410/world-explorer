@@ -17,7 +17,7 @@ export default function SearchPanel({
   label = 'Search for a country',
 }: SearchPanelProps & { label?: string }) {
   return (
-    <div className={styles.searchWrapper}>
+    <>
       <label htmlFor={id} className="sr-only">
         {label}
       </label>
@@ -28,8 +28,8 @@ export default function SearchPanel({
         placeholder={placeholder}
         onChange={(e) => onChangeAction(e.target.value)}
         className={styles.searchInput}
-        aria-label={label}
+        aria-label={'Search for a country'}
       />
-    </div>
+    </>
   );
 }

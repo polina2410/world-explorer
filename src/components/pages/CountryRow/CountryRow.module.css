@@ -12,14 +12,6 @@
     font-weight: var(--fw-semibold);
 }
 
-.countryCapital {
-    color: var(--color-text-secondary);
-}
-
-.countryFlag {
-    text-align: center;
-}
-
 .flagImage {
     height: 16px;
     width: auto;
@@ -27,7 +19,6 @@
     border-radius: 2px;
     box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.08),
     0 2px 4px rgba(0, 0, 0, 0.12);
-
     cursor: pointer;
     transition: transform 0.25s ease;
 }
@@ -39,11 +30,6 @@
 .countryPopulation {
     text-align: right;
     font-variant-numeric: tabular-nums;
-}
-
-.countryContinents {
-    white-space: normal;
-    color: var(--color-text-secondary);
 }
 
 .countryMap a {
@@ -60,22 +46,21 @@
 .flagOverlay {
     position: fixed;
     inset: 0;
+    background: rgba(0, 0, 0, 0.7);
     display: flex;
-    justify-content: center;
     align-items: center;
-    background-color: rgba(0, 0, 0, 0.75);
-    z-index: var(--z-modal);
-    cursor: pointer;
-    animation: overlayFade 0.15s ease;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.flagZoomedWrapper {
+    position: relative;
+    width: 90vw;
+    height: 70vh;
 }
 
 .flagZoomed {
-    max-width: 90%;
-    max-height: 80%;
     object-fit: contain;
-    border-radius: var(--radius-md);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
-    cursor: default;
 }
 
 @keyframes overlayFade {
