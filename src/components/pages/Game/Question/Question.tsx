@@ -1,10 +1,11 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import Button from '@/components/UI/Button/Button';
 import PageDescription from '@/components/UI/PageDescription/PageDescription';
 import SecondaryTitle from '@/components/UI/SecondaryTitle/SecondaryTitle';
 import styles from './Question.module.css';
+import Modal from '@/components/UI/Modal/Modal';
 
 export type QuizQuestion = {
   country: string;
@@ -29,6 +30,7 @@ export default function Question({
 }: QuestionProps) {
   const [selected, setSelected] = useState<string | null>(null);
   const [progress, setProgress] = useState(0);
+  const [showResetModal, setShowResetModal] = useState(false);
 
   useEffect(() => {
     setProgress(Math.round((questionNumber / totalQuestions) * 100));
@@ -53,6 +55,16 @@ export default function Question({
 
   return (
     <div id="question-panel" className="container">
+      <Modal
+        isOpen={showResetModal}
+        message="Are you sure you want to restart the quiz?"
+        onCancel={() => setShowResetModal(false)}
+        onConfirm={() => {
+          setShowResetModal(false);
+          onRestart();
+        }}
+      />
+
       <div className="flex-between">
         <PageDescription id="question-number">
           Question {questionNumber} / {totalQuestions}
@@ -62,7 +74,7 @@ export default function Question({
           type="button"
           aria-label="Reset selection"
           className={styles.resetButton}
-          onClick={onRestart}
+          onClick={() => setShowResetModal(true)}
         >
           ⟳
         </button>

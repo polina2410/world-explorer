@@ -3,6 +3,7 @@ import '@/styles/globals.css';
 import Header from '@/components/Header/Header';
 import type { Metadata } from 'next';
 import { CountriesProvider } from '@/hooks/CountriesProvider';
+import { GameProvider } from '@/context/GameContext';
 
 type RootLayoutProps = {
   children: ReactNode;
@@ -19,12 +20,14 @@ export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en">
       <body>
-        <Header />
-        <CountriesProvider>
-          <main id="app-main" className="container">
-            {children}
-          </main>
-        </CountriesProvider>
+        <GameProvider>
+          <Header />
+          <CountriesProvider>
+            <main id="app-main" className="container">
+              {children}
+            </main>
+          </CountriesProvider>
+        </GameProvider>
       </body>
     </html>
   );
