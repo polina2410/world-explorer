@@ -9,10 +9,10 @@ import Button from '@/components/UI/Button/Button';
 import Dropdown from '@/components/UI/Dropdown/Dropdown';
 import { useCloseOnAnyClick } from '@/hooks/useCloseOnAnyClick';
 import styles from './FlagMosaic.module.css';
-import SearchPanel from '@/components/pages/SearchPanel/SearchPanel';
+import SearchPanel from '@/components/UI/SearchPanel/SearchPanel';
 import { getContinents } from '@/utils/getContinents';
 import { ANIMATION_CONFIG } from '@/animations/animations';
-import { DELAYS_FLAGS, INTRO_DELAYS } from '@/animations/delays';
+import { DELAYS_FLAGS } from '@/animations/delays';
 
 type FlagMosaicProps = {
   id?: string;
