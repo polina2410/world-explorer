@@ -14,8 +14,9 @@
 
     --font-sans: 'Inter', system-ui, sans-serif;
 
-    --lh-base: 1.6;
-    --lh-tight: 1.4;
+    --lh-p: 1.5;
+    --lh-st: 1.25;
+    --lh-mt: 1;
 
     --fw-regular: 400;
     --fw-medium: 500;
@@ -68,7 +69,7 @@ body {
     font-family: var(--font-sans), serif;
     background-color: var(--color-bg);
     color: var(--color-text-primary);
-    line-height: var(--lh-tight);
+    line-height: var(--lh-st);
     font-size: var(--fs-base);
 }
 
@@ -81,12 +82,12 @@ textarea {
 
 h1 {
     font-size: var(--fs-xl);
-    line-height: var(--lh-tight);
+    line-height: var(--lh-st);
 }
 
 h2 {
     font-size: var(--fs-lg);
-    line-height: var(--lh-tight);
+    line-height: var(--lh-st);
 }
 
 h3,

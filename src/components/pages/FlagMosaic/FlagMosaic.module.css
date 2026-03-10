@@ -1,9 +1,13 @@
+.flagMosaicPageWrapper {
+    margin: var(--space-lg) 0;
+}
+
 .mosaicContainer {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
     gap: var(--space-sm);
     justify-items: center;
-    margin-bottom: var(--space-lg);
+    margin: var(--space-lg) 0;
 }
 
 .flagCard {
@@ -20,7 +24,7 @@
     position: relative;
     width: 100%;
     height: 100%;
-    transition: transform 0.5s ease;
+    transition: transform 0.5s cubic-bezier(.4, 0, .2, 1);
     transform-style: preserve-3d;
 }
 
@@ -97,7 +101,7 @@
 .controls {
     display: flex;
     gap: 12px;
-    margin-bottom: 1.5rem;
+    margin: var(--space-lg) 0;
     flex-wrap: wrap;
     justify-content: center;
 }

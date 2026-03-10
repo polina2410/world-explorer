@@ -5,10 +5,10 @@
     border: 1px solid var(--color-border);
     background: var(--color-surface);
     cursor: pointer;
-    font-size: var(--fs-sm);
+    font-size: var(--fs-base);
     font-weight: var(--fw-regular);
     color: var(--color-text-primary);
-    line-height: var(--lh-tight);
+    line-height: var(--lh-st);
     transition: background 0.2s ease,
     color 0.2s ease,
     transform 0.15s ease,
@@ -71,7 +71,7 @@
 }
 
 .md {
-    font-size: var(--fs-lg);
+    font-size: var(--fs-base);
     padding: 14px 28px;
     font-weight: var(--fw-medium);
 }

@@ -2,7 +2,8 @@
     font-size: var(--fs-lg);
     font-weight: var(--fw-medium);
     margin: var(--space-md) 0;
-    line-height: var(--lh-base);
+    line-height: var(--lh-st);
     color: var(--color-text-primary);
     text-align: center;
+    letter-spacing: -1%;
 }
