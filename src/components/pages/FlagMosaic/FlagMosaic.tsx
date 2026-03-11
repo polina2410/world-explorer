@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { useState, useRef, useMemo } from 'react';
+import { useState, useRef, useMemo, useEffect } from 'react';
 import Image from 'next/image';
 import { useCountries } from '@/hooks/CountriesProvider';
 import DataLoader from '@/components/UI/DataLoader/DataLoader';
@@ -11,7 +11,7 @@ import { useCloseOnAnyClick } from '@/hooks/useCloseOnAnyClick';
 import styles from './FlagMosaic.module.css';
 import SearchPanel from '@/components/UI/SearchPanel/SearchPanel';
 import { getContinents } from '@/utils/getContinents';
-import { ANIMATION_CONFIG } from '@/animations/animations';
+import { basicVariants } from '@/animations/animations';
 import { DELAYS_FLAGS } from '@/animations/delays';
 
 const COLUMNS = 8;
@@ -26,6 +26,8 @@ export default function FlagMosaic({ id }: FlagMosaicProps) {
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc');
   const [selectedContinent, setSelectedContinent] = useState<string>('All');
   const [searchTerm, setSearchTerm] = useState('');
+  const [hasInitialAnimationPlayed, setHasInitialAnimationPlayed] =
+    useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
@@ -68,14 +70,22 @@ export default function FlagMosaic({ id }: FlagMosaicProps) {
   const hasNoResults =
     !loading && processedCountries.length === 0 && (countries ?? []).length > 0;
 
+  useEffect(() => {
+    if (countries && countries.length > 0) {
+      const timer = setTimeout(() => {
+        setHasInitialAnimationPlayed(false);
+      }, 100);
+      return () => clearTimeout(timer);
+    }
+  }, [countries]);
+
   return (
     <div id={id ?? 'flag-mosaic'} className={styles.flagMosaicPageWrapper}>
       <motion.div
-        {...ANIMATION_CONFIG}
-        transition={{
-          ...ANIMATION_CONFIG.transition,
-          delay: DELAYS_FLAGS.FLAG_MOSAIC_CONTROLS,
-        }}
+        variants={basicVariants}
+        initial="hidden"
+        animate="visible"
+        custom={DELAYS_FLAGS.FLAG_MOSAIC_CONTROLS}
       >
         <div className={styles.controls} id="flag-mosaic-controls">
           <SearchPanel
@@ -135,7 +145,6 @@ export default function FlagMosaic({ id }: FlagMosaicProps) {
               {processedCountries.map((country, index) => {
                 const isFlipped = flipped === country.name;
                 const isDimmed = flipped && flipped !== country.name;
-
                 const row = Math.floor(index / COLUMNS);
 
                 return (
@@ -145,9 +154,26 @@ export default function FlagMosaic({ id }: FlagMosaicProps) {
                     className={`${styles.flagCard} ${
                       isFlipped ? styles.active : ''
                     } ${isDimmed ? styles.dimmed : ''}`}
-                    initial={{ opacity: 0, y: 10 }}
+                    initial={
+                      !hasInitialAnimationPlayed ? { opacity: 0, y: 10 } : false
+                    }
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.3, delay: row * 0.1 }}
+                    transition={
+                      !hasInitialAnimationPlayed
+                        ? {
+                            duration: 0.3,
+                            delay: row * 0.1,
+                          }
+                        : { duration: 0 }
+                    }
+                    onAnimationComplete={() => {
+                      if (
+                        !hasInitialAnimationPlayed &&
+                        index === processedCountries.length - 1
+                      ) {
+                        setHasInitialAnimationPlayed(true);
+                      }
+                    }}
                     onClick={() =>
                       isFlipped ? closeCard() : handleClick(country.name)
                     }
