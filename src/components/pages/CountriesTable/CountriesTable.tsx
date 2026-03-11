@@ -73,7 +73,7 @@ export default function CountriesTable({
               </span>
             </th>
 
-            <th scope="col">Continents</th>
+            <th scope="col">Regions</th>
             <th scope="col">URL</th>
           </tr>
         </thead>

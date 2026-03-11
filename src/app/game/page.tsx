@@ -42,8 +42,8 @@ export default function GamePage() {
                 Countries Quiz 🌍
               </MainTitle>
               <PageDescription id="game-page-start-desc">
-                Choose a continent and number of questions. Then guess the
-                correct capital of each country.
+                Choose a region and number of questions. Then guess the correct
+                capital of each country.
               </PageDescription>
               <Button
                 variant="start"

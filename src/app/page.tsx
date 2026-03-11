@@ -6,11 +6,17 @@ import HomeHeader from '@/components/pages/HomeHeader/HomeHeader';
 export default function HomePage() {
   return (
     <main id="home-page-main" role="main">
-      <section aria-labelledby="home-page-flag-mosaic-header">
+      <section
+        aria-labelledby="home-page-flag-mosaic-header"
+        aria-label="Welcome section"
+      >
         <HomeHeader />
       </section>
 
-      <section aria-labelledby="home-page-flag-mosaic">
+      <section
+        aria-labelledby="home-page-flag-mosaic"
+        aria-label="Country flags explorer"
+      >
         <FlagMosaic />
       </section>
     </main>

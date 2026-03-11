@@ -16,7 +16,7 @@ export default function HomeHeader() {
         animate="visible"
         custom={INTRO_DELAYS.TITLE}
       >
-        <MainTitle id="home-page-title">Welcome to Country Explorer</MainTitle>
+        <MainTitle id="home-page-title">Welcome to Country Explorer!</MainTitle>
       </motion.div>
 
       <div className={styles.pageDescription}>

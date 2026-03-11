@@ -10,7 +10,7 @@ type RootLayoutProps = {
 };
 
 export const metadata: Metadata = {
-  title: 'CountriesQuiz',
+  title: 'CountriesExplorer',
   icons: {
     icon: '/favicon.png',
   },
