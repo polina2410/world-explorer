@@ -1,11 +1,9 @@
 'use client';
 
-import Alphabet from '@/components/pages/Alphabet/Alphabet';
-import MainTitle from '@/components/UI/MainTitle/MainTitle';
-import CountriesTable from '@/components/pages/CountriesTable/CountriesTable';
 import { useState } from 'react';
 import { useCountries } from '@/hooks/CountriesProvider';
 import DataLoader from '@/components/UI/DataLoader/DataLoader';
+import CountriesContent from '@/components/pages/CountriesContent/CountriesContent';
 import { EMPTY_COUNTRIES_MESSAGE } from '@/constants';
 
 export default function CountriesPage() {
@@ -32,33 +30,11 @@ export default function CountriesPage() {
         emptyMessage={EMPTY_COUNTRIES_MESSAGE}
       >
         {() => (
-          <>
-            <MainTitle id="countries-page-title">
-              Alphabetical list of countries
-            </MainTitle>
-
-            <div
-              id="countries-alphabet-filter"
-              role="region"
-              aria-labelledby="countries-page-title"
-            >
-              <Alphabet
-                onSelectAction={setSelectedLetter}
-                aria-label="Filter countries by starting letter"
-              />
-            </div>
-
-            <div
-              id="countries-table-section"
-              role="region"
-              aria-labelledby="countries-page-title"
-            >
-              <CountriesTable
-                countries={sortedCountries}
-                selectedLetter={selectedLetter}
-              />
-            </div>
-          </>
+          <CountriesContent
+            countries={sortedCountries}
+            selectedLetter={selectedLetter}
+            setSelectedLetter={setSelectedLetter}
+          />
         )}
       </DataLoader>
     </section>

@@ -8,13 +8,10 @@ import styles from './FlagMosaicControls.module.css';
 type Props = {
   searchTerm: string;
   setSearchTerm: (v: string) => void;
-
   sortOrder: 'asc' | 'desc';
   setSortOrder: React.Dispatch<React.SetStateAction<'asc' | 'desc'>>;
-
   selectedContinent: string;
   setSelectedContinent: (v: string) => void;
-
   continents: string[];
 };
 
@@ -28,7 +25,7 @@ export default function FlagMosaicControls({
   continents,
 }: Props) {
   return (
-    <div className={styles.controls} id="flag-mosaic-controls">
+    <div className={`${styles.controls} flex-center`} id="flag-mosaic-controls">
       <SearchPanel
         id="flag-mosaic-search"
         value={searchTerm}

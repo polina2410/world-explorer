@@ -1,7 +1,6 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import styles from './HomeHeader.module.css';
 import MainTitle from '@/components/UI/MainTitle/MainTitle';
 import PageDescription from '@/components/UI/PageDescription/PageDescription';
 import { basicVariants } from '@/animations/animations';
@@ -9,7 +8,7 @@ import { INTRO_DELAYS } from '@/animations/delays';
 
 export default function HomeHeader() {
   return (
-    <div className={styles.homeHeader}>
+    <div className="page stack">
       <motion.div
         variants={basicVariants}
         initial="hidden"
@@ -19,7 +18,7 @@ export default function HomeHeader() {
         <MainTitle id="home-page-title">Welcome to Country Explorer!</MainTitle>
       </motion.div>
 
-      <div className={styles.pageDescription}>
+      <div>
         <motion.div
           variants={basicVariants}
           initial="hidden"

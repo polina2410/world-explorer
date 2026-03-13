@@ -4,7 +4,6 @@ import { motion } from 'framer-motion';
 import { useEffect, useMemo, useState } from 'react';
 import { useCountries } from '@/hooks/CountriesProvider';
 import DataLoader from '@/components/UI/DataLoader/DataLoader';
-import styles from './FlagMosaic.module.css';
 import { getContinents } from '@/utils/getContinents';
 import { basicVariants } from '@/animations/animations';
 import { DELAYS_FLAGS } from '@/animations/delays';
@@ -39,9 +38,6 @@ export default function FlagMosaic() {
       );
   }, [countries, selectedContinent, searchTerm, sortOrder]);
 
-  const hasNoResults =
-    !loading && processedCountries.length === 0 && (countries ?? []).length > 0;
-
   useEffect(() => {
     if (countries && countries.length > 0) {
       const timer = setTimeout(() => {
@@ -53,7 +49,7 @@ export default function FlagMosaic() {
 
   return (
     <FlagMosaicProvider>
-      <div className={styles.flagMosaicPageWrapper}>
+      <div>
         <motion.div
           variants={basicVariants}
           initial="hidden"

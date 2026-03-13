@@ -36,7 +36,7 @@ export default function GamePage() {
             <section
               role="region"
               aria-labelledby="game-page-start-title"
-              className="container flex-center"
+              className="container flex-center stack page"
             >
               <MainTitle id="game-page-start-title">
                 Countries Quiz 🌍

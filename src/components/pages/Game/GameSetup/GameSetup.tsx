@@ -26,7 +26,7 @@ export default function GameSetup({
   const isReadyToStart = selectedContinent !== null && questionCount !== null;
 
   return (
-    <div className={`${styles.setup} container`} id="game-setup">
+    <div className={'section container flex-center'} id="game-setup">
       <div className={styles.menuCard} id="game-setup-card">
         <div className={styles.step} id="step-select-continent">
           <SecondaryTitle id="secondary-title-continents">

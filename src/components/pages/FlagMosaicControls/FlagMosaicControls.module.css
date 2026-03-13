@@ -1,7 +1,5 @@
 .controls {
-    display: flex;
     gap: 12px;
-    margin: var(--space-lg) 0;
     flex-wrap: wrap;
-    justify-content: center;
+    align-items: stretch
 }
