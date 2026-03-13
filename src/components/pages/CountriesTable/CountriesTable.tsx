@@ -63,7 +63,6 @@ export default function CountriesTable({
                 }
               }}
               title="Click or press Enter/Space to sort"
-              role="button"
               tabIndex={0}
               aria-sort={ariaSort}
             >

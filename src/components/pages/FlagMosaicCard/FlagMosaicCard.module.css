@@ -1,0 +1,84 @@
+
+.flagCard {
+    width: 120px;
+    height: 80px;
+    perspective: 1000px;
+    cursor: pointer;
+    position: relative;
+    transition: transform 0.25s ease,
+    opacity 0.35s ease,
+    filter 0.35s ease;
+}
+
+
+.flagCard:hover .flagInner:not(.flipped) {
+    transform: var(--scale-lg);
+}
+
+.flagCard:hover .flagInner.flipped {
+    transform: rotateY(180deg) var(--scale-lg);
+}
+
+.flagInner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transition: transform 0.5s cubic-bezier(.4, 0, .2, 1);
+}
+
+.flagInner.flipped {
+    transform: rotateY(180deg);
+}
+
+.flagFront,
+.flagBack {
+    position: absolute;
+    inset: 0;
+    backface-visibility: hidden;
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.flagFront {
+    background: var(--color-border);
+    padding: 4px;
+    box-sizing: border-box;
+}
+
+.flagBack {
+    background: var(--color-accent);
+    color: var(--color-surface);
+    font-size: var(--fs-sm);
+    font-weight: var(--fw-medium);
+    text-align: center;
+    padding: var(--space-xs);
+    transform: rotateY(180deg);
+    word-break: break-word;
+}
+
+.flagImageWrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.flagImage {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+    transition: transform 0.25s ease;
+}
+
+.dimmed {
+    opacity: 0.15;
+    filter: grayscale(100%) blur(0.9px) brightness(1);
+    transition: opacity 0.35s ease, filter 0.35s ease;
+}
+
+.active {
+    transform: var(--scale-xl);
+    z-index: 10;
+}

@@ -2,6 +2,7 @@ export type Country = {
   name: string;
   capital?: string;
   continents: string[];
+  flag: string;
 };
 
 export type QuizQuestion = {
@@ -25,7 +26,11 @@ export function generateQuestions(
   count: number
 ): QuizQuestion[] {
   const filtered = countries.filter(
-    (c): c is Required<Pick<Country, 'name' | 'capital' | 'continents'>> =>
+    (
+      c
+    ): c is Required<
+      Pick<Country, 'name' | 'capital' | 'continents' | 'flag'>
+    > =>
       !!c.capital && (continent === 'All' || c.continents.includes(continent))
   );
 
