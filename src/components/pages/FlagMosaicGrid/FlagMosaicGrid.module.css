@@ -1,0 +1,19 @@
+.mosaicContainer {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    gap: var(--space-md);
+    justify-items: center;
+    margin: var(--space-lg) 0;
+}
+
+.mosaicContainer.hasActiveCard::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.3);
+    pointer-events: none;
+    z-index: 5;
+}

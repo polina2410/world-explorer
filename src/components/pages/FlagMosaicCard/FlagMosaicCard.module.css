@@ -1,43 +1,33 @@
-.mosaicContainer {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
-    gap: var(--space-sm);
-    justify-items: center;
-    margin-bottom: var(--space-lg);
-}
 
 .flagCard {
-    width: 90px;
-    height: 60px;
+    width: 120px;
+    height: 80px;
     perspective: 1000px;
     cursor: pointer;
+    position: relative;
     transition: transform 0.25s ease,
-    opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1),
-    filter 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity 0.35s ease,
+    filter 0.35s ease;
+}
+
+
+.flagCard:hover .flagInner:not(.flipped) {
+    transform: var(--scale-lg);
+}
+
+.flagCard:hover .flagInner.flipped {
+    transform: rotateY(180deg) var(--scale-lg);
 }
 
 .flagInner {
     position: relative;
     width: 100%;
     height: 100%;
-    transition: transform 0.5s ease;
     transform-style: preserve-3d;
-}
-
-.flagCard:hover .flagInner {
-    transform: var(--scale-lg);
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+    transition: transform 0.5s cubic-bezier(.4, 0, .2, 1);
 }
 
 .flagInner.flipped {
-    transform: rotateY(180deg);
-}
-
-.flagCard:hover .flagInner.flipped {
-    transform: rotateY(180deg) var(--scale-xl);
-}
-
-.flipped {
     transform: rotateY(180deg);
 }
 
@@ -83,21 +73,12 @@
 }
 
 .dimmed {
-    opacity: 0.5;
-    filter: grayscale(60%) blur(0.5px);
-    transition: opacity 0.25s ease, filter 0.25s ease;
+    opacity: 0.15;
+    filter: grayscale(100%) blur(0.9px) brightness(1);
+    transition: opacity 0.35s ease, filter 0.35s ease;
 }
 
 .active {
     transform: var(--scale-xl);
     z-index: 10;
-    position: relative;
-}
-
-.controls {
-    display: flex;
-    gap: 12px;
-    margin-bottom: 1.5rem;
-    flex-wrap: wrap;
-    justify-content: center;
 }

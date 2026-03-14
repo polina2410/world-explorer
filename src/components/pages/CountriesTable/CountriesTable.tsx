@@ -5,6 +5,8 @@ import { CountryResponse } from '@/types/country';
 import styles from './CountriesTable.module.css';
 import CountryRow from '@/components/pages/CountryRow/CountryRow';
 import PageDescription from '@/components/UI/PageDescription/PageDescription';
+import { motion } from 'motion/react';
+import { rowVariants, tableBodyVariants } from '@/animations/animations';
 
 type CountriesTableProps = {
   countries: CountryResponse[];
@@ -63,7 +65,6 @@ export default function CountriesTable({
                 }
               }}
               title="Click or press Enter/Space to sort"
-              role="button"
               tabIndex={0}
               aria-sort={ariaSort}
             >
@@ -73,12 +74,17 @@ export default function CountriesTable({
               </span>
             </th>
 
-            <th scope="col">Continents</th>
+            <th scope="col">Regions</th>
             <th scope="col">URL</th>
           </tr>
         </thead>
 
-        <tbody id="countries-table-body">
+        <motion.tbody
+          id="countries-table-body"
+          variants={tableBodyVariants}
+          initial="hidden"
+          animate="visible"
+        >
           {displayedCountries.length === 0 ? (
             <tr id="countries-table-empty">
               <td colSpan={7} className={styles.noCountriesMessage}>
@@ -93,7 +99,7 @@ export default function CountriesTable({
               <CountryRow key={c.name} country={c} index={i} />
             ))
           )}
-        </tbody>
+        </motion.tbody>
       </table>
     </div>
   );

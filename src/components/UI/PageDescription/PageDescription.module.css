@@ -1,8 +1,8 @@
 .pageDescription {
-    font-size: var(--fs-lg);
+    font-size: var(--fs-base);
     font-weight: var(--fw-regular);
-    margin: var(--space-sm) 0;
-    line-height: var(--lh-base);
+    margin: var(--space-xs) 0;
+    line-height: var(--lh-p);
     color: var(--color-text-secondary);
     text-align: left;
 }

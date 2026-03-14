@@ -2,6 +2,7 @@ export type Country = {
   name: string;
   capital?: string;
   continents: string[];
+  flag: string;
 };
 
 export type QuizQuestion = {
@@ -24,16 +25,18 @@ export function generateQuestions(
   continent: string,
   count: number
 ): QuizQuestion[] {
-  // only countries with a capital
   const filtered = countries.filter(
-    (c): c is Required<Pick<Country, 'name' | 'capital' | 'continents'>> =>
+    (
+      c
+    ): c is Required<
+      Pick<Country, 'name' | 'capital' | 'continents' | 'flag'>
+    > =>
       !!c.capital && (continent === 'All' || c.continents.includes(continent))
   );
 
   const selected = shuffle(filtered).slice(0, count);
 
   return selected.map((country) => {
-    // pick 3 wrong capitals
     const wrongCapitals = shuffle(
       filtered.filter((c) => c.name !== country.name).map((c) => c.capital)
     ).slice(0, 3);

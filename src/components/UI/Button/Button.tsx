@@ -1,12 +1,13 @@
 'use client';
 
-import React, { ButtonHTMLAttributes } from 'react';
+import { motion, HTMLMotionProps } from 'framer-motion';
+import React from 'react';
 import styles from './Button.module.css';
 
 type ButtonVariant = 'confirm' | 'default' | 'start' | 'success' | 'danger';
 type ButtonSize = 'xs' | 'sm' | 'md' | 'lg';
 
-type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
+type ButtonProps = HTMLMotionProps<'button'> & {
   children: React.ReactNode;
   active?: boolean;
   variant?: ButtonVariant;
@@ -23,19 +24,22 @@ export default function Button({
   const variantClass = variant !== 'default' ? styles[variant] : '';
 
   return (
-    <button
+    <motion.button
       aria-pressed={active || undefined}
+      whileTap={{ scale: 0.9 }}
+      whileHover={{ scale: 1.1 }}
+      transition={{ bounceDamping: 10, bounceStiffness: 600 }}
       className={[
         styles.button,
         active && styles.active,
         variantClass,
-        size && styles[size],
+        styles[size],
       ]
         .filter(Boolean)
         .join(' ')}
       {...props}
     >
       {children}
-    </button>
+    </motion.button>
   );
 }

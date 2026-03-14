@@ -13,13 +13,13 @@ export default function Header() {
       <div className="container">
         <div className="flex-between">
           <NavLink href={APP_ROUTES.home} variant="logo">
-            CountriesQuiz
+            CountriesExplorer
           </NavLink>
 
           <nav className={styles.nav} aria-label="Main navigation">
             <NavLink href={APP_ROUTES.home}>Home</NavLink>
             <NavLink href={APP_ROUTES.game} onClick={resetGame}>
-              Game
+              Quiz
             </NavLink>
             <NavLink href={APP_ROUTES.countries}>Countries</NavLink>
           </nav>

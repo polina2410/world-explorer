@@ -1,29 +1,32 @@
 'use client';
 
-import MainTitle from '@/components/UI/MainTitle/MainTitle';
-import PageDescription from '@/components/UI/PageDescription/PageDescription';
 import FlagMosaic from '@/components/pages/FlagMosaic/FlagMosaic';
+import HomeHeader from '@/components/pages/HomeHeader/HomeHeader';
+import { motion } from 'motion/react';
+import { fadeUpVariants, pageVariants } from '@/animations/animations';
 
 export default function HomePage() {
   return (
-    <main id="home-page-main" role="main">
-      <MainTitle id="home-page-title">Welcome to Country Explorer</MainTitle>
+    <motion.main
+      id="home-page-main"
+      role="main"
+      variants={pageVariants}
+      initial="hidden"
+      animate="visible"
+    >
+      <motion.section
+        variants={fadeUpVariants}
+        aria-labelledby="home-page-flag-mosaic-header"
+      >
+        <HomeHeader />
+      </motion.section>
 
-      <PageDescription id="home-page-description-1">
-        Discover the world one country at a time. Browse interactive flags,
-        explore detailed country information, and test your knowledge in a fun
-        geography game.
-      </PageDescription>
-
-      <PageDescription id="home-page-description-2">
-        Click on any flag below to flip it and reveal the country’s name. It’s a
-        simple and visual way to learn and recognize countries from around the
-        world.
-      </PageDescription>
-
-      <section aria-labelledby="home-page-flag-mosaic-title">
+      <motion.section
+        variants={fadeUpVariants}
+        aria-labelledby="home-page-flag-mosaic"
+      >
         <FlagMosaic />
-      </section>
-    </main>
+      </motion.section>
+    </motion.main>
   );
 }

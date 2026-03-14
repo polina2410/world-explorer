@@ -10,6 +10,8 @@ import { EMPTY_COUNTRIES_MESSAGE } from '@/constants';
 import MainTitle from '@/components/UI/MainTitle/MainTitle';
 import PageDescription from '@/components/UI/PageDescription/PageDescription';
 import Button from '@/components/UI/Button/Button';
+import { motion } from 'motion/react';
+import { fadeUpVariants, pageVariants } from '@/animations/animations';
 
 export default function GamePage() {
   const {
@@ -31,57 +33,75 @@ export default function GamePage() {
       emptyMessage={EMPTY_COUNTRIES_MESSAGE}
     >
       {() => (
-        <main id="game-page-main">
+        <motion.main
+          id="game-page-main"
+          variants={pageVariants}
+          initial="hidden"
+          animate="visible"
+        >
           {phase === 'start' && (
-            <section
+            <motion.section
+              variants={fadeUpVariants}
               role="region"
               aria-labelledby="game-page-start-title"
-              className="container flex-center"
+              className="container flex-center stack page"
             >
-              <MainTitle id="game-page-start-title">
-                Countries Quiz 🌍
-              </MainTitle>
-              <PageDescription id="game-page-start-desc">
-                Choose a continent and number of questions. Then guess the
-                correct capital of each country.
-              </PageDescription>
-              <Button
-                variant="start"
-                size="lg"
-                aria-label="Start countries quiz"
-                onClick={() => setPhase('setup')}
-              >
-                Start
-              </Button>
-            </section>
+              <motion.div variants={fadeUpVariants}>
+                <MainTitle id="game-page-start-title">
+                  Countries Quiz 🌍
+                </MainTitle>
+              </motion.div>
+
+              <motion.div variants={fadeUpVariants}>
+                <PageDescription id="game-page-start-desc">
+                  Choose a region and number of questions. Then guess the
+                  correct capital of each country.
+                </PageDescription>
+              </motion.div>
+
+              <motion.div variants={fadeUpVariants}>
+                <Button
+                  variant="start"
+                  size="lg"
+                  aria-label="Start countries quiz"
+                  onClick={() => setPhase('setup')}
+                >
+                  Start
+                </Button>
+              </motion.div>
+            </motion.section>
           )}
 
           {phase === 'setup' && (
-            <GameSetup
-              continents={continents}
-              selectedContinent={selectedContinent}
-              setSelectedContinent={setSelectedContinent}
-              questionCount={questionCount}
-              setQuestionCount={setQuestionCount}
-              onStartGame={() => setPhase('quiz')}
-            />
+            <motion.div variants={fadeUpVariants}>
+              <GameSetup
+                continents={continents}
+                selectedContinent={selectedContinent}
+                setSelectedContinent={setSelectedContinent}
+                questionCount={questionCount}
+                setQuestionCount={setQuestionCount}
+                onStartGame={() => setPhase('quiz')}
+              />
+            </motion.div>
           )}
 
           {phase === 'quiz' &&
             countries &&
             selectedContinent &&
             questionCount && (
-              <GamePanel
-                continent={selectedContinent}
-                questionCount={questionCount}
-                onRestart={() => {
-                  setPhase('setup');
-                  setSelectedContinent(null);
-                  setQuestionCount(null);
-                }}
-              />
+              <motion.div variants={fadeUpVariants}>
+                <GamePanel
+                  continent={selectedContinent}
+                  questionCount={questionCount}
+                  onRestart={() => {
+                    setPhase('setup');
+                    setSelectedContinent(null);
+                    setQuestionCount(null);
+                  }}
+                />
+              </motion.div>
             )}
-        </main>
+        </motion.main>
       )}
     </DataLoader>
   );

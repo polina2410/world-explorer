@@ -8,6 +8,8 @@ import { formatList, formatPopulation } from '@/utils/utils';
 import styles from './CountryRow.module.css';
 import Tooltip from '@/components/UI/Tooltip/Tooltip';
 import { useCloseOnAnyClick } from '@/hooks/useCloseOnAnyClick';
+import { motion } from 'motion/react';
+import { rowVariants } from '@/animations/animations';
 
 type CountryRowProps = {
   country: CountryResponse;
@@ -23,7 +25,12 @@ export default function CountryRow({ country, index }: CountryRowProps) {
 
   return (
     <>
-      <tr id={`country-row-${countryId}`} className={styles.countryRow}>
+      <motion.tr
+        id={`country-row-${countryId}`}
+        className={styles.countryRow}
+        variants={rowVariants}
+        layout
+      >
         <td className={styles.countryIndex}>{index + 1}</td>
         <td className={styles.countryName}>{country.name}</td>
         <td>{country.capital ?? '—'}</td>
@@ -68,7 +75,7 @@ export default function CountryRow({ country, index }: CountryRowProps) {
             '—'
           )}
         </td>
-      </tr>
+      </motion.tr>
 
       {typeof document !== 'undefined' &&
         zoomedFlag &&

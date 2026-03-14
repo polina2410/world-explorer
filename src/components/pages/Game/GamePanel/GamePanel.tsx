@@ -7,6 +7,8 @@ import Question from '@/components/pages/Game/Question/Question';
 import Loading from '@/components/UI/Loading/Loading';
 import { useQuiz } from '@/hooks/useQuiz';
 import Result from '@/components/pages/Game/Result/Result';
+import { motion } from 'motion/react';
+import { containerVariants, fadeUpVariants } from '@/animations/animations';
 
 type GamePanelProps = {
   continent: string;
@@ -20,7 +22,6 @@ export default function GamePanel({
   onRestart,
 }: GamePanelProps) {
   const { countries } = useCountries();
-
   const questions: QuizQuestion[] = useMemo(() => {
     if (!countries) return [];
     return generateQuestions(countries, continent, questionCount);
@@ -43,23 +44,28 @@ export default function GamePanel({
   }
 
   return (
-    <main
+    <motion.main
       className="container"
       id="game-panel"
       role="region"
       aria-labelledby="quiz-heading"
+      variants={containerVariants}
+      initial="hidden"
+      animate="visible"
     >
       <h2 id="quiz-heading" className="sr-only">
         {continent} Quiz
       </h2>
 
-      <Question
-        question={quiz.current}
-        questionNumber={quiz.index + 1}
-        totalQuestions={quiz.total}
-        onAnswer={quiz.answer}
-        onRestart={onRestart}
-      />
-    </main>
+      <motion.div variants={fadeUpVariants}>
+        <Question
+          question={quiz.current}
+          questionNumber={quiz.index + 1}
+          totalQuestions={quiz.total}
+          onAnswer={quiz.answer}
+          onRestart={onRestart}
+        />
+      </motion.div>
+    </motion.main>
   );
 }

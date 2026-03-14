@@ -1,14 +1,14 @@
 .dropdown {
     position: relative;
     width: 180px;
-    font-size: var(--fs-sm);
+    font-size: var(--fs-base);
     font-weight: var(--fw-regular);
     color: var(--color-text-primary);
     user-select: none;
 }
 
 .selected {
-    padding: 6px 12px;
+    padding: 10px 18px;
     border-radius: var(--radius-sm);
     border: 1px solid var(--color-border);
     background: var(--color-surface);
@@ -17,7 +17,6 @@
     justify-content: space-between;
     align-items: center;
     transition: background 0.2s ease, color 0.2s ease;
-    font-size: var(--fs-sm);
     font-weight: var(--fw-regular);
     color: var(--color-text-primary);
 }
