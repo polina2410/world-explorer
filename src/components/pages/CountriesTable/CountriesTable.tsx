@@ -6,7 +6,7 @@ import styles from './CountriesTable.module.css';
 import CountryRow from '@/components/pages/CountryRow/CountryRow';
 import PageDescription from '@/components/UI/PageDescription/PageDescription';
 import { motion } from 'motion/react';
-import { rowVariants, tableBodyVariants } from '@/animations/animations';
+import { tableBodyVariants } from '@/animations/animations';
 
 type CountriesTableProps = {
   countries: CountryResponse[];
