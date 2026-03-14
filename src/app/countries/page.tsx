@@ -17,7 +17,7 @@ export default function CountriesPage() {
         : true
     ) ?? [];
 
-  const sortedCountries = filteredCountries.sort((a, b) =>
+  const sortedCountries = [...filteredCountries].sort((a, b) =>
     a.name.localeCompare(b.name)
   );
 

@@ -3,6 +3,8 @@
 import Button from '@/components/UI/Button/Button';
 import styles from './GameSetup.module.css';
 import SecondaryTitle from '@/components/UI/SecondaryTitle/SecondaryTitle';
+import { motion } from 'motion/react';
+import { containerVariants, fadeUpVariants } from '@/animations/animations';
 
 type GameSetupProps = {
   continents: string[];
@@ -26,74 +28,102 @@ export default function GameSetup({
   const isReadyToStart = selectedContinent !== null && questionCount !== null;
 
   return (
-    <div className={'section container flex-center'} id="game-setup">
-      <div className={styles.menuCard} id="game-setup-card">
-        <div className={styles.step} id="step-select-continent">
+    <motion.div
+      className={'section container flex-center'}
+      id="game-setup"
+      variants={containerVariants}
+      initial="hidden"
+      animate="visible"
+    >
+      <motion.div
+        className={styles.menuCard}
+        id="game-setup-card"
+        variants={fadeUpVariants}
+      >
+        <motion.div
+          className={styles.step}
+          id="step-select-continent"
+          variants={fadeUpVariants}
+        >
           <SecondaryTitle id="secondary-title-continents">
             Choose continent:
           </SecondaryTitle>
 
-          <div
+          <motion.div
             className={styles.buttons}
             id="continent-buttons"
             role="group"
             aria-labelledby="secondary-title-continents"
+            variants={containerVariants}
           >
-            <Button
-              id="continent-button-all"
-              aria-label="Select all continents"
-              size="sm"
-              active={selectedContinent === 'All'}
-              onClick={() => setSelectedContinent('All')}
-            >
-              All
-            </Button>
+            <motion.div variants={fadeUpVariants}>
+              <Button
+                id="continent-button-all"
+                aria-label="Select all continents"
+                size="sm"
+                active={selectedContinent === 'All'}
+                onClick={() => setSelectedContinent('All')}
+              >
+                All
+              </Button>
+            </motion.div>
 
             {continents.map((continent) => (
-              <Button
-                id={`continent-button-${continent}`}
-                aria-label={`Select continent ${continent}`}
-                size="sm"
-                key={continent}
-                active={selectedContinent === continent}
-                onClick={() => setSelectedContinent(continent)}
-              >
-                {continent}
-              </Button>
+              <motion.div key={continent} variants={fadeUpVariants}>
+                <Button
+                  id={`continent-button-${continent}`}
+                  aria-label={`Select continent ${continent}`}
+                  size="sm"
+                  active={selectedContinent === continent}
+                  onClick={() => setSelectedContinent(continent)}
+                >
+                  {continent}
+                </Button>
+              </motion.div>
             ))}
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
 
         {selectedContinent && (
-          <div className={styles.step} id="step-select-questions">
+          <motion.div
+            className={styles.step}
+            id="step-select-questions"
+            variants={fadeUpVariants}
+          >
             <SecondaryTitle id="secondary-title-questions">
               Choose number of questions:
             </SecondaryTitle>
 
-            <div
+            <motion.div
               className={styles.buttons}
               id="question-count-buttons"
               role="group"
               aria-labelledby="secondary-title-questions"
+              variants={containerVariants}
             >
               {QUESTION_OPTIONS.map((option) => (
-                <Button
-                  id={`question-button-${option}`}
-                  size="sm"
-                  key={option}
-                  active={questionCount === option}
-                  aria-label={`Select ${option} questions`}
-                  onClick={() => setQuestionCount(option)}
-                >
-                  {option}
-                </Button>
+                <motion.div key={option} variants={fadeUpVariants}>
+                  <Button
+                    id={`question-button-${option}`}
+                    size="sm"
+                    active={questionCount === option}
+                    aria-label={`Select ${option} questions`}
+                    onClick={() => setQuestionCount(option)}
+                  >
+                    {option}
+                  </Button>
+                </motion.div>
               ))}
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
         )}
 
         {isReadyToStart && (
-          <div className={styles.startQuizButton} id="start-quiz-wrapper">
+          <motion.div
+            className={styles.startQuizButton}
+            id="start-quiz-wrapper"
+            variants={fadeUpVariants}
+          >
             <Button
               id="start-quiz-button"
               aria-label="Start Quiz"
@@ -103,9 +133,9 @@ export default function GameSetup({
             >
               Start Quiz
             </Button>
-          </div>
+          </motion.div>
         )}
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 }

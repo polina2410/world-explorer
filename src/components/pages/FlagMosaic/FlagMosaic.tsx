@@ -5,11 +5,10 @@ import { useEffect, useMemo, useState } from 'react';
 import { useCountries } from '@/hooks/CountriesProvider';
 import DataLoader from '@/components/UI/DataLoader/DataLoader';
 import { getContinents } from '@/utils/getContinents';
-import { basicVariants } from '@/animations/animations';
-import { DELAYS_FLAGS } from '@/animations/delays';
 import { FlagMosaicProvider } from '@/context/FlagMosaicContext';
 import FlagMosaicGrid from '@/components/pages/FlagMosaicGrid/FlagMosaicGrid';
 import FlagMosaicControls from '@/components/pages/FlagMosaicControls/FlagMosaicControls';
+import { containerVariants, fadeUpVariants } from '@/animations/animations';
 
 export default function FlagMosaic() {
   const { countries, loading, error } = useCountries();
@@ -22,7 +21,7 @@ export default function FlagMosaic() {
   const continents = getContinents(countries);
 
   const processedCountries = useMemo(() => {
-    return (countries ?? [])
+    return [...(countries ?? [])]
       .filter((country) =>
         selectedContinent === 'All'
           ? true
@@ -49,13 +48,8 @@ export default function FlagMosaic() {
 
   return (
     <FlagMosaicProvider>
-      <div>
-        <motion.div
-          variants={basicVariants}
-          initial="hidden"
-          animate="visible"
-          custom={DELAYS_FLAGS.FLAG_MOSAIC_CONTROLS}
-        >
+      <motion.div variants={containerVariants}>
+        <motion.div variants={fadeUpVariants}>
           <FlagMosaicControls
             searchTerm={searchTerm}
             setSearchTerm={setSearchTerm}
@@ -67,23 +61,23 @@ export default function FlagMosaic() {
           />
         </motion.div>
 
-        <DataLoader
-          data={countries}
-          loading={loading}
-          error={error}
-          emptyMessage="No countries available"
-        >
-          {() => {
-            return (
+        <motion.div variants={fadeUpVariants}>
+          <DataLoader
+            data={countries}
+            loading={loading}
+            error={error}
+            emptyMessage="No countries available"
+          >
+            {() => (
               <FlagMosaicGrid
                 countries={processedCountries}
                 hasInitialAnimationPlayed={hasInitialAnimationPlayed}
                 setHasInitialAnimationPlayed={setHasInitialAnimationPlayed}
               />
-            );
-          }}
-        </DataLoader>
-      </div>
+            )}
+          </DataLoader>
+        </motion.div>
+      </motion.div>
     </FlagMosaicProvider>
   );
 }

@@ -2,23 +2,31 @@
 
 import FlagMosaic from '@/components/pages/FlagMosaic/FlagMosaic';
 import HomeHeader from '@/components/pages/HomeHeader/HomeHeader';
+import { motion } from 'motion/react';
+import { fadeUpVariants, pageVariants } from '@/animations/animations';
 
 export default function HomePage() {
   return (
-    <main id="home-page-main" role="main">
-      <section
+    <motion.main
+      id="home-page-main"
+      role="main"
+      variants={pageVariants}
+      initial="hidden"
+      animate="visible"
+    >
+      <motion.section
+        variants={fadeUpVariants}
         aria-labelledby="home-page-flag-mosaic-header"
-        aria-label="Welcome section"
       >
         <HomeHeader />
-      </section>
+      </motion.section>
 
-      <section
+      <motion.section
+        variants={fadeUpVariants}
         aria-labelledby="home-page-flag-mosaic"
-        aria-label="Country flags explorer"
       >
         <FlagMosaic />
-      </section>
-    </main>
+      </motion.section>
+    </motion.main>
   );
 }

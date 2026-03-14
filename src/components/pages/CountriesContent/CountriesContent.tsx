@@ -1,9 +1,11 @@
 'use client';
 
+import { motion } from 'framer-motion';
 import Alphabet from '@/components/pages/Alphabet/Alphabet';
 import MainTitle from '@/components/UI/MainTitle/MainTitle';
 import CountriesTable from '@/components/pages/CountriesTable/CountriesTable';
 import { Country } from '@/utils/generateQuestions';
+import { fadeUpVariants, pageVariants } from '@/animations/animations';
 
 type Props = {
   countries: Country[];
@@ -17,12 +19,15 @@ export default function CountriesContent({
   setSelectedLetter,
 }: Props) {
   return (
-    <div className="container page">
-      <MainTitle id="countries-page-title">
-        Alphabetical list of countries
-      </MainTitle>
+    <motion.div variants={pageVariants}>
+      <motion.div variants={fadeUpVariants}>
+        <MainTitle id="countries-page-title">
+          Alphabetical list of countries
+        </MainTitle>
+      </motion.div>
 
-      <div
+      <motion.div
+        variants={fadeUpVariants}
         id="countries-alphabet-filter"
         role="region"
         aria-labelledby="countries-page-title"
@@ -31,15 +36,19 @@ export default function CountriesContent({
           onSelectAction={setSelectedLetter}
           aria-label="Filter countries by starting letter"
         />
-      </div>
+      </motion.div>
 
-      <div
+      <motion.div
+        variants={fadeUpVariants}
+        key={selectedLetter ?? 'all'}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
         id="countries-table-section"
         role="region"
         aria-labelledby="countries-page-title"
       >
         <CountriesTable countries={countries} selectedLetter={selectedLetter} />
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 }
