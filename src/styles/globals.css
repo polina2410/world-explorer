@@ -1,18 +1,17 @@
-@import url("https://unpkg.com/leaflet@1.9.5/dist/leaflet.css");
-
 :root {
-    --color-bg: #f9f9f9;
-    --color-bg-hover: #f1f5f9;
+    --color-bg: #f8fafc;
+    --color-bg-alt: #eef2f6;
     --color-surface: #ffffff;
-    --color-danger: #64748b;
-    --color-great: #3b82f6;
-    --color-success: #0f766e;
-    --color-text-primary: #1f2937;
-    --color-text-secondary: #4b5563;
-    --color-border: #d1d5db;
-    --color-accent: #3b82f6;
+    --color-error: #ef4444;
+    --color-primary: #6366f1;
+    --color-success: #10b981;
+    --color-text-primary: #0f172a;
+    --color-text-secondary: #475569;
+    --color-border: #e2e8f0;
+    --color-accent: #8b5cf6;
 
-    --font-sans: 'Inter', system-ui, sans-serif;
+    --font-main: 'Amulya';
+    --font-secondary: 'Synonym';
 
     --lh-p: 1.5;
     --lh-st: 1.25;
@@ -66,7 +65,7 @@ body {
 }
 
 body {
-    font-family: var(--font-sans), serif;
+    font-family: var(--font-secondary), serif;
     background-color: var(--color-bg);
     color: var(--color-text-primary);
     line-height: var(--lh-st);

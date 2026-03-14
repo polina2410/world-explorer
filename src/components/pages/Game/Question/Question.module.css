@@ -24,7 +24,7 @@
     width: 0;
     border-radius: 4px;
     transition: width 0.5s ease-in-out;
-    background: linear-gradient(90deg, #cce7ff, var(--color-great));
+    background: linear-gradient(90deg, #cce7ff, var(--color-primary));
 }
 
 .resetButton {

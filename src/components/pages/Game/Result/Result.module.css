@@ -29,7 +29,7 @@
 }
 
 .great {
-    color: var(--color-great);
+    color: var(--color-primary);
     font-weight: var(--fw-medium);
     font-size: var(--fs-lg);
 }

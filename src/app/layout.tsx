@@ -19,6 +19,13 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en">
+      <head>
+        <link
+          href="https://api.fontshare.com/v2/css?f[]=synonym@400&f[]=amulya@700&display=swap"
+          rel="stylesheet"
+        />
+        <title>Countries Explorer</title>
+      </head>
       <body>
         <GameProvider>
           <Header />

@@ -1,4 +1,5 @@
 .title {
+    font-family: var(--font-main), serif;
     font-size: var(--fs-xl);
     font-weight: var(--fw-medium);
     margin: var(--space-sm) 0 0 0;

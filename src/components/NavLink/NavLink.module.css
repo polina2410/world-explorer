@@ -2,6 +2,7 @@
     position: relative;
     padding: var(--space-xs) 0;
     text-decoration: none;
+    font-family: var(--font-main), serif;
     font-size: var(--fs-lg);
     font-weight: var(--fw-medium);
     color: var(--color-text-secondary);
