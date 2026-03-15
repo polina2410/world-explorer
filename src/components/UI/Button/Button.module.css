@@ -53,6 +53,7 @@
 .xs {
     padding: 0.5rem 1.1rem;
     font-size: var(--fs-md);
+    min-width: auto;
 }
 
 .sm {
