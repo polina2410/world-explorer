@@ -50,7 +50,7 @@ export default function GameSetup({
           </SecondaryTitle>
 
           <motion.div
-            className={`${styles.buttons} flex-center`}
+            className={`${styles.buttons} flex-center flex-wrap`}
             id="continent-buttons"
             role="group"
             aria-labelledby="secondary-title-continents"
@@ -95,7 +95,7 @@ export default function GameSetup({
             </SecondaryTitle>
 
             <motion.div
-              className={`${styles.buttons} flex-center`}
+              className={`${styles.buttons} flex-center flex-wrap`}
               id="question-count-buttons"
               role="group"
               aria-labelledby="secondary-title-questions"

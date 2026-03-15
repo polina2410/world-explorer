@@ -34,7 +34,6 @@
     --space-xl: 48px;
 
     --radius-sm: 4px;
-    /*--radius-md: 6px;*/
     --radius-lg: 8px;
     --radius-xl: 12px;
 
@@ -176,6 +175,10 @@ a.active {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.flex-wrap {
+    flex-wrap: wrap;
 }
 
 .sr-only {
