@@ -1,6 +1,6 @@
 .countryRow td {
     white-space: nowrap;
-    transition: background-color 0.2s ease;
+    transition: background-color var(--transition-fast);
 }
 
 .countryIndex {
@@ -16,19 +16,16 @@
     height: 16px;
     width: auto;
     object-fit: contain;
-    border-radius: 2px;
-    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.08),
-    0 2px 4px rgba(0, 0, 0, 0.12);
+    box-shadow: var(--shadow-sm), var(--shadow-sm);
     cursor: pointer;
-    transition: transform 0.25s ease;
+    transition: transform var(--transition-fast);
 }
 
 .flagImage:hover {
-    transform: var(--scale-lg);
+    transform: scale(var(--scale-lg));
 }
 
 .countryPopulation {
-    text-align: right;
     font-variant-numeric: tabular-nums;
 }
 
@@ -36,7 +33,7 @@
     font-weight: var(--fw-semibold);
     color: var(--color-accent);
     text-decoration: none;
-    transition: color 0.2s ease;
+    transition: color var(--transition-fast);
 }
 
 .countryMap a:hover {
@@ -46,11 +43,8 @@
 .flagOverlay {
     position: fixed;
     inset: 0;
-    background: rgba(0, 0, 0, 0.7);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 1000;
+    background: var(--black-overlay-strong);
+    z-index: var(--z-modal);
 }
 
 .flagZoomedWrapper {

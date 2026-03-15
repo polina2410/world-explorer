@@ -8,7 +8,7 @@
     background: var(--color-text-secondary);
     color: var(--color-bg);
     padding: 10px 14px;
-    border-radius: var(--radius-md);
+    border-radius: var(--radius-lg);
     font-size: var(--fs-base);
     font-weight: var(--fw-medium);
     white-space: normal;

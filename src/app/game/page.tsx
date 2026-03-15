@@ -11,7 +11,11 @@ import MainTitle from '@/components/UI/MainTitle/MainTitle';
 import PageDescription from '@/components/UI/PageDescription/PageDescription';
 import Button from '@/components/UI/Button/Button';
 import { motion } from 'motion/react';
-import { fadeUpVariants, pageVariants } from '@/animations/animations';
+import {
+  containerVariants,
+  fadeUpVariants,
+  pageVariants,
+} from '@/animations/animations';
 
 export default function GamePage() {
   const {
@@ -41,7 +45,7 @@ export default function GamePage() {
         >
           {phase === 'start' && (
             <motion.section
-              variants={fadeUpVariants}
+              variants={containerVariants}
               role="region"
               aria-labelledby="game-page-start-title"
               className="container flex-center stack page"

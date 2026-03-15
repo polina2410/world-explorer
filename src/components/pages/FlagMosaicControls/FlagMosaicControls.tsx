@@ -25,7 +25,10 @@ export default function FlagMosaicControls({
   continents,
 }: Props) {
   return (
-    <div className={`${styles.controls} flex-center`} id="flag-mosaic-controls">
+    <div
+      className={`${styles.controls} flex-center flex-wrap`}
+      id="flag-mosaic-controls"
+    >
       <SearchPanel
         id="flag-mosaic-search"
         value={searchTerm}

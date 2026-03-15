@@ -1,5 +1,4 @@
 .controls {
-    gap: 12px;
-    flex-wrap: wrap;
+    gap: var(--space-md);
     align-items: stretch
 }

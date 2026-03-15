@@ -54,7 +54,7 @@ export default function Question({
   }
 
   return (
-    <div id="question-panel" className="container">
+    <div id="question-panel" className="container page">
       <Modal
         isOpen={showResetModal}
         message="Are you sure you want to restart the quiz?"
@@ -87,32 +87,33 @@ export default function Question({
           style={{ width: `${progress}%` }}
         />
       </div>
+      <div className="page">
+        <SecondaryTitle id="question-text">
+          What is the capital of {question.country}?
+        </SecondaryTitle>
 
-      <SecondaryTitle id="question-text">
-        What is the capital of {question.country}?
-      </SecondaryTitle>
-
-      <div
-        className={styles.optionsWrapper}
-        id="question-options"
-        role="radiogroup"
-        aria-labelledby="question-text"
-      >
-        {question.options.map((option) => (
-          <Button
-            id={`question-option-${option}`}
-            key={option}
-            role="radio"
-            aria-checked={selected === option}
-            variant={getVariant(option)}
-            size="md"
-            active={selected === option}
-            disabled={!!selected}
-            onClick={() => handleClick(option)}
-          >
-            {option}
-          </Button>
-        ))}
+        <div
+          className={styles.optionsWrapper}
+          id="question-options"
+          role="radiogroup"
+          aria-labelledby="question-text"
+        >
+          {question.options.map((option) => (
+            <Button
+              id={`question-option-${option}`}
+              key={option}
+              role="radio"
+              aria-checked={selected === option}
+              variant={getVariant(option)}
+              size="md"
+              active={selected === option}
+              disabled={!!selected}
+              onClick={() => handleClick(option)}
+            >
+              {option}
+            </Button>
+          ))}
+        </div>
       </div>
     </div>
   );

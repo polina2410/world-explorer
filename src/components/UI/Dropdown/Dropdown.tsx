@@ -83,7 +83,7 @@ export default function Dropdown({
       onKeyDown={handleKeyDown}
     >
       <div
-        className={styles.selected}
+        className={`${styles.selected} flex-between`}
         onClick={() => setIsOpen((prev) => !prev)}
         aria-label={placeholder}
       >

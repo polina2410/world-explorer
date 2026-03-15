@@ -1,9 +1,9 @@
 .title {
+    font-family: var(--font-main), serif;
     font-size: var(--fs-xl);
     font-weight: var(--fw-medium);
     margin: var(--space-sm) 0 0 0;
     line-height: var(--lh-mt);
-    letter-spacing: -2%;
     color: var(--color-text-primary);
     text-align: center;
 }

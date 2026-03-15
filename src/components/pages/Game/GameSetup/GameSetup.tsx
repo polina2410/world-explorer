@@ -29,14 +29,14 @@ export default function GameSetup({
 
   return (
     <motion.div
-      className={'section container flex-center'}
+      className="section container flex-center"
       id="game-setup"
       variants={containerVariants}
       initial="hidden"
       animate="visible"
     >
       <motion.div
-        className={styles.menuCard}
+        className={`${styles.menuCard} stack`}
         id="game-setup-card"
         variants={fadeUpVariants}
       >
@@ -50,7 +50,7 @@ export default function GameSetup({
           </SecondaryTitle>
 
           <motion.div
-            className={styles.buttons}
+            className={`${styles.buttons} flex-center flex-wrap`}
             id="continent-buttons"
             role="group"
             aria-labelledby="secondary-title-continents"
@@ -95,7 +95,7 @@ export default function GameSetup({
             </SecondaryTitle>
 
             <motion.div
-              className={styles.buttons}
+              className={`${styles.buttons} flex-center flex-wrap`}
               id="question-count-buttons"
               role="group"
               aria-labelledby="secondary-title-questions"
@@ -120,7 +120,7 @@ export default function GameSetup({
 
         {isReadyToStart && (
           <motion.div
-            className={styles.startQuizButton}
+            className="flex-center"
             id="start-quiz-wrapper"
             variants={fadeUpVariants}
           >

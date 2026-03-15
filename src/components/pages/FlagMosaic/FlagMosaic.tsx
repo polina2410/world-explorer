@@ -9,6 +9,7 @@ import { FlagMosaicProvider } from '@/context/FlagMosaicContext';
 import FlagMosaicGrid from '@/components/pages/FlagMosaicGrid/FlagMosaicGrid';
 import FlagMosaicControls from '@/components/pages/FlagMosaicControls/FlagMosaicControls';
 import { containerVariants, fadeUpVariants } from '@/animations/animations';
+import PageDescription from '@/components/UI/PageDescription/PageDescription';
 
 export default function FlagMosaic() {
   const { countries, loading, error } = useCountries();
@@ -68,13 +69,21 @@ export default function FlagMosaic() {
             error={error}
             emptyMessage="No countries available"
           >
-            {() => (
-              <FlagMosaicGrid
-                countries={processedCountries}
-                hasInitialAnimationPlayed={hasInitialAnimationPlayed}
-                setHasInitialAnimationPlayed={setHasInitialAnimationPlayed}
-              />
-            )}
+            {() =>
+              processedCountries.length > 0 ? (
+                <FlagMosaicGrid
+                  countries={processedCountries}
+                  hasInitialAnimationPlayed={hasInitialAnimationPlayed}
+                  setHasInitialAnimationPlayed={setHasInitialAnimationPlayed}
+                />
+              ) : (
+                <div className="flex-center page">
+                  <PageDescription>
+                    No countries match your search. Try again!
+                  </PageDescription>
+                </div>
+              )
+            }
           </DataLoader>
         </motion.div>
       </motion.div>

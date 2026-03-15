@@ -30,7 +30,7 @@ export default function Modal({
       <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
         <SecondaryTitle id="confirm-modal-title">{message}</SecondaryTitle>
 
-        <div className={styles.buttons}>
+        <div className={`${styles.buttons} flex-center`}>
           <Button size="xs" onClick={onCancel}>
             No
           </Button>

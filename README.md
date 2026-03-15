@@ -89,6 +89,7 @@ This project was built as a frontend learning exercise to practice:
 - **Validation**: [Zod](https://zod.dev/)
 - **Styling**: CSS Modules
 - **Confetti**: [canvas-confetti](https://github.com/catdad/canvas-confetti)
+- **Fonts**: [Fontshare](https://www.fontshare.com/) — *Synonym (400), Amulya (700)*
 
 ## 📦 Installation
 

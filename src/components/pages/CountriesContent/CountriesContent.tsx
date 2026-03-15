@@ -19,7 +19,7 @@ export default function CountriesContent({
   setSelectedLetter,
 }: Props) {
   return (
-    <motion.div variants={pageVariants}>
+    <motion.div variants={pageVariants} className="page">
       <motion.div variants={fadeUpVariants}>
         <MainTitle id="countries-page-title">
           Alphabetical list of countries

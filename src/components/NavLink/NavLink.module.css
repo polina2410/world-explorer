@@ -2,10 +2,11 @@
     position: relative;
     padding: var(--space-xs) 0;
     text-decoration: none;
-    font-size: var(--fs-lg);
+    font-family: var(--font-main), serif;
+    font-size: var(--fs-md);
     font-weight: var(--fw-medium);
     color: var(--color-text-secondary);
-    transition: var(--transition-color);
+    transition: color var(--transition-fast);
 }
 
 .link::after {
@@ -16,9 +17,9 @@
     width: 100%;
     height: 2px;
     background-color: var(--color-accent);
-    transform: scaleX(0);
+    transform: scaleX(var(--scale-0));
     transform-origin: left;
-    transition: transform 0.2s ease;
+    transition: transform var(--transition-fast);
 }
 
 .link:hover {
@@ -26,7 +27,7 @@
 }
 
 .link:hover::after {
-    transform: scaleX(1);
+    transform: scaleX(var(--scale-basic));
 }
 
 .active {
@@ -34,7 +35,7 @@
 }
 
 .active::after {
-    transform: scaleX(1);
+    transform: scaleX(var(--scale-basic));
 }
 
 .link:focus-visible {
@@ -44,7 +45,7 @@
 }
 
 .logo {
-    font-size: var(--fs-xl);
+    font-size: var(--fs-lg);
     font-weight: var(--fw-semibold);
     letter-spacing: -0.02em;
     color: var(--color-text-primary);
