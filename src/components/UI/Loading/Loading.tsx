@@ -4,7 +4,7 @@ export default function Loading() {
   return (
     <div
       id="loading-screen"
-      className={`${styles.loadingWrapper} flex-center`}
+      className={`page flex-center`}
       role="status"
       aria-live="polite"
     >

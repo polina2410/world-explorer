@@ -11,6 +11,10 @@
     line-height: var(--lh-st);
 }
 
+.button:hover {
+    box-shadow: var(--shadow-md);
+}
+
 .button:disabled {
     cursor: default;
 }
@@ -48,6 +52,7 @@
 
 .xs {
     padding: 0.5rem 1.1rem;
+    font-size: var(--fs-md);
 }
 
 .sm {
@@ -57,13 +62,13 @@
 }
 
 .md {
-    font-size: var(--fs-base);
+    font-size: var(--fs-md);
     padding: 14px 28px;
     font-weight: var(--fw-medium);
 }
 
 .lg {
-    font-size: var(--fs-xl);
+    font-size: var(--fs-lg);
     padding: 16px 36px;
     font-weight: var(--fw-semibold);
 }

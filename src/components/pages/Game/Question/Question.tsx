@@ -54,7 +54,7 @@ export default function Question({
   }
 
   return (
-    <div id="question-panel" className="container">
+    <div id="question-panel" className="container page">
       <Modal
         isOpen={showResetModal}
         message="Are you sure you want to restart the quiz?"

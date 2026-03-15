@@ -1,21 +1,19 @@
 .overlay {
     position: fixed;
     inset: 0;
-    background: rgba(0, 0, 0, 0.45);
+    background: var(--black-overlay-medium);
     z-index: var(--z-modal);
 }
 
 .modal {
     background: var(--color-surface);
     padding: var(--space-lg);
-    border-radius: var(--radius-md);
+    border-radius: var(--radius-lg);
     min-width: 280px;
     text-align: center;
 }
 
 .buttons {
     margin: var(--space-md);
-    display: flex;
-    justify-content: center;
     gap: var(--space-md);
 }

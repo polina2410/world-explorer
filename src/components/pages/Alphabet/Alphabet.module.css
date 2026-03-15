@@ -1,8 +1,5 @@
 .alphabet {
-    display: flex;
-    justify-content: space-between;
     flex-wrap: wrap;
-    width: 100%;
 }
 
 .letter {
@@ -11,7 +8,7 @@
     font-weight: var(--fw-semibold);
     cursor: pointer;
     color: var(--color-accent);
-    transition: background-color 0.2s ease, var(--transition-color);
+    transition: background-color var(--transition-fast), var(--transition-fast);
 }
 
 .letter:hover {

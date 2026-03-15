@@ -8,7 +8,7 @@
     width: 100%;
     table-layout: fixed;
     border-collapse: collapse;
-    font-size: var(--fs-sm);
+    font-size: var(--fs-base);
     background-color: var(--color-surface);
     margin-bottom: 3rem;
 }
@@ -86,13 +86,13 @@
 }
 
 .sortArrow {
-    opacity: 0.4;
-    margin-left: 4px;
+    opacity: var(--opacity-overlay-strong);
+    margin-left: var(--space-xs);
     user-select: none;
     cursor: pointer;
 }
 
 .noCountriesMessage {
     text-align: center;
-    padding: 2rem;
+    padding: var(--space-xs);
 }

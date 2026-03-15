@@ -1,5 +1,5 @@
 .pageDescription {
-    font-size: var(--fs-base);
+    font-size: var(--fs-md);
     font-weight: var(--fw-regular);
     margin: var(--space-xs) 0;
     line-height: var(--lh-p);

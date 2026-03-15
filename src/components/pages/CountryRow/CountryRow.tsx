@@ -68,7 +68,7 @@ export default function CountryRow({ country, index }: CountryRowProps) {
                 rel="noopener noreferrer"
                 className={styles.truncated}
               >
-                Link
+                View on map
               </a>
             </Tooltip>
           ) : (
@@ -81,7 +81,7 @@ export default function CountryRow({ country, index }: CountryRowProps) {
         zoomedFlag &&
         createPortal(
           <div
-            className={styles.flagOverlay}
+            className={`${styles.flagOverlay} flex-center`}
             onClick={() => setZoomedFlag(null)}
           >
             <div
