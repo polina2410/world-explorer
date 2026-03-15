@@ -2,7 +2,7 @@
 
 import { createContext, useContext, useState, ReactNode } from 'react';
 
-type GamePhase = 'start' | 'setup' | 'quiz';
+export type GamePhase = 'start' | 'setup' | 'quiz';
 
 type GameContextType = {
   phase: GamePhase;

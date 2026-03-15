@@ -3,16 +3,22 @@ import { motion } from 'motion/react';
 import styles from './ThemeToggle.module.css';
 import { MoonIcon, SunIcon } from '@/components/icons/ThemeIcons';
 
-type Props = {
+interface Props {
   theme: 'light' | 'dark';
   toggleTheme: () => void;
-};
+  onClick?: () => void;
+}
 
-export default function ThemeToggle({ theme, toggleTheme }: Props) {
+export default function ThemeToggle({ theme, toggleTheme, onClick }: Props) {
+  const handleClick = () => {
+    toggleTheme();
+    if (onClick) onClick();
+  };
+
   return (
     <motion.button
       type="button"
-      onClick={toggleTheme}
+      onClick={handleClick}
       aria-label="Toggle theme"
       className={styles.iconButton}
       whileTap={{ scale: 0.9 }}

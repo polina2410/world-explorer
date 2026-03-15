@@ -3,8 +3,8 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import styles from './NavLink.module.css';
-import { APP_ROUTES } from '@/routes/appRoutes';
 import { ReactNode } from 'react';
+import { APP_ROUTES } from '@/routes/appRoutes';
 
 type NavLinkProps = {
   href: (typeof APP_ROUTES)[keyof typeof APP_ROUTES];
