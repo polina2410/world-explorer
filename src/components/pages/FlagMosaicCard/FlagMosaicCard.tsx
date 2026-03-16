@@ -10,52 +10,36 @@ type Props = {
     name: string;
     flag: string;
   };
-  row: number;
-  index: number;
-  hasInitialAnimationPlayed: boolean;
-  totalCountries: number;
-  setHasInitialAnimationPlayed: (value: boolean) => void;
 };
 
-export default function FlagMosaicCard({
-  country,
-  row,
-  index,
-  hasInitialAnimationPlayed,
-  totalCountries,
-  setHasInitialAnimationPlayed,
-}: Props) {
+const cardVariants = {
+  hidden: { opacity: 0, y: 12, scale: 0.96 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: { duration: 0.01 },
+  },
+};
+
+export default function FlagMosaicCard({ country }: Props) {
   const { state, flip, close } = useFlagMosaic();
 
   const isFlipped = state.flipped === country.name;
-  const isDimmed = state.flipped && state.flipped !== country.name;
+  const isDimmed = Boolean(state.flipped && state.flipped !== country.name);
 
   const handleClick = () => {
-    if (isFlipped) {
-      close();
-    } else {
-      flip(country.name);
-    }
+    if (isFlipped) close();
+    else flip(country.name);
   };
 
   return (
     <motion.div
       id={`flag-card-${country.name}`}
-      className={`${styles.flagCard} ${
-        isFlipped ? styles.active : ''
-      } ${isDimmed ? styles.dimmed : ''}`}
-      initial={!hasInitialAnimationPlayed ? { opacity: 0, y: 10 } : false}
-      animate={{ opacity: 1, y: 0 }}
-      transition={
-        !hasInitialAnimationPlayed
-          ? { duration: 0.3, delay: row * 0.1 }
-          : { duration: 0 }
-      }
-      onAnimationComplete={() => {
-        if (!hasInitialAnimationPlayed && index === totalCountries - 1) {
-          setHasInitialAnimationPlayed(true);
-        }
-      }}
+      className={`${styles.flagCard} ${isFlipped ? styles.active : ''} ${
+        isDimmed ? styles.dimmed : ''
+      }`}
+      variants={cardVariants}
       onClick={handleClick}
       onKeyDown={(e) => {
         if (e.key === 'Enter' || e.key === ' ') {

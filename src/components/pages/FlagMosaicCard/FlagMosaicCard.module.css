@@ -1,4 +1,3 @@
-
 .flagCard {
     width: 100%;
     aspect-ratio: 3 / 2;
@@ -10,8 +9,8 @@
     filter var(--transition-medium);
     box-shadow: var(--shadow-md);
     border-radius: var(--radius-sm);
+    max-width: 140px;
 }
-
 
 .flagCard:hover {
     transform: scale(var(--scale-xl));
