@@ -10,7 +10,6 @@
     font-size: var(--fs-base);;
     font-weight: var(--fw-regular);
     transition: border-color var(--transition-fast), box-shadow var(--transition-fast), background-color var(--transition-fast);
-
 }
 
 .searchInput::placeholder {
@@ -33,4 +32,20 @@
     background-color: var(--color-bg);
     cursor: not-allowed;
     opacity: var(--opacity-overlay-strong);
+}
+
+@media (max-width: 768px) {
+    .searchInput {
+        max-width: 100%;
+        padding: 12px 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .searchInput {
+        width: 100%;
+        max-width: 100%;
+        padding: 10px 14px;
+        min-width: 0;
+    }
 }

@@ -22,10 +22,10 @@
     --fw-semibold: 600;
     --fw-bold: 700;
 
-    --fs-base: 1rem;
-    --fs-md: 1.25rem;
-    --fs-lg: 1.6rem;
-    --fs-xl: 2rem;
+    --fs-base: clamp(0.9rem, 0.85rem + 0.25vw, 1rem);
+    --fs-md: clamp(1.1rem, 1rem + 0.5vw, 1.25rem);
+    --fs-lg: clamp(1.35rem, 1.1rem + 1vw, 1.6rem);
+    --fs-xl: clamp(1.6rem, 1.2rem + 1.5vw, 2rem);
 
     --space-xs: 4px;
     --space-sm: 8px;
@@ -62,10 +62,6 @@
     --scale-basic: 1;
     --scale-lg: 1.15;
     --scale-xl: 1.3;
-
-    --tablet: 1024px;
-    --mobile: 768px;
-    --small-mobile: 480px;
 }
 
 [data-theme="dark"] {

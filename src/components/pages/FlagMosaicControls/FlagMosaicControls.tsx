@@ -37,6 +37,7 @@ export default function FlagMosaicControls({
 
       <Button
         id="flag-mosaic-sort"
+        className={styles.fullWidth}
         onClick={() =>
           setSortOrder((prev) => (prev === 'asc' ? 'desc' : 'asc'))
         }

@@ -1,4 +1,14 @@
 .controls {
     gap: var(--space-md);
-    align-items: stretch
+    align-items: stretch;
+}
+
+.sortButton {
+    width: auto;
+}
+
+@media (max-width: 768px) {
+    .fullWidth {
+        width: 100%;
+    }
 }
