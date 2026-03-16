@@ -5,10 +5,12 @@
 
 .sortButton {
     width: auto;
+    height: var(--control-height);
+    display: flex;
 }
 
 @media (max-width: 768px) {
-    .fullWidth {
+    .sortButton {
         width: 100%;
     }
 }

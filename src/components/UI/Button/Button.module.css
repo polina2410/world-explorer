@@ -9,6 +9,7 @@
     font-weight: var(--fw-regular);
     color: var(--color-text-primary);
     line-height: var(--lh-st);
+    width: 100%;
 }
 
 .button:hover {

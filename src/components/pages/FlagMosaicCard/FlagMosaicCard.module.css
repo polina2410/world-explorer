@@ -1,7 +1,7 @@
 
 .flagCard {
-    width: 120px;
-    height: 80px;
+    width: 100%;
+    aspect-ratio: 3 / 2;
     perspective: 1000px;
     cursor: pointer;
     position: relative;
@@ -13,7 +13,7 @@
 }
 
 
-.flagCard:hover .flagInner:not(.flipped) {
+.flagCard:hover {
     transform: scale(var(--scale-xl));
 }
 
@@ -83,4 +83,10 @@
 .active {
     transform: scale(var(--scale-xl));
     z-index: var(--z-sticky);
+}
+
+@media (hover: none) {
+    .flagCard:hover {
+        transform: none;
+    }
 }

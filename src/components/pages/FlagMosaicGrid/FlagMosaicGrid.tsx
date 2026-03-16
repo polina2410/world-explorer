@@ -3,8 +3,7 @@
 import FlagMosaicCard from '@/components/pages/FlagMosaicCard/FlagMosaicCard';
 import styles from './FlagMosaicGrid.module.css';
 import { Country } from '@/utils/generateQuestions';
-
-const COLUMNS = 8;
+import { useEffect, useRef, useState } from 'react';
 
 type Props = {
   countries: Country[];
@@ -17,10 +16,32 @@ export default function FlagMosaicGrid({
   hasInitialAnimationPlayed,
   setHasInitialAnimationPlayed,
 }: Props) {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [columns, setColumns] = useState(1);
+
+  useEffect(() => {
+    const updateColumns = () => {
+      if (!containerRef.current) return;
+
+      const grid = containerRef.current;
+      const computed = window.getComputedStyle(grid);
+      const columnCount = computed.gridTemplateColumns.split(' ').length;
+
+      setColumns(columnCount);
+    };
+
+    updateColumns();
+
+    const resizeObserver = new ResizeObserver(updateColumns);
+    if (containerRef.current) resizeObserver.observe(containerRef.current);
+
+    return () => resizeObserver.disconnect();
+  }, []);
+
   return (
     <div className={styles.mosaicContainer} id="flag-mosaic-container">
       {countries.map((country, index) => {
-        const row = Math.floor(index / COLUMNS);
+        const row = Math.floor(index / columns);
 
         return (
           <FlagMosaicCard

@@ -73,10 +73,9 @@ export default function FlagMosaicCard({
             <Image
               src={country.flag}
               alt={country.name}
-              width={120}
-              height={80}
+              fill
               className={styles.flagImage}
-              sizes="120px"
+              sizes="(max-width: 768px) 25vw, (max-width: 1200px) 15vw, 120px"
             />
           </div>
         </div>

@@ -1,6 +1,6 @@
 .mosaicContainer {
     display: grid;
-    grid-template-columns: repeat(8, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
     gap: var(--space-md);
     justify-items: center;
     margin: var(--space-lg) 0;
