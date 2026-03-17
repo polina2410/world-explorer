@@ -8,14 +8,20 @@
 }
 
 .selected {
-    padding: 2px 18px;
-    border-radius: var(--radius-sm);
+    height: var(--control-height);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 var(--control-padding-x);
+    border-radius: var(--radius-md);
     border: 1px solid var(--color-border);
     background: var(--color-surface);
     cursor: pointer;
-    transition: background var(--transition-fast), color var(--transition-fast);
+    transition: background var(--transition-fast),
+    color var(--transition-fast),
+    border-color var(--transition-fast),
+    box-shadow var(--transition-fast);
     font-weight: var(--fw-regular);
-    color: var(--color-text-primary);
 }
 
 .selected:hover {
@@ -23,10 +29,26 @@
     border-color: var(--color-text-secondary);
 }
 
+.selected.open {
+    border-color: var(--color-accent);
+    box-shadow: var(--shadow-sm);
+}
+
+.selected.open:hover {
+    border-color: var(--color-accent);
+    box-shadow: var(--shadow-sm);
+}
+
+.label {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
 .arrow {
     margin-left: var(--space-sm);
     transition: transform var(--transition-fast);
-    font-size: var(--fs-xl);
+    font-size: var(--fs-lg);
 }
 
 .arrow.open {
@@ -35,10 +57,10 @@
 
 .options {
     position: absolute;
-    top: calc(100% + 4px);
+    top: calc(100% + var(--space-xs));
     left: 0;
     width: 100%;
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-md);
     border: 1px solid var(--color-border);
     background: var(--color-surface);
     box-shadow: var(--shadow-sm);
@@ -65,4 +87,29 @@
     background: var(--color-accent);
     color: var(--color-surface);
     font-weight: var(--fw-medium);
+}
+
+@media (max-width: 768px) {
+    .dropdown {
+        width: 100%;
+    }
+
+    .selected {
+        padding: 0 14px;
+    }
+
+    .option {
+        padding: 8px 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .dropdown {
+        width: 100%;
+    }
+
+    .arrow {
+        margin-left: var(--space-sm);
+        flex-shrink: 0;
+    }
 }

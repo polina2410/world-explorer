@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 import { useCountries } from '@/hooks/CountriesProvider';
 import DataLoader from '@/components/UI/DataLoader/DataLoader';
 import { getContinents } from '@/utils/getContinents';
@@ -16,8 +16,6 @@ export default function FlagMosaic() {
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc');
   const [selectedContinent, setSelectedContinent] = useState<string>('All');
   const [searchTerm, setSearchTerm] = useState('');
-  const [hasInitialAnimationPlayed, setHasInitialAnimationPlayed] =
-    useState(false);
 
   const continents = getContinents(countries);
 
@@ -37,15 +35,6 @@ export default function FlagMosaic() {
           : b.name.localeCompare(a.name)
       );
   }, [countries, selectedContinent, searchTerm, sortOrder]);
-
-  useEffect(() => {
-    if (countries && countries.length > 0) {
-      const timer = setTimeout(() => {
-        setHasInitialAnimationPlayed(false);
-      }, 100);
-      return () => clearTimeout(timer);
-    }
-  }, [countries]);
 
   return (
     <FlagMosaicProvider>
@@ -71,11 +60,7 @@ export default function FlagMosaic() {
           >
             {() =>
               processedCountries.length > 0 ? (
-                <FlagMosaicGrid
-                  countries={processedCountries}
-                  hasInitialAnimationPlayed={hasInitialAnimationPlayed}
-                  setHasInitialAnimationPlayed={setHasInitialAnimationPlayed}
-                />
+                <FlagMosaicGrid countries={processedCountries} />
               ) : (
                 <div className="flex-center page">
                   <PageDescription>

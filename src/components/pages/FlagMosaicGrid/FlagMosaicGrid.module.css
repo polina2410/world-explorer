@@ -1,18 +1,15 @@
 .mosaicContainer {
     display: grid;
-    grid-template-columns: repeat(8, 1fr);
+    grid-template-columns: repeat(auto-fill, 120px);
     gap: var(--space-md);
-    justify-items: center;
+    justify-content: space-evenly;
     margin: var(--space-lg) 0;
 }
 
 .mosaicContainer.hasActiveCard::before {
     content: '';
     position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+    inset: 0;
     background: var(--black-overlay-soft);
     pointer-events: none;
     z-index: var(--z-sticky);

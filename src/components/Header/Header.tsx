@@ -22,12 +22,18 @@ export default function Header() {
     if (isOpen) setIsOpen(false);
   });
 
+  const handleNavClick = (callback?: () => void) => {
+    setIsOpen(false);
+    callback?.();
+  };
+
   return (
     <header className={styles.header} ref={headerRef}>
       <div className="container flex-between">
         <NavLink href={APP_ROUTES.home} variant="logo">
           CountriesExplorer
         </NavLink>
+
         <motion.button
           className={`${styles.menuButton} ${isOpen ? styles.open : ''}`}
           onClick={toggleMenu}
@@ -47,11 +53,21 @@ export default function Header() {
           className={`${styles.nav} ${isOpen ? styles.open : ''}`}
           aria-label="Main navigation"
         >
-          <NavLink href={APP_ROUTES.home}>Home</NavLink>
-          <NavLink href={APP_ROUTES.game} onClick={resetGame}>
+          <NavLink href={APP_ROUTES.home} onClick={() => handleNavClick()}>
+            Home
+          </NavLink>
+
+          <NavLink
+            href={APP_ROUTES.game}
+            onClick={() => handleNavClick(resetGame)}
+          >
             Quiz
           </NavLink>
-          <NavLink href={APP_ROUTES.countries}>Countries</NavLink>
+
+          <NavLink href={APP_ROUTES.countries} onClick={() => handleNavClick()}>
+            Countries
+          </NavLink>
+
           <ThemeToggle theme={theme} toggleTheme={toggleTheme} />
         </motion.nav>
       </div>

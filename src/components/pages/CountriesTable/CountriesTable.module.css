@@ -10,7 +10,7 @@
     border-collapse: collapse;
     font-size: var(--fs-base);
     background-color: var(--color-surface);
-    margin-bottom: 3rem;
+    margin-bottom: var(--space-xl);
 }
 
 .all_countries_table thead {
@@ -40,6 +40,10 @@
 
 .all_countries_table tbody tr:nth-child(even) {
     background-color: var(--color-bg);
+}
+
+.all_countries_table tbody tr {
+    transition: background-color var(--transition-fast);
 }
 
 .all_countries_table tbody tr:hover {
@@ -94,5 +98,5 @@
 
 .noCountriesMessage {
     text-align: center;
-    padding: var(--space-xs);
+    padding: var(--space-xl);
 }

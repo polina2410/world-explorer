@@ -34,12 +34,20 @@ export default function GamePanel({
 
   if (quiz.finished) {
     return (
-      <Result
-        score={quiz.score}
-        total={quiz.total}
-        onRestart={onRestart}
-        aria-label={`Quiz finished. Your score is ${quiz.score} out of ${quiz.total}`}
-      />
+      <motion.div
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+      >
+        <motion.div variants={fadeUpVariants}>
+          <Result
+            score={quiz.score}
+            total={quiz.total}
+            onRestart={onRestart}
+            aria-label={`Quiz finished. Your score is ${quiz.score} out of ${quiz.total}`}
+          />
+        </motion.div>
+      </motion.div>
     );
   }
 

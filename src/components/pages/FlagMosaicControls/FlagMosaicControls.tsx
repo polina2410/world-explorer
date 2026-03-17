@@ -35,15 +35,16 @@ export default function FlagMosaicControls({
         onChangeAction={setSearchTerm}
       />
 
-      <Button
-        id="flag-mosaic-sort"
-        onClick={() =>
-          setSortOrder((prev) => (prev === 'asc' ? 'desc' : 'asc'))
-        }
-      >
-        Sort: {sortOrder === 'asc' ? 'A – Z' : 'Z – A'}
-      </Button>
-
+      <div className={styles.sortButton}>
+        <Button
+          id="flag-mosaic-sort"
+          onClick={() =>
+            setSortOrder((prev) => (prev === 'asc' ? 'desc' : 'asc'))
+          }
+        >
+          Sort: {sortOrder === 'asc' ? 'A – Z' : 'Z – A'}
+        </Button>
+      </div>
       <Dropdown
         id="flag-mosaic-dropdown"
         value={selectedContinent}

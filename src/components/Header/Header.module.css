@@ -2,14 +2,18 @@
     position: sticky;
     top: 0;
     z-index: var(--z-sticky);
-    background-color: var(--color-surface);
+    background-color: color-mix(in srgb, var(--color-surface) 85%, transparent);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--color-border);
     box-shadow: var(--shadow-sm);
+    width: 100%;
 }
 
-.nav {
-    display: flex;
-    gap: var(--space-lg);
+.header :global(.container),
+.header :global(.flex-between) {
+    align-items: center;
+    flex-direction: row;
 }
 
 .menuButton {
@@ -31,16 +35,21 @@
     width: 100%;
     background-color: var(--color-accent);
     border-radius: var(--radius-sm);
-    transition: all 0.3s ease;
+    transition: all var(--transition-medium);
+}
+
+.nav {
+    display: flex;
+    gap: var(--space-lg);
 }
 
 @media (max-width: 768px) {
-    .header :global(.flex-between) {
-        width: 100%;
+    .header {
+        padding: 0 var(--space-md);
     }
 
     .menuButton {
-        display: inline-flex;
+        display: flex;
     }
 
     .nav {
@@ -50,19 +59,20 @@
         right: 0;
         flex-direction: column;
         align-items: center;
-        background: var(--color-surface);
+        background: color-mix(in srgb, var(--color-surface) 85%, transparent);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
         border-top: 1px solid var(--color-border);
         box-shadow: var(--shadow-md);
-        padding: 0 var(--space-md);
+        padding: 0 var(--space-lg);
         gap: var(--space-md);
         overflow: hidden;
         max-height: 0;
-        transition: max-height 0.3s ease-in-out, padding 0.3s ease-in-out;
-        z-index: 100;
+        transition: max-height var(--transition-medium), padding var(--transition-medium);
     }
 
     .nav.open {
         max-height: 500px;
-        padding: var(--space-md);
+        padding: var(--space-lg);
     }
 }

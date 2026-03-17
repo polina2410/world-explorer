@@ -1,4 +1,16 @@
 .controls {
     gap: var(--space-md);
-    align-items: stretch
+    align-items: stretch;
+}
+
+.sortButton {
+    width: auto;
+    height: var(--control-height);
+    display: flex;
+}
+
+@media (max-width: 768px) {
+    .sortButton {
+        width: 100%;
+    }
 }

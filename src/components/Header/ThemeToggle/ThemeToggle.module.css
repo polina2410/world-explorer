@@ -9,8 +9,7 @@
     border-radius: 50%;
     background-color: var(--color-surface);
     color: var(--color-accent);
-    position: relative;
-    top: 4px;
+    transition: transform var(--transition-fast);
 }
 
 .iconButton:hover {
