@@ -8,14 +8,14 @@
     min-width: 200px;
     width: 100%;
     max-width: 260px;
-    font-size: var(--fs-base);;
+    font-size: var(--fs-base);
     font-weight: var(--fw-regular);
     transition: border-color var(--transition-fast), box-shadow var(--transition-fast), background-color var(--transition-fast);
 }
 
 .searchInput::placeholder {
     color: var(--color-text-secondary);
-    opacity: var(--opacity-overlay-strong);
+    opacity: var(--opacity-overlay-medium);
 }
 
 .searchInput:hover {
@@ -23,7 +23,7 @@
     box-shadow: var(--shadow-sm);
 }
 
-.searchInput:focus {
+.searchInput:focus-visible {
     outline: none;
     border-color: var(--color-accent);
     box-shadow: var(--shadow-md);

@@ -1,11 +1,11 @@
-import { Variants } from 'motion';
+import { Variants } from 'motion/react';
 
 export const pageVariants: Variants = {
   hidden: {},
   visible: {
     transition: {
-      staggerChildren: 0.35,
-      delayChildren: 0.2,
+      staggerChildren: 0.15,
+      delayChildren: 0.1,
     },
   },
 };
@@ -42,6 +42,6 @@ export const rowVariants: Variants = {
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.25 },
+    transition: { duration: 0.25, ease: 'easeOut' },
   },
 };

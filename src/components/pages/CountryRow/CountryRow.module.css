@@ -16,7 +16,7 @@
     height: 16px;
     width: auto;
     object-fit: contain;
-    box-shadow: var(--shadow-sm), var(--shadow-sm);
+    box-shadow: var(--shadow-sm);
     cursor: pointer;
     transition: transform var(--transition-fast);
 }
@@ -37,7 +37,7 @@
 }
 
 .countryMap a:hover {
-    text-decoration: underline;
+    color: var(--color-primary);
 }
 
 .flagOverlay {
@@ -45,6 +45,7 @@
     inset: 0;
     background: var(--black-overlay-strong);
     z-index: var(--z-modal);
+    animation: overlayFade var(--transition-fast) ease;
 }
 
 .flagZoomedWrapper {

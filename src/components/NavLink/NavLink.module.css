@@ -2,7 +2,7 @@
     position: relative;
     padding: var(--space-xs) 0;
     text-decoration: none;
-    font-family: var(--font-main), serif;
+    font-family: var(--font-main), sans-serif;
     font-size: var(--fs-md);
     font-weight: var(--fw-medium);
     color: var(--color-text-secondary);
@@ -39,8 +39,8 @@
 }
 
 .link:focus-visible {
-    outline: none;
-    box-shadow: var(--shadow-sm);
+    outline: 2px solid var(--color-primary);
+    outline-offset: 3px;
     border-radius: var(--radius-sm);
 }
 
@@ -49,7 +49,7 @@
     font-weight: var(--fw-semibold);
     letter-spacing: -0.02em;
     color: var(--color-text-primary);
-    padding: 20px 0;
+    padding: var(--space-md) 0;
 }
 
 .logo::after {

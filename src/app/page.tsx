@@ -7,9 +7,8 @@ import { fadeUpVariants, pageVariants } from '@/animations/animations';
 
 export default function HomePage() {
   return (
-    <motion.main
+    <motion.div
       id="home-page-main"
-      role="main"
       variants={pageVariants}
       initial="hidden"
       animate="visible"
@@ -27,6 +26,6 @@ export default function HomePage() {
       >
         <FlagMosaic />
       </motion.section>
-    </motion.main>
+    </motion.div>
   );
 }

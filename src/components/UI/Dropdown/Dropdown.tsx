@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useRef, useEffect, KeyboardEvent } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import styles from './Dropdown.module.css';
 
 interface DropdownProps {
@@ -93,23 +94,32 @@ export default function Dropdown({
         </span>
       </div>
 
-      {isOpen && (
-        <div className={styles.options} role="listbox">
-          {options.map((option, index) => (
-            <div
-              key={option}
-              role="option"
-              aria-selected={value === option}
-              className={`${styles.option} ${option === value ? styles.active : ''} ${
-                index === highlightedIndex ? styles.highlighted : ''
-              }`}
-              onClick={() => handleSelect(option)}
-            >
-              {option}
-            </div>
-          ))}
-        </div>
-      )}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            className={styles.options}
+            role="listbox"
+            initial={{ opacity: 0, y: -6 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -6 }}
+            transition={{ duration: 0.15 }}
+          >
+            {options.map((option, index) => (
+              <div
+                key={option}
+                role="option"
+                aria-selected={value === option}
+                className={`${styles.option} ${option === value ? styles.active : ''} ${
+                  index === highlightedIndex ? styles.highlighted : ''
+                }`}
+                onClick={() => handleSelect(option)}
+              >
+                {option}
+              </div>
+            ))}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

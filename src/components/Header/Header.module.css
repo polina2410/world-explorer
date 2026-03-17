@@ -2,7 +2,9 @@
     position: sticky;
     top: 0;
     z-index: var(--z-sticky);
-    background-color: var(--color-surface);
+    background-color: color-mix(in srgb, var(--color-surface) 85%, transparent);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--color-border);
     box-shadow: var(--shadow-sm);
     width: 100%;
@@ -33,7 +35,7 @@
     width: 100%;
     background-color: var(--color-accent);
     border-radius: var(--radius-sm);
-    transition: all 0.3s ease;
+    transition: all var(--transition-medium);
 }
 
 .nav {
@@ -57,13 +59,16 @@
         right: 0;
         flex-direction: column;
         align-items: center;
-        background: var(--color-surface);
+        background: color-mix(in srgb, var(--color-surface) 85%, transparent);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
         border-top: 1px solid var(--color-border);
         box-shadow: var(--shadow-md);
         padding: 0 var(--space-lg);
         gap: var(--space-md);
         overflow: hidden;
         max-height: 0;
+        transition: max-height var(--transition-medium), padding var(--transition-medium);
     }
 
     .nav.open {

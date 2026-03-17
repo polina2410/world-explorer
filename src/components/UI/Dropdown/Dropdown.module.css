@@ -12,8 +12,8 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 18px;
-    border-radius: var(--radius-sm);
+    padding: 0 var(--control-padding-x);
+    border-radius: var(--radius-md);
     border: 1px solid var(--color-border);
     background: var(--color-surface);
     cursor: pointer;
@@ -22,7 +22,6 @@
     border-color var(--transition-fast),
     box-shadow var(--transition-fast);
     font-weight: var(--fw-regular);
-    color: var(--color-text-primary);
 }
 
 .selected:hover {
@@ -58,10 +57,10 @@
 
 .options {
     position: absolute;
-    top: calc(100% + 4px);
+    top: calc(100% + var(--space-xs));
     left: 0;
     width: 100%;
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-md);
     border: 1px solid var(--color-border);
     background: var(--color-surface);
     box-shadow: var(--shadow-sm);
@@ -110,7 +109,7 @@
     }
 
     .arrow {
-        margin-left: 8px;
+        margin-left: var(--space-sm);
         flex-shrink: 0;
     }
 }

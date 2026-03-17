@@ -1,9 +1,9 @@
 .title {
-    font-family: var(--font-main), serif;
+    font-family: var(--font-main), sans-serif;
     font-size: var(--fs-xl);
-    font-weight: var(--fw-medium);
+    font-weight: var(--fw-semibold);
     margin: var(--space-sm) 0 0 0;
-    line-height: var(--lh-mt);
+    line-height: var(--lh-st);
     color: var(--color-text-primary);
     text-align: center;
 }

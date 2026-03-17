@@ -8,7 +8,7 @@
     opacity var(--transition-medium),
     filter var(--transition-medium);
     box-shadow: var(--shadow-md);
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-md);
     max-width: 140px;
 }
 
@@ -37,15 +37,13 @@
     position: absolute;
     inset: 0;
     backface-visibility: hidden;
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-md);
     overflow: hidden;
-    box-shadow: var(--shadow-md);
 }
 
 .flagFront {
     background: var(--color-border);
     padding: var(--space-xs);
-    box-sizing: border-box;
 }
 
 .flagBack {
@@ -70,18 +68,22 @@
     height: 100%;
     object-fit: contain;
     object-position: center;
-    transition: transform var(--transition-fast);
 }
 
 .dimmed {
     opacity: var(--opacity-overlay-strong);
-    filter: blur(1.5px) brightness(1);
+    filter: blur(1.5px);
     transition: opacity var(--transition-medium), filter var(--transition-medium);
 }
 
 .active {
     transform: scale(var(--scale-xl));
-    z-index: var(--z-sticky);
+    z-index: var(--z-modal);
+}
+
+.flagCard:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 3px;
 }
 
 @media (hover: none) {
