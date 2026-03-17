@@ -21,8 +21,6 @@ export default function Button({
   size = 'sm',
   ...props
 }: ButtonProps) {
-  const variantClass = variant !== 'default' ? styles[variant] : '';
-
   return (
     <motion.button
       aria-pressed={active || undefined}
@@ -32,7 +30,7 @@ export default function Button({
       className={[
         styles.button,
         active && styles.active,
-        variantClass,
+        variant !== 'default' ? styles[variant] : '',
         styles[size],
       ]
         .filter(Boolean)

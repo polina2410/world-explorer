@@ -7,6 +7,7 @@ type SearchPanelProps = {
   onChangeAction: (value: string) => void;
   placeholder?: string;
   id?: string;
+  label?: string;
 };
 
 export default function SearchPanel({
@@ -15,7 +16,7 @@ export default function SearchPanel({
   placeholder = 'Search country...',
   id,
   label = 'Search for a country',
-}: SearchPanelProps & { label?: string }) {
+}: SearchPanelProps) {
   return (
     <>
       <label htmlFor={id} className="sr-only">
@@ -28,7 +29,6 @@ export default function SearchPanel({
         placeholder={placeholder}
         onChange={(e) => onChangeAction(e.target.value)}
         className={styles.searchInput}
-        aria-label={'Search for a country'}
       />
     </>
   );

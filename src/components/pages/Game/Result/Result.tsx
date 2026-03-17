@@ -4,6 +4,7 @@ import SecondaryTitle from '@/components/UI/SecondaryTitle/SecondaryTitle';
 import styles from './Result.module.css';
 import { useConfetti } from '@/hooks/useConfetti';
 import Button from '@/components/UI/Button/Button';
+import { calculatePercentage } from '@/utils/utils';
 
 type ResultProps = {
   score: number;
@@ -30,7 +31,7 @@ const RESULT_THRESHOLDS: ResultThreshold[] = [
 ];
 
 export default function Result({ score, total, onRestart }: ResultProps) {
-  const percentage = Math.round((score / total) * 100);
+  const percentage = calculatePercentage(score, total);
 
   useConfetti(percentage);
 

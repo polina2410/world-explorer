@@ -5,26 +5,16 @@ import styles from './GameSetup.module.css';
 import SecondaryTitle from '@/components/UI/SecondaryTitle/SecondaryTitle';
 import { motion } from 'motion/react';
 import { containerVariants, fadeUpVariants } from '@/animations/animations';
+import { useGame } from '@/context/GameContext';
 
 type GameSetupProps = {
   continents: string[];
-  selectedContinent: string | null;
-  setSelectedContinent: (continent: string) => void;
-  questionCount: number | null;
-  setQuestionCount: (questionCount: number) => void;
-  onStartGame: () => void;
 };
 
 export const QUESTION_OPTIONS = [5, 10, 20];
 
-export default function GameSetup({
-  continents,
-  selectedContinent,
-  setSelectedContinent,
-  questionCount,
-  setQuestionCount,
-  onStartGame,
-}: GameSetupProps) {
+export default function GameSetup({ continents }: GameSetupProps) {
+  const { selectedContinent, setSelectedContinent, questionCount, setQuestionCount, setPhase } = useGame();
   const isReadyToStart = selectedContinent !== null && questionCount !== null;
 
   return (
@@ -129,7 +119,7 @@ export default function GameSetup({
               aria-label="Start Quiz"
               size="lg"
               active
-              onClick={onStartGame}
+              onClick={() => setPhase('quiz')}
             >
               Start Quiz
             </Button>

@@ -4,22 +4,13 @@ import { motion } from 'framer-motion';
 import Image from 'next/image';
 import styles from './FlagMosaicCard.module.css';
 import { useFlagMosaic } from '@/context/FlagMosaicContext';
+import { cardVariants } from '@/animations/animations';
 
 type Props = {
   country: {
     name: string;
     flag: string;
   };
-};
-
-const cardVariants = {
-  hidden: { opacity: 0, y: 12, scale: 0.96 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    scale: 1,
-    transition: { duration: 0.01 },
-  },
 };
 
 export default function FlagMosaicCard({ country }: Props) {

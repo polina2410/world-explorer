@@ -1,5 +1,26 @@
 import { Variants } from 'motion/react';
 
+export const exitFadeUp = { opacity: 0, y: -10, transition: { duration: 0.2 } } as const;
+
+export const cardVariants: Variants = {
+  hidden: { opacity: 0, y: 12, scale: 0.96 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: { duration: 0.01 },
+  },
+};
+
+export const gridVariants: Variants = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.008,
+    },
+  },
+};
+
 export const pageVariants: Variants = {
   hidden: {},
   visible: {

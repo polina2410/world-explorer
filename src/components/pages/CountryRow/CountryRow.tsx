@@ -2,24 +2,26 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
-import { createPortal } from 'react-dom';
 import { CountryResponse } from '@/types/country';
 import { formatList, formatPopulation } from '@/utils/utils';
 import styles from './CountryRow.module.css';
 import Tooltip from '@/components/UI/Tooltip/Tooltip';
-import { useCloseOnAnyClick } from '@/hooks/useCloseOnAnyClick';
+import { useClickOutside } from '@/hooks/useClickOutside';
 import { motion } from 'motion/react';
 import { rowVariants } from '@/animations/animations';
+import FlagZoomOverlay from '@/components/UI/FlagZoomOverlay/FlagZoomOverlay';
 
 type CountryRowProps = {
   country: CountryResponse;
   index: number;
 };
 
+const flagImageStyle = { display: 'block', margin: '0 auto' };
+
 export default function CountryRow({ country, index }: CountryRowProps) {
   const [zoomedFlag, setZoomedFlag] = useState<string | null>(null);
 
-  useCloseOnAnyClick({ onCloseAction: () => setZoomedFlag(null) });
+  useClickOutside(() => setZoomedFlag(null), { escape: true });
 
   const countryId = country.name.toLowerCase().replace(/\s/g, '-');
 
@@ -43,7 +45,7 @@ export default function CountryRow({ country, index }: CountryRowProps) {
               alt={`${country.name} flag`}
               width={24}
               height={16}
-              style={{ display: 'block', margin: '0 auto' }}
+              style={flagImageStyle}
               className={styles.flagImage}
               onClick={(e) => {
                 e.stopPropagation();
@@ -77,29 +79,13 @@ export default function CountryRow({ country, index }: CountryRowProps) {
         </td>
       </motion.tr>
 
-      {typeof document !== 'undefined' &&
-        zoomedFlag &&
-        createPortal(
-          <div
-            className={`${styles.flagOverlay} flex-center`}
-            onClick={() => setZoomedFlag(null)}
-          >
-            <div
-              className={styles.flagZoomedWrapper}
-              onClick={(e) => e.stopPropagation()}
-            >
-              <Image
-                id="flag-zoomed-image"
-                src={zoomedFlag}
-                alt={`Zoomed flag of ${country.name}`}
-                fill
-                sizes="90vw"
-                className={styles.flagZoomed}
-              />
-            </div>
-          </div>,
-          document.body
-        )}
+      {zoomedFlag && (
+        <FlagZoomOverlay
+          src={zoomedFlag}
+          countryName={country.name}
+          onClose={() => setZoomedFlag(null)}
+        />
+      )}
     </>
   );
 }

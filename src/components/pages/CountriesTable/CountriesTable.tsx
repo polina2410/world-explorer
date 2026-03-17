@@ -45,7 +45,7 @@ export default function CountriesTable({
     <div id="countries-table-wrapper" className={styles.tableWrapper}>
       <table
         id="countries-table"
-        className={`table ${styles.all_countries_table}`}
+        className={`table ${styles.countriesTable}`}
       >
         <thead id="countries-table-head">
           <tr>
@@ -95,8 +95,8 @@ export default function CountriesTable({
               </td>
             </tr>
           ) : (
-            displayedCountries.map((c, i) => (
-              <CountryRow key={c.name} country={c} index={i} />
+            displayedCountries.map((country, i) => (
+              <CountryRow key={country.name} country={country} index={i} />
             ))
           )}
         </motion.tbody>
