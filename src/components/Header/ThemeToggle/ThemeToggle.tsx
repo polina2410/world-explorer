@@ -1,5 +1,5 @@
 'use client';
-import { motion } from 'motion/react';
+import { motion, AnimatePresence, Variants } from 'motion/react';
 import styles from './ThemeToggle.module.css';
 import { MoonIcon, SunIcon } from '@/components/icons/ThemeIcons';
 import { SCALE } from '@/animations/animations';
@@ -10,11 +10,33 @@ interface Props {
   onClick?: () => void;
 }
 
+const iconVariants: Variants = {
+  initial: (isDark: boolean) => ({
+    opacity: 0,
+    rotate: isDark ? -90 : 90,
+    scale: 0.5,
+  }),
+  animate: {
+    opacity: 1,
+    rotate: 0,
+    scale: 1,
+    transition: { type: 'spring', stiffness: 260, damping: 18 },
+  },
+  exit: (isDark: boolean) => ({
+    opacity: 0,
+    rotate: isDark ? 90 : -90,
+    scale: 0.5,
+    transition: { duration: 0.15, ease: 'easeIn' },
+  }),
+};
+
 export default function ThemeToggle({ theme, toggleTheme, onClick }: Props) {
   const handleClick = () => {
     toggleTheme();
     if (onClick) onClick();
   };
+
+  const isDark = theme === 'dark';
 
   return (
     <motion.button
@@ -23,10 +45,22 @@ export default function ThemeToggle({ theme, toggleTheme, onClick }: Props) {
       aria-label="Toggle theme"
       className={styles.iconButton}
       whileTap={{ scale: SCALE.PRESS }}
-      whileHover={{ scale: SCALE.HOVER }}
-      transition={{ bounceDamping: 10, bounceStiffness: 600 }}
+      whileHover={{ scale: SCALE.ACTIVE }}
+      transition={{ type: 'spring', stiffness: 400, damping: 25 }}
     >
-      {theme === 'light' ? <MoonIcon /> : <SunIcon />}
+      <AnimatePresence mode="wait" initial={false}>
+        <motion.span
+          key={theme}
+          className={styles.iconWrap}
+          variants={iconVariants}
+          custom={isDark}
+          initial="initial"
+          animate="animate"
+          exit="exit"
+        >
+          {isDark ? <SunIcon /> : <MoonIcon />}
+        </motion.span>
+      </AnimatePresence>
     </motion.button>
   );
 }

@@ -5,6 +5,7 @@ import type { Metadata } from 'next';
 import { CountriesProvider } from '@/hooks/CountriesProvider';
 import { GameProvider } from '@/context/GameContext';
 import { ThemeProvider } from '@/context/ThemeContext';
+import { NavigationGuardProvider } from '@/context/NavigationGuardContext';
 
 type RootLayoutProps = {
   children: ReactNode;
@@ -29,14 +30,16 @@ export default function RootLayout({ children }: RootLayoutProps) {
       </head>
       <body>
         <ThemeProvider>
-          <GameProvider>
-            <Header />
-            <CountriesProvider>
-              <main id="app-main" className="container">
-                {children}
-              </main>
-            </CountriesProvider>
-          </GameProvider>
+          <NavigationGuardProvider>
+            <GameProvider>
+              <Header />
+              <CountriesProvider>
+                <main id="app-main" className="container">
+                  {children}
+                </main>
+              </CountriesProvider>
+            </GameProvider>
+          </NavigationGuardProvider>
         </ThemeProvider>
       </body>
     </html>

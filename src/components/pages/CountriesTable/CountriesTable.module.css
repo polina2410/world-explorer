@@ -101,3 +101,7 @@
     text-align: center;
     padding: var(--space-xl);
 }
+
+.noCountriesMessage p {
+    text-align: center;
+}

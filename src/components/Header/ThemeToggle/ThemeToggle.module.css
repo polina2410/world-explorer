@@ -9,15 +9,14 @@
     border-radius: 50%;
     background-color: var(--color-surface);
     color: var(--color-accent);
-    transition: transform var(--transition-fast);
 }
 
-.iconButton:hover {
-    transform: scale(var(--scale-hover));
-}
-
-.iconButton:active {
-    transform: scale(var(--scale-press));
+.iconWrap {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    top: 3px;
 }
 
 .iconButton svg {
