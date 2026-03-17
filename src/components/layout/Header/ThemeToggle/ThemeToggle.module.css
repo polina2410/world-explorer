@@ -1,0 +1,25 @@
+.iconButton {
+    all: unset;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    background-color: var(--color-surface);
+    color: var(--color-accent);
+}
+
+.iconWrap {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    top: 3px;
+}
+
+.iconButton svg {
+    width: 2rem;
+    height: 2rem;
+}

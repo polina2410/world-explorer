@@ -6,7 +6,7 @@ import styles from './CountriesTable.module.css';
 import CountryRow from '@/components/features/CountriesTable/CountryRow/CountryRow';
 import PageDescription from '@/components/UI/PageDescription/PageDescription';
 import { motion } from 'motion/react';
-import { tableBodyVariants, SPRING_INDICATOR } from '@/animations';
+import { SPRING_INDICATOR } from '@/animations';
 import { COUNTRIES_TABLE_COLUMN_COUNT } from '@/constants';
 
 type CountriesTableProps = {
@@ -84,12 +84,7 @@ export default function CountriesTable({
           </tr>
         </thead>
 
-        <motion.tbody
-          id="countries-table-body"
-          variants={tableBodyVariants}
-          initial="hidden"
-          animate="visible"
-        >
+        <tbody id="countries-table-body">
           {displayedCountries.length === 0 ? (
               <tr id="countries-table-empty">
                 <td colSpan={COUNTRIES_TABLE_COLUMN_COUNT} className={styles.noCountriesMessage}>
@@ -104,7 +99,7 @@ export default function CountriesTable({
                 <CountryRow key={country.name} country={country} index={i} />
               ))
             )}
-        </motion.tbody>
+        </tbody>
       </table>
     </div>
   );
