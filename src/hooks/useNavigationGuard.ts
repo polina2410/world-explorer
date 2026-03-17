@@ -13,7 +13,9 @@ export function useNavigationGuard(
 ) {
   const { guardRef } = useNavigationGuardContext();
   const onBlockRef = useRef(onBlock);
-  onBlockRef.current = onBlock;
+  useEffect(() => {
+    onBlockRef.current = onBlock;
+  });
 
   // Register/unregister guard in shared ref (no re-renders needed)
   useEffect(() => {

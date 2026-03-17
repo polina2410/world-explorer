@@ -13,7 +13,7 @@ describe('useNavigationGuard', () => {
   it('registers guard in guardRef when active', () => {
     let guardRef: React.MutableRefObject<((proceed: () => void) => void) | null> | undefined;
 
-    const { rerender } = renderHook(
+    renderHook(
       ({ active }: { active: boolean }) => {
         const ctx = useNavigationGuardContext();
         guardRef = ctx.guardRef;
