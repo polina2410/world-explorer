@@ -8,7 +8,7 @@ import styles from './CountryRow.module.css';
 import Tooltip from '@/components/UI/Tooltip/Tooltip';
 import { useClickOutside } from '@/hooks/useClickOutside';
 import { motion, AnimatePresence } from 'motion/react';
-import { rowVariants } from '@/animations';
+import { CARD_STAGGER_INCREMENT, CARD_STAGGER_MAX_DELAY } from '@/animations';
 import FlagZoomOverlay from '@/components/UI/FlagZoomOverlay/FlagZoomOverlay';
 
 type CountryRowProps = {
@@ -30,10 +30,14 @@ export default function CountryRow({ country, index }: CountryRowProps) {
       <motion.tr
         id={`country-row-${countryId}`}
         className={styles.countryRow}
-        variants={rowVariants}
-        layout
+        initial={{ opacity: 0, x: -8 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{
+          duration: 0.2,
+          ease: 'easeOut',
+          delay: Math.min(index * CARD_STAGGER_INCREMENT, CARD_STAGGER_MAX_DELAY),
+        }}
         whileHover={{ x: 3 }}
-        transition={{ x: { type: 'spring', stiffness: 400, damping: 30 } }}
       >
         <td className={styles.countryIndex}>{index + 1}</td>
         <td className={styles.countryName}>{country.name}</td>
