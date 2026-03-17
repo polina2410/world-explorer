@@ -6,12 +6,10 @@ import PageDescription from '@/components/UI/PageDescription/PageDescription';
 import SecondaryTitle from '@/components/UI/SecondaryTitle/SecondaryTitle';
 import styles from './Question.module.css';
 import Modal from '@/components/UI/Modal/Modal';
+import { QuizQuestion } from '@/utils/generateQuestions';
+import { calculatePercentage } from '@/utils/utils';
 
-export type QuizQuestion = {
-  country: string;
-  correct: string;
-  options: string[];
-};
+const ANSWER_REVEAL_DELAY_MS = 1000;
 
 type QuestionProps = {
   question: QuizQuestion;
@@ -33,7 +31,7 @@ export default function Question({
   const [showResetModal, setShowResetModal] = useState(false);
 
   useEffect(() => {
-    setProgress(Math.round((questionNumber / totalQuestions) * 100));
+    setProgress(calculatePercentage(questionNumber, totalQuestions));
   }, [questionNumber, totalQuestions]);
 
   function handleClick(option: string) {
@@ -43,7 +41,7 @@ export default function Question({
     setTimeout(() => {
       setSelected(null);
       onAnswer(correct);
-    }, 1000);
+    }, ANSWER_REVEAL_DELAY_MS);
   }
 
   function getVariant(option: string) {

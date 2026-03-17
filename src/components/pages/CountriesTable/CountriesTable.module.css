@@ -4,7 +4,7 @@
     margin-bottom: var(--space-lg);
 }
 
-.all_countries_table {
+.countriesTable {
     width: 100%;
     table-layout: fixed;
     border-collapse: collapse;
@@ -13,12 +13,12 @@
     margin-bottom: var(--space-xl);
 }
 
-.all_countries_table thead {
+.countriesTable thead {
     background-color: var(--color-bg);
 }
 
-.all_countries_table th,
-.all_countries_table td {
+.countriesTable th,
+.countriesTable td {
     padding: var(--space-sm) var(--space-md);
     text-align: left;
     border: 1px solid var(--color-border);
@@ -29,59 +29,59 @@
     line-height: var(--lh-p);
 }
 
-.all_countries_table th {
+.countriesTable th {
     font-weight: var(--fw-bold);
     color: var(--color-text-secondary);
 }
 
-.all_countries_table tbody tr:nth-child(odd) {
+.countriesTable tbody tr:nth-child(odd) {
     background-color: var(--color-surface);
 }
 
-.all_countries_table tbody tr:nth-child(even) {
+.countriesTable tbody tr:nth-child(even) {
     background-color: var(--color-bg);
 }
 
-.all_countries_table tbody tr {
+.countriesTable tbody tr {
     transition: background-color var(--transition-fast);
 }
 
-.all_countries_table tbody tr:hover {
+.countriesTable tbody tr:hover {
     background-color: var(--color-bg-alt);
 }
 
-.all_countries_table th:nth-child(1),
-.all_countries_table td:nth-child(1) {
+.countriesTable th:nth-child(1),
+.countriesTable td:nth-child(1) {
     width: 60px;
 }
 
-.all_countries_table th:nth-child(2),
-.all_countries_table td:nth-child(2) {
+.countriesTable th:nth-child(2),
+.countriesTable td:nth-child(2) {
     width: 180px;
 }
 
-.all_countries_table th:nth-child(3),
-.all_countries_table td:nth-child(3) {
+.countriesTable th:nth-child(3),
+.countriesTable td:nth-child(3) {
     width: 160px;
 }
 
-.all_countries_table th:nth-child(4),
-.all_countries_table td:nth-child(4) {
+.countriesTable th:nth-child(4),
+.countriesTable td:nth-child(4) {
     width: 100px;
 }
 
-.all_countries_table th:nth-child(5),
-.all_countries_table td:nth-child(5) {
+.countriesTable th:nth-child(5),
+.countriesTable td:nth-child(5) {
     width: 140px;
 }
 
-.all_countries_table th:nth-child(6),
-.all_countries_table td:nth-child(6) {
+.countriesTable th:nth-child(6),
+.countriesTable td:nth-child(6) {
     width: 180px;
 }
 
-.all_countries_table th:nth-child(7),
-.all_countries_table td:nth-child(7) {
+.countriesTable th:nth-child(7),
+.countriesTable td:nth-child(7) {
     width: 120px;
 }
 

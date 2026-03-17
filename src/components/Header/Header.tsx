@@ -8,7 +8,7 @@ import { useTheme } from '@/context/ThemeContext';
 import ThemeToggle from '@/components/Header/ThemeToggle/ThemeToggle';
 import { useRef, useState } from 'react';
 import { motion } from 'motion/react';
-import { useOnClickOutsideMobileMenu } from '@/hooks/useOnClickOutsideMobileMenu';
+import { useClickOutside } from '@/hooks/useClickOutside';
 
 export default function Header() {
   const { resetGame } = useGame();
@@ -18,9 +18,7 @@ export default function Header() {
 
   const toggleMenu = () => setIsOpen((prev) => !prev);
 
-  useOnClickOutsideMobileMenu(headerRef, () => {
-    if (isOpen) setIsOpen(false);
-  });
+  useClickOutside(() => setIsOpen(false), { ref: headerRef, touch: true });
 
   const handleNavClick = (callback?: () => void) => {
     setIsOpen(false);

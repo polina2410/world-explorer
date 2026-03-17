@@ -39,30 +39,3 @@
 .countryMap a:hover {
     color: var(--color-primary);
 }
-
-.flagOverlay {
-    position: fixed;
-    inset: 0;
-    background: var(--black-overlay-strong);
-    z-index: var(--z-modal);
-    animation: overlayFade var(--transition-fast) ease;
-}
-
-.flagZoomedWrapper {
-    position: relative;
-    width: 90vw;
-    height: 70vh;
-}
-
-.flagZoomed {
-    object-fit: contain;
-}
-
-@keyframes overlayFade {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
-}

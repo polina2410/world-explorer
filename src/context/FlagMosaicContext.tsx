@@ -8,6 +8,8 @@ import {
   useRef,
 } from 'react';
 
+const FLAG_CARD_AUTO_CLOSE_MS = 2500;
+
 type State = {
   flipped: string | null;
 };
@@ -58,7 +60,7 @@ export function FlagMosaicProvider({ children }: { children: ReactNode }) {
 
     timeoutRef.current = setTimeout(() => {
       dispatch({ type: 'CLOSE' });
-    }, 2500);
+    }, FLAG_CARD_AUTO_CLOSE_MS);
   };
 
   return (

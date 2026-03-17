@@ -1,6 +1,7 @@
 'use client';
 
-import { useState, useRef, useEffect, KeyboardEvent } from 'react';
+import { useState, useRef, KeyboardEvent } from 'react';
+import { useClickOutside } from '@/hooks/useClickOutside';
 import { motion, AnimatePresence } from 'framer-motion';
 import styles from './Dropdown.module.css';
 
@@ -23,19 +24,7 @@ export default function Dropdown({
   const [highlightedIndex, setHighlightedIndex] = useState<number>(-1);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    const handleClickOutside = (e: MouseEvent) => {
-      if (
-        dropdownRef.current &&
-        !dropdownRef.current.contains(e.target as Node)
-      ) {
-        setIsOpen(false);
-        setHighlightedIndex(-1);
-      }
-    };
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, []);
+  useClickOutside(() => { setIsOpen(false); setHighlightedIndex(-1); }, { ref: dropdownRef });
 
   const handleSelect = (option: string) => {
     onChangeAction(option);
