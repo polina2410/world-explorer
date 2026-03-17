@@ -1,0 +1,17 @@
+.mosaicContainer {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 140px);
+    justify-content: space-between;
+    column-gap: var(--space-sm);
+    row-gap: var(--space-md);
+    margin: var(--space-lg) 0;
+}
+
+.mosaicContainer.hasActiveCard::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: var(--black-overlay-soft);
+    pointer-events: none;
+    z-index: var(--z-sticky);
+}

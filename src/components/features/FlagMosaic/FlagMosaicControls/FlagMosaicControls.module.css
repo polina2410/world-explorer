@@ -1,0 +1,23 @@
+.controls {
+    gap: var(--space-md);
+    align-items: stretch;
+}
+
+.sortButton {
+    width: auto;
+    height: var(--control-height);
+    display: flex;
+}
+
+.sortValue {
+    display: inline-flex;
+    align-items: center;
+    min-width: 3.2ch;
+    overflow: hidden;
+}
+
+@media (max-width: 768px) {
+    .sortButton {
+        width: 100%;
+    }
+}
