@@ -2,16 +2,16 @@
 
 import { useState } from 'react';
 import { useGame } from '@/context/GameContext';
-import { useCountries } from '@/hooks/CountriesProvider';
+import { useCountries } from '@/context/CountriesContext';
 import { getContinents } from '@/utils/getContinents';
 import DataLoader from '@/components/UI/DataLoader/DataLoader';
-import GameStart from '@/components/pages/Game/GameStart/GameStart';
-import GameSetup from '@/components/pages/Game/GameSetup/GameSetup';
-import GamePanel from '@/components/pages/Game/GamePanel/GamePanel';
+import GameStart from '@/components/features/Game/GameStart/GameStart';
+import GameSetup from '@/components/features/Game/GameSetup/GameSetup';
+import GamePanel from '@/components/features/Game/GamePanel/GamePanel';
 import Modal from '@/components/UI/Modal/Modal';
-import { EMPTY_COUNTRIES_MESSAGE } from '@/constants';
+import { EMPTY_COUNTRIES_MESSAGE, EXIT_QUIZ_MESSAGE } from '@/constants';
 import { motion, AnimatePresence } from 'motion/react';
-import { exitFadeUp, fadeUpVariants, pageVariants } from '@/animations/animations';
+import { exitFadeUp, fadeUpVariants, pageVariants } from '@/animations';
 import { useNavigationGuard } from '@/hooks/useNavigationGuard';
 
 export default function GamePage() {
@@ -101,7 +101,7 @@ export default function GamePage() {
 
       <Modal
         isOpen={showExitModal}
-        message="Leave the quiz? Your progress will be lost."
+        message={EXIT_QUIZ_MESSAGE}
         onConfirm={handleExitConfirm}
         onCancel={handleExitCancel}
       />

@@ -4,7 +4,7 @@ import { createPortal } from 'react-dom';
 import { motion } from 'motion/react';
 import Image from 'next/image';
 import styles from './FlagZoomOverlay.module.css';
-import { SCALE } from '@/animations/animations';
+import { SCALE, SPRING_OVERLAY, TRANSITION_OVERLAY } from '@/animations';
 
 type Props = {
   src: string;
@@ -22,7 +22,7 @@ export default function FlagZoomOverlay({ src, countryName, onClose }: Props) {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      transition={{ duration: 0.2 }}
+      transition={TRANSITION_OVERLAY}
     >
       <motion.div
         className={styles.wrapper}
@@ -30,7 +30,7 @@ export default function FlagZoomOverlay({ src, countryName, onClose }: Props) {
         initial={{ opacity: 0, scale: SCALE.ENTER }}
         animate={{ opacity: 1, scale: SCALE.BASIC }}
         exit={{ opacity: 0, scale: SCALE.ENTER }}
-        transition={{ type: 'spring', stiffness: 320, damping: 26 }}
+        transition={SPRING_OVERLAY}
       >
         <Image
           id="flag-zoomed-image"

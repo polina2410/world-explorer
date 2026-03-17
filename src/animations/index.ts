@@ -1,4 +1,4 @@
-import { Variants } from 'motion/react';
+import { Variants, Transition } from 'motion/react';
 
 export const SCALE = {
   PRESS: 0.92,
@@ -8,6 +8,22 @@ export const SCALE = {
   HOVER_LG: 1.15,
   ACTIVE: 1.2,
 } as const;
+
+// Spring transition presets
+export const SPRING_INTERACTIVE: Transition = { type: 'spring', stiffness: 400, damping: 20 };
+export const SPRING_CARD: Transition = { type: 'spring', stiffness: 380, damping: 20 };
+export const SPRING_OVERLAY: Transition = { type: 'spring', stiffness: 320, damping: 26 };
+export const SPRING_ICON: Transition = { type: 'spring', stiffness: 260, damping: 18 };
+export const SPRING_INDICATOR: Transition = { type: 'spring', stiffness: 300, damping: 22 };
+export const SPRING_LAYOUT: Transition = { type: 'spring', stiffness: 120, damping: 22 };
+
+// Eased transition presets
+export const TRANSITION_OVERLAY: Transition = { duration: 0.2 };
+export const TRANSITION_POPUP: Transition = { duration: 0.15 };
+
+// Card entrance stagger
+export const CARD_STAGGER_INCREMENT = 0.012;
+export const CARD_STAGGER_MAX_DELAY = 0.5;
 
 export const exitFadeUp = { opacity: 0, y: -10, transition: { duration: 0.2 } } as const;
 
@@ -22,9 +38,13 @@ export const cardVariants: Variants = {
 };
 
 export const gridVariants: Variants = {
-  hidden: {},
+  hidden: { opacity: 0, y: 12 },
   visible: {
+    opacity: 1,
+    y: 0,
     transition: {
+      duration: 0.35,
+      ease: 'easeOut',
       staggerChildren: 0.008,
     },
   },

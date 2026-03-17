@@ -3,6 +3,7 @@
 import { useState, useRef, KeyboardEvent } from 'react';
 import { useClickOutside } from '@/hooks/useClickOutside';
 import { motion, AnimatePresence } from 'motion/react';
+import { TRANSITION_POPUP } from '@/animations';
 import styles from './Dropdown.module.css';
 
 interface DropdownProps {
@@ -91,7 +92,7 @@ export default function Dropdown({
             initial={{ opacity: 0, y: -6 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -6 }}
-            transition={{ duration: 0.15 }}
+            transition={TRANSITION_POPUP}
           >
             {options.map((option, index) => (
               <div

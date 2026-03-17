@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import styles from './NavLink.module.css';
 import { ReactNode } from 'react';
-import { APP_ROUTES } from '@/routes/appRoutes';
+import { APP_ROUTES } from '@/constants/routes';
 import { useNavigationGuardContext } from '@/context/NavigationGuardContext';
 
 type NavLinkProps = {

@@ -1,9 +1,9 @@
 'use client';
 
-import FlagMosaic from '@/components/pages/FlagMosaic/FlagMosaic';
-import HomeHeader from '@/components/pages/HomeHeader/HomeHeader';
+import FlagMosaic from '@/components/features/FlagMosaic/FlagMosaic';
+import HomeHeader from '@/components/features/HomeHeader/HomeHeader';
 import { motion } from 'motion/react';
-import { fadeUpVariants, pageVariants } from '@/animations/animations';
+import { fadeUpVariants, pageVariants } from '@/animations';
 
 export default function HomePage() {
   return (

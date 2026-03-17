@@ -3,7 +3,7 @@
 import { motion, HTMLMotionProps } from 'motion/react';
 import React from 'react';
 import styles from './Button.module.css';
-import { SCALE } from '@/animations/animations';
+import { SCALE } from '@/animations';
 
 type ButtonVariant = 'confirm' | 'default' | 'start' | 'success' | 'danger';
 type ButtonSize = 'xs' | 'sm' | 'md' | 'lg';

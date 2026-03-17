@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import styles from './Modal.module.css';
 import Button from '@/components/UI/Button/Button';
 import SecondaryTitle from '@/components/UI/SecondaryTitle/SecondaryTitle';
-import { SCALE } from '@/animations/animations';
+import { SCALE, TRANSITION_OVERLAY } from '@/animations';
 
 type ConfirmModalProps = {
   isOpen: boolean;
@@ -31,7 +31,7 @@ export default function Modal({
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.2 }}
+          transition={TRANSITION_OVERLAY}
         >
           <motion.div
             className={styles.modal}
@@ -39,7 +39,7 @@ export default function Modal({
             initial={{ opacity: 0, scale: SCALE.ENTER, y: 8 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: SCALE.ENTER, y: 8 }}
-            transition={{ duration: 0.2 }}
+            transition={TRANSITION_OVERLAY}
           >
             <SecondaryTitle id="confirm-modal-title">{message}</SecondaryTitle>
 
