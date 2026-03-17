@@ -2,7 +2,7 @@
 
 import MainTitle from '@/components/UI/MainTitle/MainTitle';
 import PageDescription from '@/components/UI/PageDescription/PageDescription';
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 import { containerVariants, fadeUpVariants } from '@/animations/animations';
 
 export default function HomeHeader() {

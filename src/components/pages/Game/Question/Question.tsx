@@ -1,13 +1,15 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { motion, AnimatePresence } from 'motion/react';
 import Button from '@/components/UI/Button/Button';
-import PageDescription from '@/components/UI/PageDescription/PageDescription';
 import SecondaryTitle from '@/components/UI/SecondaryTitle/SecondaryTitle';
 import styles from './Question.module.css';
 import Modal from '@/components/UI/Modal/Modal';
 import { QuizQuestion } from '@/utils/generateQuestions';
 import { calculatePercentage } from '@/utils/utils';
+import { ResetIcon } from '@/components/icons/ResetIcon';
+import { containerVariants, fadeUpVariants } from '@/animations/animations';
 
 const ANSWER_REVEAL_DELAY_MS = 1000;
 
@@ -63,56 +65,74 @@ export default function Question({
         }}
       />
 
-      <div className="flex-between">
-        <PageDescription id="question-number">
-          Question {questionNumber} / {totalQuestions}
-        </PageDescription>
+      <div className={styles.header}>
+        <div className={styles.questionBadge}>
+          <span className={styles.questionCurrent}>{questionNumber}</span>
+          <span className={styles.questionSeparator}>/</span>
+          <span>{totalQuestions}</span>
+        </div>
+
+        <div className={styles.progressWrapper} id="question-progress-wrapper">
+          <motion.div
+            id="question-progress-bar"
+            className={styles.progressBar}
+            animate={{ width: `${progress}%` }}
+            transition={{ duration: 0.5, ease: 'easeOut' }}
+          />
+        </div>
 
         <button
           type="button"
-          aria-label="Reset selection"
+          aria-label="Restart quiz"
           className={styles.resetButton}
           onClick={() => setShowResetModal(true)}
         >
-          ⟳
+          <ResetIcon />
         </button>
       </div>
 
-      <div className={styles.progressWrapper} id="question-progress-wrapper">
-        <div
-          id="question-progress-bar"
-          className={styles.progressBar}
-          style={{ width: `${progress}%` }}
-        />
-      </div>
-      <div className="page">
-        <SecondaryTitle id="question-text">
-          What is the capital of {question.country}?
-        </SecondaryTitle>
-
-        <div
-          className={styles.optionsWrapper}
-          id="question-options"
-          role="radiogroup"
-          aria-labelledby="question-text"
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={questionNumber}
+          className={styles.questionCard}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -20 }}
+          transition={{ duration: 0.25, ease: 'easeOut' }}
         >
-          {question.options.map((option) => (
-            <Button
-              id={`question-option-${option}`}
-              key={option}
-              role="radio"
-              aria-checked={selected === option}
-              variant={getVariant(option)}
-              size="md"
-              active={selected === option}
-              disabled={!!selected}
-              onClick={() => handleClick(option)}
-            >
-              {option}
-            </Button>
-          ))}
-        </div>
-      </div>
+          <SecondaryTitle id="question-text">
+            What is the capital of{' '}
+            <span className={styles.countryHighlight}>{question.country}</span>?
+          </SecondaryTitle>
+
+          <motion.div
+            className={styles.optionsWrapper}
+            id="question-options"
+            role="radiogroup"
+            aria-labelledby="question-text"
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+          >
+            {question.options.map((option) => (
+              <motion.div key={option} variants={fadeUpVariants} className={styles.optionItem}>
+                <Button
+                  id={`question-option-${option}`}
+                  role="radio"
+                  aria-checked={selected === option}
+                  variant={getVariant(option)}
+                  size="md"
+                  active={selected === option}
+                  disabled={!!selected}
+                  onClick={() => handleClick(option)}
+                >
+                  {option}
+                </Button>
+              </motion.div>
+            ))}
+          </motion.div>
+        </motion.div>
+      </AnimatePresence>
     </div>
   );
 }

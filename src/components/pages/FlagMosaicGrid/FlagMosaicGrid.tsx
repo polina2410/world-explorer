@@ -1,6 +1,6 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'motion/react';
 import FlagMosaicCard from '@/components/pages/FlagMosaicCard/FlagMosaicCard';
 import styles from './FlagMosaicGrid.module.css';
 import { Country } from '@/utils/generateQuestions';
@@ -18,10 +18,13 @@ export default function FlagMosaicGrid({ countries }: Props) {
       variants={gridVariants}
       initial="hidden"
       animate="visible"
+      layout
     >
-      {countries.map((country) => (
-        <FlagMosaicCard key={country.name} country={country} />
-      ))}
+      <AnimatePresence mode="popLayout">
+        {countries.map((country) => (
+          <FlagMosaicCard key={country.name} country={country} />
+        ))}
+      </AnimatePresence>
     </motion.div>
   );
 }

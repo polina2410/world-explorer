@@ -1,6 +1,6 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 import Alphabet from '@/components/pages/Alphabet/Alphabet';
 import MainTitle from '@/components/UI/MainTitle/MainTitle';
 import CountriesTable from '@/components/pages/CountriesTable/CountriesTable';

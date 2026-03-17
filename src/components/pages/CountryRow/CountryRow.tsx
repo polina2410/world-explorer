@@ -7,7 +7,7 @@ import { formatList, formatPopulation } from '@/utils/utils';
 import styles from './CountryRow.module.css';
 import Tooltip from '@/components/UI/Tooltip/Tooltip';
 import { useClickOutside } from '@/hooks/useClickOutside';
-import { motion } from 'motion/react';
+import { motion, AnimatePresence } from 'motion/react';
 import { rowVariants } from '@/animations/animations';
 import FlagZoomOverlay from '@/components/UI/FlagZoomOverlay/FlagZoomOverlay';
 
@@ -32,6 +32,8 @@ export default function CountryRow({ country, index }: CountryRowProps) {
         className={styles.countryRow}
         variants={rowVariants}
         layout
+        whileHover={{ x: 3 }}
+        transition={{ x: { type: 'spring', stiffness: 400, damping: 30 } }}
       >
         <td className={styles.countryIndex}>{index + 1}</td>
         <td className={styles.countryName}>{country.name}</td>
@@ -79,13 +81,15 @@ export default function CountryRow({ country, index }: CountryRowProps) {
         </td>
       </motion.tr>
 
-      {zoomedFlag && (
-        <FlagZoomOverlay
-          src={zoomedFlag}
-          countryName={country.name}
-          onClose={() => setZoomedFlag(null)}
-        />
-      )}
+      <AnimatePresence>
+        {zoomedFlag && (
+          <FlagZoomOverlay
+            src={zoomedFlag}
+            countryName={country.name}
+            onClose={() => setZoomedFlag(null)}
+          />
+        )}
+      </AnimatePresence>
     </>
   );
 }

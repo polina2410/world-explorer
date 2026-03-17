@@ -1,8 +1,9 @@
 .mosaicContainer {
     display: grid;
-    grid-template-columns: repeat(auto-fill, 120px);
-    gap: var(--space-md);
-    justify-content: space-evenly;
+    grid-template-columns: repeat(auto-fill, 140px);
+    justify-content: space-between;
+    column-gap: var(--space-sm);
+    row-gap: var(--space-md);
     margin: var(--space-lg) 0;
 }
 

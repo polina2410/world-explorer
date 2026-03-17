@@ -1,8 +1,9 @@
 'use client';
 
-import { motion, HTMLMotionProps } from 'framer-motion';
+import { motion, HTMLMotionProps } from 'motion/react';
 import React from 'react';
 import styles from './Button.module.css';
+import { SCALE } from '@/animations/animations';
 
 type ButtonVariant = 'confirm' | 'default' | 'start' | 'success' | 'danger';
 type ButtonSize = 'xs' | 'sm' | 'md' | 'lg';
@@ -24,8 +25,8 @@ export default function Button({
   return (
     <motion.button
       aria-pressed={active || undefined}
-      whileTap={{ scale: 0.9 }}
-      whileHover={{ scale: 1.1 }}
+      whileTap={{ scale: SCALE.PRESS }}
+      whileHover={{ scale: SCALE.HOVER }}
       transition={{ bounceDamping: 10, bounceStiffness: 600 }}
       className={[
         styles.button,

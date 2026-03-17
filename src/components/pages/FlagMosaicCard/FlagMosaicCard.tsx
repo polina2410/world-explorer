@@ -1,10 +1,10 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 import Image from 'next/image';
 import styles from './FlagMosaicCard.module.css';
 import { useFlagMosaic } from '@/context/FlagMosaicContext';
-import { cardVariants } from '@/animations/animations';
+import { SCALE } from '@/animations/animations';
 
 type Props = {
   country: {
@@ -30,7 +30,18 @@ export default function FlagMosaicCard({ country }: Props) {
       className={`${styles.flagCard} ${isFlipped ? styles.active : ''} ${
         isDimmed ? styles.dimmed : ''
       }`}
-      variants={cardVariants}
+      layout
+      initial={{ opacity: 0, y: 12, scale: SCALE.ENTER }}
+      animate={{ opacity: 1, y: 0, scale: isFlipped ? SCALE.ACTIVE : SCALE.BASIC }}
+      exit={{ opacity: 0, scale: SCALE.PRESS, transition: { duration: 0.15 } }}
+      whileHover={{ scale: isFlipped ? SCALE.ACTIVE : SCALE.HOVER_LG }}
+      whileTap={{ scale: SCALE.PRESS }}
+      transition={{
+        type: 'spring',
+        stiffness: 380,
+        damping: 20,
+        layout: { type: 'spring', stiffness: 200, damping: 30 },
+      }}
       onClick={handleClick}
       onKeyDown={(e) => {
         if (e.key === 'Enter' || e.key === ' ') {

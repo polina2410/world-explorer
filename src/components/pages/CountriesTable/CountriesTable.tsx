@@ -43,10 +43,7 @@ export default function CountriesTable({
 
   return (
     <div id="countries-table-wrapper" className={styles.tableWrapper}>
-      <table
-        id="countries-table"
-        className={`table ${styles.countriesTable}`}
-      >
+      <table id="countries-table" className={`table ${styles.countriesTable}`}>
         <thead id="countries-table-head">
           <tr>
             <th scope="col">#</th>
@@ -69,9 +66,16 @@ export default function CountriesTable({
               aria-sort={ariaSort}
             >
               Population{' '}
-              <span className={styles.sortArrow}>
-                {sortOrder === 'asc' ? '↑' : sortOrder === 'desc' ? '↓' : '⇅'}
-              </span>
+              <motion.span
+                className={styles.sortArrow}
+                animate={{
+                  rotate: sortOrder === 'desc' ? 180 : 0,
+                  opacity: sortOrder ? 1 : 0.4,
+                }}
+                transition={{ type: 'spring', stiffness: 300, damping: 22 }}
+              >
+                ↑
+              </motion.span>
             </th>
 
             <th scope="col">Regions</th>
@@ -86,19 +90,19 @@ export default function CountriesTable({
           animate="visible"
         >
           {displayedCountries.length === 0 ? (
-            <tr id="countries-table-empty">
-              <td colSpan={7} className={styles.noCountriesMessage}>
-                <PageDescription>
-                  No countries found{' '}
-                  {selectedLetter && ` starting with "${selectedLetter}"`}.
-                </PageDescription>
-              </td>
-            </tr>
-          ) : (
-            displayedCountries.map((country, i) => (
-              <CountryRow key={country.name} country={country} index={i} />
-            ))
-          )}
+              <tr id="countries-table-empty">
+                <td colSpan={7} className={styles.noCountriesMessage}>
+                  <PageDescription>
+                    No countries found{' '}
+                    {selectedLetter && ` starting with "${selectedLetter}"`}.
+                  </PageDescription>
+                </td>
+              </tr>
+            ) : (
+              displayedCountries.map((country, i) => (
+                <CountryRow key={country.name} country={country} index={i} />
+              ))
+            )}
         </motion.tbody>
       </table>
     </div>

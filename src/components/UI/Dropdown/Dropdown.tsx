@@ -2,7 +2,7 @@
 
 import { useState, useRef, KeyboardEvent } from 'react';
 import { useClickOutside } from '@/hooks/useClickOutside';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence } from 'motion/react';
 import styles from './Dropdown.module.css';
 
 interface DropdownProps {

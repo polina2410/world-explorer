@@ -1,8 +1,10 @@
 'use client';
 
 import { useState } from 'react';
+import { motion } from 'motion/react';
 import styles from './Alphabet.module.css';
 import Tooltip from '@/components/UI/Tooltip/Tooltip';
+import { SCALE } from '@/animations/animations';
 
 const ALPHABET = Array.from({ length: 26 }, (_, i) =>
   String.fromCharCode(65 + i)
@@ -38,25 +40,32 @@ export default function Alphabet({ onSelectAction }: AlphabetProps) {
       aria-label="Select a letter to filter countries"
     >
       {ALPHABET.map((letter) => (
-        <Tooltip
+        <motion.div
           key={letter}
-          content={`Click to show countries that start with the letter "${letter}"`}
+          whileHover={{ scale: SCALE.HOVER }}
+          whileTap={{ scale: SCALE.PRESS }}
+          transition={{ type: 'spring', stiffness: 400, damping: 20 }}
+          style={{ display: 'inline-block' }}
         >
-          <a
-            href="#"
-            role="button"
-            aria-pressed={activeLetter === letter}
-            tabIndex={0}
-            onClick={(e) => {
-              e.preventDefault();
-              handleClick(letter);
-            }}
-            onKeyDown={(e) => handleKeyDown(e, letter)}
-            className={`${styles.letter} ${activeLetter === letter ? styles.active : ''}`}
+          <Tooltip
+            content={`Click to show countries that start with the letter "${letter}"`}
           >
-            {letter}
-          </a>
-        </Tooltip>
+            <a
+              href="#"
+              role="button"
+              aria-pressed={activeLetter === letter}
+              tabIndex={0}
+              onClick={(e) => {
+                e.preventDefault();
+                handleClick(letter);
+              }}
+              onKeyDown={(e) => handleKeyDown(e, letter)}
+              className={`${styles.letter} ${activeLetter === letter ? styles.active : ''}`}
+            >
+              {letter}
+            </a>
+          </Tooltip>
+        </motion.div>
       ))}
     </div>
   );

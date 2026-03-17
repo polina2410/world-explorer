@@ -1,6 +1,6 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 import { useMemo, useState } from 'react';
 import { useCountries } from '@/hooks/CountriesProvider';
 import DataLoader from '@/components/UI/DataLoader/DataLoader';

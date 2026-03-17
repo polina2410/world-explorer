@@ -90,6 +90,7 @@
 }
 
 .sortArrow {
+    display: inline-block;
     opacity: var(--opacity-overlay-strong);
     margin-left: var(--space-xs);
     user-select: none;

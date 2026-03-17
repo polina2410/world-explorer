@@ -4,20 +4,10 @@
     perspective: 1000px;
     cursor: pointer;
     position: relative;
-    transition: transform var(--transition-fast),
-    opacity var(--transition-medium),
-    filter var(--transition-medium);
+    transition: opacity var(--transition-medium), filter var(--transition-medium);
     box-shadow: var(--shadow-md);
     border-radius: var(--radius-md);
     max-width: 140px;
-}
-
-.flagCard:hover {
-    transform: scale(var(--scale-xl));
-}
-
-.flagCard:hover .flagInner.flipped {
-    transform: rotateY(180deg) scale(var(--scale-lg));
 }
 
 .flagInner {
@@ -77,7 +67,6 @@
 }
 
 .active {
-    transform: scale(var(--scale-xl));
     z-index: var(--z-modal);
 }
 
@@ -86,8 +75,3 @@
     outline-offset: 3px;
 }
 
-@media (hover: none) {
-    .flagCard:hover {
-        transform: none;
-    }
-}

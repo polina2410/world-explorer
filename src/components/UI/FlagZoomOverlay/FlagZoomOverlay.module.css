@@ -3,7 +3,6 @@
     inset: 0;
     background: var(--black-overlay-strong);
     z-index: var(--z-modal);
-    animation: overlayFade var(--transition-fast) ease;
 }
 
 .wrapper {
@@ -14,13 +13,4 @@
 
 .image {
     object-fit: contain;
-}
-
-@keyframes overlayFade {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
 }

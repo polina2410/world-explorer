@@ -9,6 +9,7 @@ import ThemeToggle from '@/components/Header/ThemeToggle/ThemeToggle';
 import { useRef, useState } from 'react';
 import { motion } from 'motion/react';
 import { useClickOutside } from '@/hooks/useClickOutside';
+import { SCALE } from '@/animations/animations';
 
 export default function Header() {
   const { resetGame } = useGame();
@@ -37,8 +38,8 @@ export default function Header() {
           onClick={toggleMenu}
           aria-label="Toggle menu"
           aria-expanded={isOpen}
-          whileTap={{ scale: 0.9 }}
-          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: SCALE.PRESS }}
+          whileHover={{ scale: SCALE.HOVER }}
           animate={{ rotate: isOpen ? 90 : 0 }}
           transition={{ type: 'spring', stiffness: 400, damping: 20 }}
         >

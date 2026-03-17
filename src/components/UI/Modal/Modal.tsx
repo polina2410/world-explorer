@@ -1,9 +1,10 @@
 'use client';
 
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence } from 'motion/react';
 import styles from './Modal.module.css';
 import Button from '@/components/UI/Button/Button';
 import SecondaryTitle from '@/components/UI/SecondaryTitle/SecondaryTitle';
+import { SCALE } from '@/animations/animations';
 
 type ConfirmModalProps = {
   isOpen: boolean;
@@ -35,9 +36,9 @@ export default function Modal({
           <motion.div
             className={styles.modal}
             onClick={(e) => e.stopPropagation()}
-            initial={{ opacity: 0, scale: 0.95, y: 8 }}
+            initial={{ opacity: 0, scale: SCALE.ENTER, y: 8 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.95, y: 8 }}
+            exit={{ opacity: 0, scale: SCALE.ENTER, y: 8 }}
             transition={{ duration: 0.2 }}
           >
             <SecondaryTitle id="confirm-modal-title">{message}</SecondaryTitle>
