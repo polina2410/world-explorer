@@ -1,0 +1,104 @@
+.header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+}
+
+.questionBadge {
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-xs);
+    color: var(--color-text-secondary);
+    font-size: var(--fs-base);
+    white-space: nowrap;
+}
+
+.questionCurrent {
+    font-size: var(--fs-lg);
+    font-weight: var(--fw-bold);
+    color: var(--color-primary);
+    line-height: 1;
+}
+
+.questionSeparator {
+    opacity: var(--opacity-overlay-strong);
+}
+
+.progressWrapper {
+    flex: 1;
+    height: 8px;
+    background: var(--color-border);
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+}
+
+.progressBar {
+    height: 100%;
+    width: 0;
+    border-radius: var(--radius-sm);
+    background: linear-gradient(90deg, color-mix(in srgb, var(--color-primary) 40%, var(--color-bg)), var(--color-primary));
+}
+
+.resetButton {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background-color: var(--color-bg);
+    color: var(--color-text-secondary);
+    cursor: pointer;
+    transition: background-color var(--transition-fast), color var(--transition-fast), border-color var(--transition-fast);
+}
+
+.resetButton:hover {
+    background-color: var(--color-error);
+    border-color: var(--color-error);
+    color: var(--color-surface);
+}
+
+.resetButton:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+}
+
+.questionCard {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-xl);
+    padding: var(--space-xl);
+    box-shadow: var(--shadow-md);
+    margin-top: var(--space-lg);
+}
+
+.countryHighlight {
+    color: var(--color-accent);
+    font-weight: var(--fw-bold);
+}
+
+.optionsWrapper {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-md);
+}
+
+.optionItem {
+    width: 100%;
+}
+
+@media (max-width: 480px) {
+    .optionsWrapper {
+        grid-template-columns: 1fr;
+    }
+
+    .questionCard {
+        padding: var(--space-lg);
+    }
+}
