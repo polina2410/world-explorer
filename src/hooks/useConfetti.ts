@@ -1,9 +1,10 @@
 import { useEffect } from 'react';
 import confetti from 'canvas-confetti';
+import { CONFETTI_DURATION_MS, SCORE_CONFETTI_MIN, SCORE_GOOD_MIN, SCORE_PERFECT } from '@/constants';
 
-export function useConfetti(scorePercent: number, durationMs = 3000) {
+export function useConfetti(scorePercent: number, durationMs = CONFETTI_DURATION_MS) {
   useEffect(() => {
-    if (scorePercent < 50) return;
+    if (scorePercent < SCORE_CONFETTI_MIN) return;
 
     const animationEnd = Date.now() + durationMs;
 
@@ -11,13 +12,13 @@ export function useConfetti(scorePercent: number, durationMs = 3000) {
     let spread = 70;
     let velocity = 25;
 
-    if (scorePercent >= 70) {
+    if (scorePercent >= SCORE_GOOD_MIN) {
       particleCount = 120;
       spread = 90;
       velocity = 30;
     }
 
-    if (scorePercent === 100) {
+    if (scorePercent === SCORE_PERFECT) {
       particleCount = 200;
       spread = 120;
       velocity = 35;
@@ -29,7 +30,7 @@ export function useConfetti(scorePercent: number, durationMs = 3000) {
       if (timeLeft <= 0) {
         clearInterval(interval);
 
-        if (scorePercent === 100) {
+        if (scorePercent === SCORE_PERFECT) {
           confetti({
             particleCount: 400,
             spread: 360,

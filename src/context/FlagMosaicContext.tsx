@@ -7,8 +7,7 @@ import {
   ReactNode,
   useRef,
 } from 'react';
-
-const FLAG_CARD_AUTO_CLOSE_MS = 2500;
+import { FLAG_CARD_AUTO_CLOSE_MS } from '@/constants';
 
 type State = {
   flipped: string | null;

@@ -1,6 +1,7 @@
 import { createPortal } from 'react-dom';
 import { useState, useRef, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence } from 'motion/react';
+import { TRANSITION_POPUP } from '@/animations';
 import styles from './Tooltip.module.css';
 
 type TooltipProps = {
@@ -68,7 +69,7 @@ export default function Tooltip({ content, children }: TooltipProps) {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                transition={{ duration: 0.15 }}
+                transition={TRANSITION_POPUP}
               >
                 {content}
               </motion.div>

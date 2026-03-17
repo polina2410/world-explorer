@@ -8,7 +8,7 @@ import {
   ReactNode,
 } from 'react';
 import { CountryResponse } from '@/types/country';
-import { API_ROUTES } from '@/routes/apiRoutes';
+import { API_ROUTES } from '@/constants/routes';
 
 interface CountriesContextType {
   countries: CountryResponse[] | null;

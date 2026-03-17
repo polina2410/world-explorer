@@ -1,9 +1,9 @@
 'use client';
 
 import { useState } from 'react';
-import { useCountries } from '@/hooks/CountriesProvider';
+import { useCountries } from '@/context/CountriesContext';
 import DataLoader from '@/components/UI/DataLoader/DataLoader';
-import CountriesContent from '@/components/pages/CountriesContent/CountriesContent';
+import CountriesContent from '@/components/features/CountriesContent/CountriesContent';
 import { EMPTY_COUNTRIES_MESSAGE } from '@/constants';
 
 export default function CountriesPage() {
