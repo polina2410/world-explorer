@@ -3,8 +3,8 @@
 import {
   createContext,
   useContext,
-  useEffect,
-  useState,
+  useCallback,
+  useSyncExternalStore,
   ReactNode,
 } from 'react';
 
@@ -15,24 +15,33 @@ interface ThemeContextType {
   toggleTheme: () => void;
 }
 
+const THEME_KEY = 'theme';
+const THEME_EVENT = 'theme-change';
+
+function subscribe(callback: () => void) {
+  window.addEventListener(THEME_EVENT, callback);
+  return () => window.removeEventListener(THEME_EVENT, callback);
+}
+
+function getSnapshot(): Theme {
+  return (localStorage.getItem(THEME_KEY) as Theme) ?? 'light';
+}
+
+function getServerSnapshot(): Theme {
+  return 'light';
+}
+
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
-  const [theme, setTheme] = useState<Theme>(() => {
-    if (typeof window !== 'undefined') {
-      const saved = localStorage.getItem('theme') as Theme | null;
-      if (saved) return saved;
-    }
-    return 'light';
-  });
+  const theme = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
 
-  useEffect(() => {
-    document.documentElement.setAttribute('data-theme', theme);
-    localStorage.setItem('theme', theme);
+  const toggleTheme = useCallback(() => {
+    const next = theme === 'light' ? 'dark' : 'light';
+    localStorage.setItem(THEME_KEY, next);
+    document.documentElement.setAttribute('data-theme', next);
+    window.dispatchEvent(new Event(THEME_EVENT));
   }, [theme]);
-
-  const toggleTheme = () =>
-    setTheme((prev) => (prev === 'light' ? 'dark' : 'light'));
 
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme }}>

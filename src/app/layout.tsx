@@ -6,6 +6,7 @@ import { CountriesProvider } from '@/context/CountriesContext';
 import { GameProvider } from '@/context/GameContext';
 import { ThemeProvider } from '@/context/ThemeContext';
 import { NavigationGuardProvider } from '@/context/NavigationGuardContext';
+import { fetchCountries } from '@/lib/fetchCountries';
 
 type RootLayoutProps = {
   children: ReactNode;
@@ -18,10 +19,17 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({ children }: RootLayoutProps) {
+export default async function RootLayout({ children }: RootLayoutProps) {
+  const countries = await fetchCountries();
+
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `try{var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}`,
+          }}
+        />
         <link rel="preconnect" href="https://api.fontshare.com" />
         <link
           href="https://api.fontshare.com/v2/css?f[]=synonym@400&f[]=amulya@700&display=swap"
@@ -34,7 +42,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
           <NavigationGuardProvider>
             <GameProvider>
               <Header />
-              <CountriesProvider>
+              <CountriesProvider initialCountries={countries}>
                 <main id="app-main" className="container">
                   {children}
                 </main>
