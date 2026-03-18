@@ -61,6 +61,24 @@ All Framer Motion presets live in `src/animations/index.ts` — page variants, c
 
 Tests live under `src/__tests__/` mirroring the `src/` structure (`api/`, `components/`, `context/`, `hooks/`, `schemas/`, `utils/`). Setup file: `src/__tests__/setup.ts` (imports `@testing-library/jest-dom`). Config: `vitest.config.ts`.
 
+### Styling
+
+All global CSS variables and utility classes are in `src/styles/globals.css`. Theming uses `[data-theme="dark"]` on the root element.
+
+**Breakpoints:**
+| Breakpoint | What changes |
+|---|---|
+| `≤ 1024px` | Container gets inline padding, table goes full-width, page block padding reduces |
+| `≤ 768px` | Body font shrinks to `--fs-base`, h1 shrinks to `--fs-md`, table cell padding tightens |
+| `≤ 480px` | `.flex-between` stacks vertically, table font reduces to 0.9rem |
+
+**CSS custom properties (key tokens):**
+- Spacing: `--space-xs/sm/md/lg/xl/2xl` (4 → 80px)
+- Radii: `--radius-sm/md/lg/xl` (4 → 12px)
+- Shadows: `--shadow-sm/md/lg`
+- Transitions: `--transition-fast` (0.2s), `--transition-medium` (0.3s), `--transition-slow` (0.5s cubic-bezier)
+- Z-index: `--z-sticky` (200), `--z-modal` (300)
+
 ### Path Alias
 
 `@/` maps to `src/` in both TypeScript and Vitest configs.

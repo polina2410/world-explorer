@@ -5,7 +5,7 @@ import Image from 'next/image';
 import styles from './FlagMosaicCard.module.css';
 import { useFlagMosaic } from '@/context/FlagMosaicContext';
 import { SCALE, SPRING_CARD, SPRING_LAYOUT, CARD_STAGGER_INCREMENT, CARD_STAGGER_MAX_DELAY } from '@/animations';
-import { useRef, useEffect } from 'react';
+import { useState } from 'react';
 
 type Props = {
   country: {
@@ -21,10 +21,7 @@ export default function FlagMosaicCard({ country, index }: Props) {
   const isFlipped = state.flipped === country.name;
   const isDimmed = Boolean(state.flipped && state.flipped !== country.name);
 
-  const mountedRef = useRef(false);
-  useEffect(() => {
-    mountedRef.current = true;
-  }, []);
+  const [mounted, setMounted] = useState(false);
 
   const handleClick = () => {
     if (isFlipped) close();
@@ -41,13 +38,16 @@ export default function FlagMosaicCard({ country, index }: Props) {
       initial={{ opacity: 0, y: 12, scale: SCALE.ENTER }}
       animate={{ opacity: 1, y: 0, scale: isFlipped ? SCALE.ACTIVE : SCALE.BASIC }}
       exit={{ opacity: 0, scale: SCALE.PRESS, transition: { duration: 0.15 } }}
-      whileHover={{ scale: isFlipped ? SCALE.ACTIVE : SCALE.HOVER_LG }}
-      whileTap={{ scale: SCALE.PRESS }}
+      whileHover={isFlipped ? {} : { scale: 1.06, y: -5 }}
+      whileTap={isFlipped ? {} : { scale: 0.96, y: 0 }}
       transition={{
         ...SPRING_CARD,
-        delay: mountedRef.current ? 0 : Math.min(index * CARD_STAGGER_INCREMENT, CARD_STAGGER_MAX_DELAY),
+        delay: mounted ? 0 : Math.min(index * CARD_STAGGER_INCREMENT, CARD_STAGGER_MAX_DELAY),
         layout: SPRING_LAYOUT,
+        scale: { type: 'spring', stiffness: 220, damping: 18 },
+        y: { type: 'spring', stiffness: 220, damping: 18 },
       }}
+      onAnimationComplete={() => setMounted(true)}
       onClick={handleClick}
       onKeyDown={(e) => {
         if (e.key === 'Enter' || e.key === ' ') {
