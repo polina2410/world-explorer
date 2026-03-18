@@ -51,8 +51,16 @@ describe('GET /api/countries', () => {
 
     expect(Array.isArray(data)).toBe(true);
     expect(data).toHaveLength(2); // Kosovo (independent: false) excluded
-    expect(data[0]).toMatchObject({ name: 'France', capital: 'Paris', flag: 'fr.svg' });
-    expect(data[1]).toMatchObject({ name: 'Japan', capital: 'Tokyo', flag: 'jp.svg' });
+    expect(data[0]).toMatchObject({
+      name: 'France',
+      capital: 'Paris',
+      flag: 'fr.svg',
+    });
+    expect(data[1]).toMatchObject({
+      name: 'Japan',
+      capital: 'Tokyo',
+      flag: 'jp.svg',
+    });
   });
 
   it('excludes non-independent countries', async () => {

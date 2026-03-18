@@ -1,5 +1,5 @@
-import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { renderHook, waitFor } from '@testing-library/react';
+import { describe, it, expect } from 'vitest';
+import { renderHook } from '@testing-library/react';
 import { CountriesProvider, useCountries } from '@/context/CountriesContext';
 import { ReactNode } from 'react';
 
@@ -9,51 +9,30 @@ const mockCountries = [
 ];
 
 const wrapper = ({ children }: { children: ReactNode }) => (
-  <CountriesProvider>{children}</CountriesProvider>
+  <CountriesProvider initialCountries={mockCountries}>{children}</CountriesProvider>
 );
 
 describe('CountriesContext', () => {
-  beforeEach(() => {
-    vi.restoreAllMocks();
-  });
-
-  it('starts in loading state', () => {
-    vi.stubGlobal('fetch', vi.fn(() => new Promise(() => {})));
+  it('provides initialCountries via context', () => {
     const { result } = renderHook(() => useCountries(), { wrapper });
-    expect(result.current.loading).toBe(true);
-    expect(result.current.countries).toBeNull();
-    expect(result.current.error).toBeNull();
-  });
-
-  it('sets countries and stops loading on success', async () => {
-    vi.stubGlobal('fetch', vi.fn().mockResolvedValue({
-      ok: true,
-      json: async () => mockCountries,
-    }));
-
-    const { result } = renderHook(() => useCountries(), { wrapper });
-
-    await waitFor(() => expect(result.current.loading).toBe(false));
     expect(result.current.countries).toEqual(mockCountries);
+  });
+
+  it('loading is always false', () => {
+    const { result } = renderHook(() => useCountries(), { wrapper });
+    expect(result.current.loading).toBe(false);
+  });
+
+  it('error is always null', () => {
+    const { result } = renderHook(() => useCountries(), { wrapper });
     expect(result.current.error).toBeNull();
   });
 
-  it('sets error and stops loading when fetch fails', async () => {
-    vi.stubGlobal('fetch', vi.fn().mockRejectedValue(new Error('Network error')));
-
-    const { result } = renderHook(() => useCountries(), { wrapper });
-
-    await waitFor(() => expect(result.current.loading).toBe(false));
-    expect(result.current.error).toBe('Network error');
-    expect(result.current.countries).toBeNull();
-  });
-
-  it('sets error when response is not ok', async () => {
-    vi.stubGlobal('fetch', vi.fn().mockResolvedValue({ ok: false }));
-
-    const { result } = renderHook(() => useCountries(), { wrapper });
-
-    await waitFor(() => expect(result.current.loading).toBe(false));
-    expect(result.current.error).toBe('Failed to fetch countries');
+  it('provides empty array when no countries given', () => {
+    const emptyWrapper = ({ children }: { children: ReactNode }) => (
+      <CountriesProvider initialCountries={[]}>{children}</CountriesProvider>
+    );
+    const { result } = renderHook(() => useCountries(), { wrapper: emptyWrapper });
+    expect(result.current.countries).toEqual([]);
   });
 });

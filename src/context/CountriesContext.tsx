@@ -1,45 +1,31 @@
 'use client';
 
-import {
-  createContext,
-  useContext,
-  useState,
-  useEffect,
-  ReactNode,
-} from 'react';
+import { createContext, useContext, ReactNode } from 'react';
 import { CountryResponse } from '@/types/country';
-import { API_ROUTES } from '@/constants/routes';
 
 interface CountriesContextType {
-  countries: CountryResponse[] | null;
-  loading: boolean;
-  error: string | null;
+  countries: CountryResponse[];
+  loading: false;
+  error: null;
 }
 
 const CountriesContext = createContext<CountriesContextType>({
-  countries: null,
-  loading: true,
+  countries: [],
+  loading: false,
   error: null,
 });
 
-export function CountriesProvider({ children }: { children: ReactNode }) {
-  const [countries, setCountries] = useState<CountryResponse[] | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    fetch(API_ROUTES.countries)
-      .then((res) => {
-        if (!res.ok) throw new Error('Failed to fetch countries');
-        return res.json();
-      })
-      .then((data) => setCountries(data))
-      .catch((err) => setError(err.message))
-      .finally(() => setLoading(false));
-  }, []);
-
+export function CountriesProvider({
+  children,
+  initialCountries,
+}: {
+  children: ReactNode;
+  initialCountries: CountryResponse[];
+}) {
   return (
-    <CountriesContext.Provider value={{ countries, loading, error }}>
+    <CountriesContext.Provider
+      value={{ countries: initialCountries, loading: false, error: null }}
+    >
       {children}
     </CountriesContext.Provider>
   );
