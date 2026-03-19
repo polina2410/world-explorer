@@ -35,15 +35,22 @@ export default function CountryRow({ country, index }: CountryRowProps) {
         transition={{
           duration: 0.2,
           ease: 'easeOut',
-          delay: Math.min(index * CARD_STAGGER_INCREMENT, CARD_STAGGER_MAX_DELAY),
+          delay: Math.min(
+            index * CARD_STAGGER_INCREMENT,
+            CARD_STAGGER_MAX_DELAY
+          ),
         }}
         whileHover={{ x: 3 }}
       >
-        <td className={styles.countryIndex}>{index + 1}</td>
-        <td className={styles.countryName}>{country.name}</td>
-        <td>{country.capital ?? '—'}</td>
+        <td data-label="#">{index + 1}</td>
 
-        <td>
+        <td data-label="Name" className={styles.countryName}>
+          {country.name}
+        </td>
+
+        <td data-label="Capital">{country.capital ?? '—'}</td>
+
+        <td data-label="Flag">
           {country.flag && (
             <Image
               id={`flag-${countryId}`}
@@ -61,13 +68,13 @@ export default function CountryRow({ country, index }: CountryRowProps) {
           )}
         </td>
 
-        <td className={styles.countryPopulation}>
+        <td data-label="Population" className={styles.countryPopulation}>
           {formatPopulation(country.population ?? 0)}
         </td>
 
-        <td>{formatList(country.continents) ?? '—'}</td>
+        <td data-label="Regions">{formatList(country.continents) ?? '—'}</td>
 
-        <td className={styles.countryMap}>
+        <td data-label="Link" className={styles.countryMap}>
           {country.mapUrl ? (
             <Tooltip content={`View ${country.name} on the map`}>
               <a

@@ -6,7 +6,7 @@
 
 .countriesTable {
     width: 100%;
-    table-layout: fixed;
+    table-layout: auto;
     border-collapse: collapse;
     font-size: var(--fs-base);
     background-color: var(--color-surface);
@@ -23,9 +23,6 @@
     text-align: left;
     border: 1px solid var(--color-border);
     vertical-align: middle;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
     line-height: var(--lh-p);
 }
 
@@ -104,4 +101,61 @@
 
 .noCountriesMessage p {
     text-align: center;
+}
+
+@media (max-width: 768px) {
+    .countriesTable th,
+    .countriesTable td {
+        padding: var(--space-xs) var(--space-sm);
+        font-size: 0.9rem;
+    }
+
+    .countriesTable th:nth-child(6),
+    .countriesTable td:nth-child(6),
+    .countriesTable th:nth-child(7),
+    .countriesTable td:nth-child(7) {
+        display: none;
+    }
+
+    .countriesTable th:nth-child(2),
+    .countriesTable td:nth-child(2),
+    .countriesTable th:nth-child(3),
+    .countriesTable td:nth-child(3) {
+        width: auto;
+    }
+}
+
+@media (max-width: 480px) {
+    .countriesTable thead {
+        display: none;
+    }
+
+    .countriesTable,
+    .countriesTable tbody,
+    .countriesTable tr,
+    .countriesTable td {
+        display: block;
+        width: 100%;
+    }
+
+    .countriesTable tr {
+        margin-bottom: var(--space-md);
+        border: 1px solid var(--color-border);
+        border-radius: var(--radius-md);
+        padding: var(--space-sm);
+        background-color: var(--color-surface);
+    }
+
+    .countriesTable td {
+        border: none;
+        display: flex;
+        justify-content: space-between;
+        padding: var(--space-xs) 0;
+    }
+
+    .countriesTable td::before {
+        content: attr(data-label);
+        font-weight: var(--fw-semibold);
+        color: var(--color-text-secondary);
+    }
 }
