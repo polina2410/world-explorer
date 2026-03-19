@@ -2,6 +2,7 @@ import type { ReactNode } from 'react';
 import '@/styles/globals.css';
 import Header from '@/components/layout/Header/Header';
 import type { Metadata } from 'next';
+import Script from 'next/script';
 import { CountriesProvider } from '@/context/CountriesContext';
 import { GameProvider } from '@/context/GameContext';
 import { ThemeProvider } from '@/context/ThemeContext';
@@ -25,11 +26,6 @@ export default async function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `try{var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}`,
-          }}
-        />
         <link rel="preconnect" href="https://api.fontshare.com" />
         <link
           href="https://api.fontshare.com/v2/css?f[]=synonym@400&f[]=amulya@700&display=swap"
@@ -38,6 +34,10 @@ export default async function RootLayout({ children }: RootLayoutProps) {
         <title>Countries Explorer</title>
       </head>
       <body>
+        <Script
+          id="theme-init"
+          strategy="beforeInteractive"
+        >{`try{var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}`}</Script>
         <ThemeProvider>
           <NavigationGuardProvider>
             <GameProvider>
