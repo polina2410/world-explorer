@@ -1,5 +1,8 @@
+.countryRow {
+    cursor: pointer;
+}
+
 .countryRow td {
-    white-space: nowrap;
     transition: background-color var(--transition-fast);
 }
 
