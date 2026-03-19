@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import Button from '@/components/UI/Button/Button';
 import SecondaryTitle from '@/components/UI/SecondaryTitle/SecondaryTitle';
@@ -28,18 +28,22 @@ export default function Question({
   onRestart,
 }: QuestionProps) {
   const [selected, setSelected] = useState<string | null>(null);
-  const [progress, setProgress] = useState(0);
   const [showResetModal, setShowResetModal] = useState(false);
+  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const progress = calculatePercentage(questionNumber, totalQuestions);
 
   useEffect(() => {
-    setProgress(calculatePercentage(questionNumber, totalQuestions));
-  }, [questionNumber, totalQuestions]);
+    return () => {
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    };
+  }, [question]);
 
   function handleClick(option: string) {
     setSelected(option);
     const correct = option === question.correct;
 
-    setTimeout(() => {
+    timeoutRef.current = setTimeout(() => {
       setSelected(null);
       onAnswer(correct);
     }, ANSWER_REVEAL_DELAY_MS);

@@ -40,8 +40,13 @@ describe('calculatePercentage', () => {
   it('returns 100 for perfect score', () => {
     expect(calculatePercentage(7, 7)).toBe(100);
   });
+
+  it('returns 0 when total is 0', () => {
+    expect(calculatePercentage(5, 0)).toBe(0);
+  });
 });
 
+// noinspection JSVoidFunctionReturnValueUsed
 describe('formatList', () => {
   it('joins multiple items with comma', () => {
     expect(formatList(['Europe', 'Asia'])).toBe('Europe, Asia');

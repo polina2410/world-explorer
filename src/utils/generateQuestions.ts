@@ -36,15 +36,17 @@ export function generateQuestions(
 
   const selected = shuffle(filtered).slice(0, count);
 
-  return selected.map((country) => {
+  return selected.flatMap((country) => {
     const wrongCapitals = shuffle(
       filtered.filter((c) => c.name !== country.name).map((c) => c.capital)
     ).slice(0, 3);
 
-    return {
+    if (wrongCapitals.length < 3) return [];
+
+    return [{
       country: country.name,
       correct: country.capital,
       options: shuffle([country.capital, ...wrongCapitals]),
-    };
+    }];
   });
 }

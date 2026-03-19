@@ -3,6 +3,7 @@
 import {
   createContext,
   useContext,
+  useEffect,
   useReducer,
   ReactNode,
   useRef,
@@ -36,6 +37,12 @@ export function FlagMosaicProvider({ children }: { children: ReactNode }) {
   const [state, dispatch] = useReducer(reducer, { flipped: null });
 
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  useEffect(() => {
+    return () => {
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    };
+  }, []);
 
   const close = () => {
     dispatch({ type: 'CLOSE' });
