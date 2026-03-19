@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { CountryResponse } from '@/types/country';
 import styles from './CountriesTable.module.css';
-import CountryRow from '@/components/features/CountriesPage/CountryRow/CountryRow';
+import CountryRow from '@/components/features/CountriesPage/CountriesTable/CountryRow/CountryRow';
 import PageDescription from '@/components/UI/PageDescription/PageDescription';
 import { motion } from 'motion/react';
 import { SPRING_INDICATOR } from '@/animations';

@@ -1,6 +1,6 @@
 import { describe, it, expect, vi } from 'vitest';
 import { render, screen, fireEvent } from '@testing-library/react';
-import CountryRow from '@/components/features/CountriesPage/CountryRow/CountryRow';
+import CountryRow from '@/components/features/CountriesPage/CountriesTable/CountryRow/CountryRow';
 import type { CountryResponse } from '@/types/country';
 
 vi.mock('motion/react', () => import('@/__tests__/__mocks__/motionMock'));
