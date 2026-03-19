@@ -35,7 +35,7 @@ export default function Alphabet({ onSelectAction }: AlphabetProps) {
 
   return (
     <div
-      className={`flex-wrap table flex-between`}
+      className={`table ${styles.wrapper}`}
       role="group"
       aria-label="Select a letter to filter countries"
     >

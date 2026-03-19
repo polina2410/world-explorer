@@ -3,7 +3,7 @@ export const EXIT_QUIZ_MESSAGE = 'Leave the quiz? Your progress will be lost.';
 export const RESTART_QUIZ_MESSAGE =
   'Are you sure you want to restart the quiz?';
 
-export const ANSWER_REVEAL_DELAY_MS = 1000;
+export const ANSWER_REVEAL_DELAY_MS = 800;
 export const FLAG_CARD_AUTO_CLOSE_MS = 2500;
 export const CONFETTI_DURATION_MS = 3000;
 
