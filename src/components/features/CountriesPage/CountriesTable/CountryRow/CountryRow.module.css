@@ -26,7 +26,7 @@
 
 .flagImage:hover {
     transform: scale(var(--scale-hover-lg));
-    box-shadow: var(--shadow-md), 0 0 0 1px rgba(0, 0, 0, 0.12);
+    box-shadow: var(--shadow-md), 0 0 0 1px rgba(0, 0, 0, var(--opacity-border));
 }
 
 .countryPopulation {
@@ -42,4 +42,14 @@
 
 .countryMap a:hover {
     color: var(--color-primary);
+}
+
+@media (max-width: 480px) {
+    .countryName {
+        font-size: 1rem;
+    }
+
+    .flagImage {
+        margin-left: auto;
+    }
 }
