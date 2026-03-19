@@ -1,6 +1,6 @@
 import { describe, it, expect, vi } from 'vitest';
 import { render, screen, fireEvent } from '@testing-library/react';
-import Result from '@/components/features/Game/Result/Result';
+import Result from '@/components/features/Quiz/Result/Result';
 
 vi.mock('motion/react', () => import('@/__tests__/__mocks__/motionMock'));
 vi.mock('@/hooks/useConfetti', () => ({ useConfetti: vi.fn() }));

@@ -4,7 +4,7 @@ import { createContext, useContext, useState, ReactNode } from 'react';
 
 export type GamePhase = 'start' | 'setup' | 'quiz';
 
-type GameContextType = {
+type QuizContextType = {
   phase: GamePhase;
   setPhase: (phase: GamePhase) => void;
   selectedContinent: string | null;
@@ -14,9 +14,9 @@ type GameContextType = {
   resetGame: () => void;
 };
 
-const GameContext = createContext<GameContextType | undefined>(undefined);
+const QuizContext = createContext<QuizContextType | undefined>(undefined);
 
-export function GameProvider({ children }: { children: ReactNode }) {
+export function QuizProvider({ children }: { children: ReactNode }) {
   const [phase, setPhase] = useState<GamePhase>('start');
   const [selectedContinent, setSelectedContinent] = useState<string | null>(
     null
@@ -30,7 +30,7 @@ export function GameProvider({ children }: { children: ReactNode }) {
   };
 
   return (
-    <GameContext.Provider
+    <QuizContext.Provider
       value={{
         phase,
         setPhase,
@@ -42,14 +42,14 @@ export function GameProvider({ children }: { children: ReactNode }) {
       }}
     >
       {children}
-    </GameContext.Provider>
+    </QuizContext.Provider>
   );
 }
 
-export function useGame() {
-  const context = useContext(GameContext);
+export function useQuiz() {
+  const context = useContext(QuizContext);
   if (!context) {
-    throw new Error('useGame must be used within a GameProvider');
+    throw new Error('useQuiz must be used within a QuizProvider');
   }
   return context;
 }

@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
-import HomeHeader from '@/components/features/HomeHeader/HomeHeader';
+import HomeHeader from '@/components/features/HomePage/HomeHeader/HomeHeader';
 import { vi } from 'vitest';
 
 vi.mock('motion/react', () => import('@/__tests__/__mocks__/motionMock'));

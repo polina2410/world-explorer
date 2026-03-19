@@ -1,9 +1,9 @@
 'use client';
 
 import { motion } from 'motion/react';
-import Alphabet from '@/components/features/Alphabet/Alphabet';
+import Alphabet from '@/components/features/CountriesPage/Alphabet/Alphabet';
 import MainTitle from '@/components/UI/MainTitle/MainTitle';
-import CountriesTable from '@/components/features/CountriesTable/CountriesTable';
+import CountriesTable from '@/components/features/CountriesPage/CountriesTable/CountriesTable';
 import { Country } from '@/utils/generateQuestions';
 import { fadeUpVariants, pageVariants } from '@/animations';
 

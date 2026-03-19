@@ -42,25 +42,25 @@ describe('NavLink', () => {
   });
 
   it('renders children', () => {
-    render(<NavLink href="/game">Play</NavLink>, { wrapper });
+    render(<NavLink href="/quiz">Play</NavLink>, { wrapper });
     expect(screen.getByText('Play')).toBeInTheDocument();
   });
 
   it('sets aria-current="page" when path matches href', () => {
-    mockPathname.mockReturnValue('/game');
-    render(<NavLink href="/game">Game</NavLink>, { wrapper });
+    mockPathname.mockReturnValue('/quiz');
+    render(<NavLink href="/quiz">Game</NavLink>, { wrapper });
     expect(screen.getByRole('link')).toHaveAttribute('aria-current', 'page');
   });
 
   it('does not set aria-current when path does not match', () => {
     mockPathname.mockReturnValue('/');
-    render(<NavLink href="/game">Game</NavLink>, { wrapper });
+    render(<NavLink href="/quiz">Game</NavLink>, { wrapper });
     expect(screen.getByRole('link')).not.toHaveAttribute('aria-current');
   });
 
   it('calls onClick prop on normal click (no guard)', () => {
     const onClick = vi.fn();
-    render(<NavLink href="/game" onClick={onClick}>Game</NavLink>, { wrapper });
+    render(<NavLink href="/quiz" onClick={onClick}>Game</NavLink>, { wrapper });
     fireEvent.click(screen.getByRole('link'));
     expect(onClick).toHaveBeenCalledTimes(1);
   });
@@ -77,7 +77,7 @@ describe('NavLink', () => {
     render(
       <NavigationGuardProvider>
         <SetGuard fn={guard} />
-        <NavLink href="/game">Game</NavLink>
+        <NavLink href="/quiz">Game</NavLink>
       </NavigationGuardProvider>
     );
 
@@ -99,13 +99,13 @@ describe('NavLink', () => {
     render(
       <NavigationGuardProvider>
         <SetGuard />
-        <NavLink href="/game">Game</NavLink>
+        <NavLink href="/quiz">Game</NavLink>
       </NavigationGuardProvider>
     );
 
     fireEvent.click(screen.getByRole('link'));
     expect(capturedProceed).not.toBeNull();
     capturedProceed!();
-    expect(mockPush).toHaveBeenCalledWith('/game');
+    expect(mockPush).toHaveBeenCalledWith('/quiz');
   });
 });

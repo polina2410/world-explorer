@@ -3,7 +3,7 @@
 import styles from './Header.module.css';
 import { NavLink } from '@/components/layout/NavLink/NavLink';
 import { APP_ROUTES } from '@/constants/routes';
-import { useGame } from '@/context/GameContext';
+import { useQuiz } from '@/context/QuizContext';
 import { useTheme } from '@/context/ThemeContext';
 import ThemeToggle from '@/components/layout/Header/ThemeToggle/ThemeToggle';
 import { useRef, useState } from 'react';
@@ -12,7 +12,7 @@ import { useClickOutside } from '@/hooks/useClickOutside';
 import { SCALE, SPRING_INTERACTIVE } from '@/animations';
 
 export default function Header() {
-  const { resetGame } = useGame();
+  const { resetGame } = useQuiz();
   const { theme, toggleTheme } = useTheme();
   const [isOpen, setIsOpen] = useState(false);
   const headerRef = useRef<HTMLElement>(null);
@@ -57,7 +57,7 @@ export default function Header() {
           </NavLink>
 
           <NavLink
-            href={APP_ROUTES.game}
+            href={APP_ROUTES.quiz}
             onClick={() => handleNavClick(resetGame)}
           >
             Quiz

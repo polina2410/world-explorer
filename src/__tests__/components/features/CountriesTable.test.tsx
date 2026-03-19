@@ -1,14 +1,35 @@
 import { describe, it, expect, vi } from 'vitest';
 import { render, screen, fireEvent, within } from '@testing-library/react';
-import CountriesTable from '@/components/features/CountriesTable/CountriesTable';
+import CountriesTable from '@/components/features/CountriesPage/CountriesTable/CountriesTable';
 import type { CountryResponse } from '@/types/country';
 
 vi.mock('motion/react', () => import('@/__tests__/__mocks__/motionMock'));
 
 const countries: CountryResponse[] = [
-  { name: 'France', capital: 'Paris', flag: 'fr.svg', population: 67000000, continents: ['Europe'], mapUrl: '' },
-  { name: 'Japan', capital: 'Tokyo', flag: 'jp.svg', population: 125000000, continents: ['Asia'], mapUrl: '' },
-  { name: 'Chad', capital: "N'Djamena", flag: 'td.svg', population: 17000000, continents: ['Africa'], mapUrl: '' },
+  {
+    name: 'France',
+    capital: 'Paris',
+    flag: 'fr.svg',
+    population: 67000000,
+    continents: ['Europe'],
+    mapUrl: '',
+  },
+  {
+    name: 'Japan',
+    capital: 'Tokyo',
+    flag: 'jp.svg',
+    population: 125000000,
+    continents: ['Asia'],
+    mapUrl: '',
+  },
+  {
+    name: 'Chad',
+    capital: "N'Djamena",
+    flag: 'td.svg',
+    population: 17000000,
+    continents: ['Africa'],
+    mapUrl: '',
+  },
 ];
 
 describe('CountriesTable', () => {

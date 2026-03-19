@@ -1,7 +1,7 @@
 import { describe, it, expect, vi } from 'vitest';
 import { render, screen, fireEvent } from '@testing-library/react';
-import GameSetup from '@/components/features/Game/GameSetup/GameSetup';
-import { GameProvider } from '@/context/GameContext';
+import QuizSetup from '@/components/features/Quiz/QuizSetup/QuizSetup';
+import { QuizProvider } from '@/context/QuizContext';
 import { ReactNode } from 'react';
 
 vi.mock('motion/react', () => import('@/__tests__/__mocks__/motionMock'));
@@ -9,13 +9,13 @@ vi.mock('motion/react', () => import('@/__tests__/__mocks__/motionMock'));
 const continents = ['Europe', 'Asia', 'Africa'];
 
 const wrapper = ({ children }: { children: ReactNode }) => (
-  <GameProvider>{children}</GameProvider>
+  <QuizProvider>{children}</QuizProvider>
 );
 
 const renderSetup = (props = {}) =>
-  render(<GameSetup continents={continents} {...props} />, { wrapper });
+  render(<QuizSetup continents={continents} {...props} />, { wrapper });
 
-describe('GameSetup', () => {
+describe('QuizSetup', () => {
   it('renders "All" continent button', () => {
     renderSetup();
     expect(screen.getByRole('button', { name: 'Select all continents' })).toBeInTheDocument();

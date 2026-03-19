@@ -8,8 +8,8 @@ vi.mock('motion/react', () => import('@/__tests__/__mocks__/motionMock'));
 const mockResetGame = vi.fn();
 const mockToggleTheme = vi.fn();
 
-vi.mock('@/context/GameContext', () => ({
-  useGame: () => ({ resetGame: mockResetGame }),
+vi.mock('@/context/QuizContext', () => ({
+  useQuiz: () => ({ resetGame: mockResetGame }),
 }));
 
 vi.mock('@/context/ThemeContext', () => ({

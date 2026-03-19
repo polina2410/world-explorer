@@ -1,21 +1,21 @@
 'use client';
 
 import { useState } from 'react';
-import { useGame } from '@/context/GameContext';
+import { useQuiz } from '@/context/QuizContext';
 import { useCountries } from '@/context/CountriesContext';
 import { getContinents } from '@/utils/getContinents';
 import DataLoader from '@/components/UI/DataLoader/DataLoader';
-import GameStart from '@/components/features/Game/GameStart/GameStart';
-import GameSetup from '@/components/features/Game/GameSetup/GameSetup';
-import GamePanel from '@/components/features/Game/GamePanel/GamePanel';
+import QuizStart from '@/components/features/Quiz/QuizStart/QuizStart';
+import QuizSetup from '@/components/features/Quiz/QuizSetup/QuizSetup';
+import QuizPanel from '@/components/features/Quiz/QuizPanel/QuizPanel';
 import Modal from '@/components/UI/Modal/Modal';
 import { EMPTY_COUNTRIES_MESSAGE, EXIT_QUIZ_MESSAGE } from '@/constants';
 import { motion, AnimatePresence } from 'motion/react';
 import { exitFadeUp, fadeUpVariants, pageVariants } from '@/animations';
 import { useNavigationGuard } from '@/hooks/useNavigationGuard';
 
-export default function GamePage() {
-  const { phase, setPhase, selectedContinent, setSelectedContinent, questionCount, setQuestionCount } = useGame();
+export default function QuizPageClient() {
+  const { phase, setPhase, selectedContinent, setSelectedContinent, questionCount, setQuestionCount } = useQuiz();
   const { countries, loading, error } = useCountries();
   const continents = getContinents(countries);
 
@@ -48,7 +48,7 @@ export default function GamePage() {
       >
         {() => (
           <motion.div
-            id="game-page-main"
+            id="quiz-page-main"
             variants={pageVariants}
             initial="hidden"
             animate="visible"
@@ -59,7 +59,7 @@ export default function GamePage() {
                   key="start"
                   exit={exitFadeUp}
                 >
-                  <GameStart />
+                  <QuizStart />
                 </motion.div>
               )}
 
@@ -71,7 +71,7 @@ export default function GamePage() {
                   animate="visible"
                   exit={exitFadeUp}
                 >
-                  <GameSetup continents={continents} />
+                  <QuizSetup continents={continents} />
                 </motion.div>
               )}
 
@@ -83,7 +83,7 @@ export default function GamePage() {
                   animate="visible"
                   exit={exitFadeUp}
                 >
-                  <GamePanel
+                  <QuizPanel
                     continent={selectedContinent}
                     questionCount={questionCount}
                     onRestart={() => {

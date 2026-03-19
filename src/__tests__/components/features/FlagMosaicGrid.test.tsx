@@ -1,6 +1,6 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { render, screen, fireEvent } from '@testing-library/react';
-import FlagMosaicGrid from '@/components/features/FlagMosaic/FlagMosaicGrid/FlagMosaicGrid';
+import FlagMosaicGrid from '@/components/features/HomePage/FlagMosaicGrid/FlagMosaicGrid';
 import { FlagMosaicProvider } from '@/context/FlagMosaicContext';
 import { ReactNode } from 'react';
 
@@ -15,7 +15,12 @@ vi.mock('next/image', () => ({
 const countries = [
   { name: 'France', capital: 'Paris', flag: 'fr.svg', continents: ['Europe'] },
   { name: 'Japan', capital: 'Tokyo', flag: 'jp.svg', continents: ['Asia'] },
-  { name: 'Brazil', capital: 'Brasília', flag: 'br.svg', continents: ['Americas'] },
+  {
+    name: 'Brazil',
+    capital: 'Brasília',
+    flag: 'br.svg',
+    continents: ['Americas'],
+  },
 ];
 
 const wrapper = ({ children }: { children: ReactNode }) => (
@@ -35,7 +40,9 @@ describe('FlagMosaicGrid', () => {
 
   it('renders the grid container', () => {
     render(<FlagMosaicGrid countries={countries} />, { wrapper });
-    expect(document.getElementById('flag-mosaic-container')).toBeInTheDocument();
+    expect(
+      document.getElementById('flag-mosaic-container')
+    ).toBeInTheDocument();
   });
 
   it('renders country names on card backs', () => {

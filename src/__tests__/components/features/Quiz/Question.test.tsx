@@ -1,6 +1,6 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { render, screen, fireEvent, act } from '@testing-library/react';
-import Question from '@/components/features/Game/Question/Question';
+import Question from '@/components/features/Quiz/Question/Question';
 import type { QuizQuestion } from '@/utils/generateQuestions';
 import { ANSWER_REVEAL_DELAY_MS } from '@/constants';
 

@@ -6,8 +6,8 @@ import { useCountries } from '@/context/CountriesContext';
 import DataLoader from '@/components/UI/DataLoader/DataLoader';
 import { getContinents } from '@/utils/getContinents';
 import { FlagMosaicProvider } from '@/context/FlagMosaicContext';
-import FlagMosaicGrid from '@/components/features/FlagMosaic/FlagMosaicGrid/FlagMosaicGrid';
-import FlagMosaicControls from '@/components/features/FlagMosaic/FlagMosaicControls/FlagMosaicControls';
+import FlagMosaicGrid from '@/components/features/HomePage/FlagMosaicGrid/FlagMosaicGrid';
+import FlagMosaicControls from '@/components/features/HomePage/FlagMosaicControls/FlagMosaicControls';
 import { containerVariants, fadeUpVariants } from '@/animations';
 import PageDescription from '@/components/UI/PageDescription/PageDescription';
 

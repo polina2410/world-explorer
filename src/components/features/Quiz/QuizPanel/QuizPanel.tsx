@@ -3,24 +3,24 @@
 import { useCountries } from '@/context/CountriesContext';
 import { useMemo } from 'react';
 import { generateQuestions, QuizQuestion } from '@/utils/generateQuestions';
-import Question from '@/components/features/Game/Question/Question';
+import Question from '@/components/features/Quiz/Question/Question';
 import Loading from '@/components/UI/Loading/Loading';
 import { useQuiz } from '@/hooks/useQuiz';
-import Result from '@/components/features/Game/Result/Result';
+import Result from '@/components/features/Quiz/Result/Result';
 import { motion } from 'motion/react';
 import { containerVariants, fadeUpVariants } from '@/animations';
 
-type GamePanelProps = {
+type QuizPanelProps = {
   continent: string;
   questionCount: number;
   onRestart: () => void;
 };
 
-export default function GamePanel({
+export default function QuizPanel({
   continent,
   questionCount,
   onRestart,
-}: GamePanelProps) {
+}: QuizPanelProps) {
   const { countries } = useCountries();
   const questions: QuizQuestion[] = useMemo(() => {
     if (!countries) return [];
@@ -54,7 +54,7 @@ export default function GamePanel({
   return (
     <motion.main
       className="container"
-      id="game-panel"
+      id="quiz-panel"
       role="region"
       aria-labelledby="quiz-heading"
       variants={containerVariants}

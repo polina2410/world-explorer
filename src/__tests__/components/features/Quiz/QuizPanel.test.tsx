@@ -1,6 +1,6 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { render, screen, fireEvent, act } from '@testing-library/react';
-import GamePanel from '@/components/features/Game/GamePanel/GamePanel';
+import QuizPanel from '@/components/features/Quiz/QuizPanel/QuizPanel';
 import type { CountryResponse } from '@/types/country';
 import { ANSWER_REVEAL_DELAY_MS } from '@/constants';
 
@@ -21,31 +21,31 @@ vi.mock('@/context/CountriesContext', () => ({
   useCountries: () => mockUseCountries(),
 }));
 
-describe('GamePanel', () => {
+describe('QuizPanel', () => {
   beforeEach(() => vi.useFakeTimers());
   afterEach(() => vi.useRealTimers());
 
   it('shows loading when countries is null', () => {
     mockUseCountries.mockReturnValue({ countries: null, loading: true, error: null });
-    render(<GamePanel continent="All" questionCount={3} onRestart={vi.fn()} />);
+    render(<QuizPanel continent="All" questionCount={3} onRestart={vi.fn()} />);
     expect(screen.getByRole('status')).toBeInTheDocument();
   });
 
   it('renders a question when countries are available', () => {
     mockUseCountries.mockReturnValue({ countries: mockCountries, loading: false, error: null });
-    render(<GamePanel continent="All" questionCount={3} onRestart={vi.fn()} />);
+    render(<QuizPanel continent="All" questionCount={3} onRestart={vi.fn()} />);
     expect(screen.getByText(/What is the capital of/i)).toBeInTheDocument();
   });
 
   it('shows progress badge with total questions', () => {
     mockUseCountries.mockReturnValue({ countries: mockCountries, loading: false, error: null });
-    render(<GamePanel continent="All" questionCount={3} onRestart={vi.fn()} />);
+    render(<QuizPanel continent="All" questionCount={3} onRestart={vi.fn()} />);
     expect(screen.getByText('3')).toBeInTheDocument();
   });
 
   it('shows Result after all questions are answered', () => {
     mockUseCountries.mockReturnValue({ countries: mockCountries, loading: false, error: null });
-    render(<GamePanel continent="All" questionCount={1} onRestart={vi.fn()} />);
+    render(<QuizPanel continent="All" questionCount={1} onRestart={vi.fn()} />);
 
     const options = screen.getAllByRole('radio');
     fireEvent.click(options[0]);
@@ -57,7 +57,7 @@ describe('GamePanel', () => {
   it('calls onRestart when restarting from result screen', () => {
     const onRestart = vi.fn();
     mockUseCountries.mockReturnValue({ countries: mockCountries, loading: false, error: null });
-    render(<GamePanel continent="All" questionCount={1} onRestart={onRestart} />);
+    render(<QuizPanel continent="All" questionCount={1} onRestart={onRestart} />);
 
     const options = screen.getAllByRole('radio');
     fireEvent.click(options[0]);

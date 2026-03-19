@@ -4,7 +4,7 @@ import Header from '@/components/layout/Header/Header';
 import type { Metadata } from 'next';
 import Script from 'next/script';
 import { CountriesProvider } from '@/context/CountriesContext';
-import { GameProvider } from '@/context/GameContext';
+import { QuizProvider } from '@/context/QuizContext';
 import { ThemeProvider } from '@/context/ThemeContext';
 import { NavigationGuardProvider } from '@/context/NavigationGuardContext';
 import { fetchCountries } from '@/lib/fetchCountries';
@@ -40,14 +40,14 @@ export default async function RootLayout({ children }: RootLayoutProps) {
         >{`try{var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}`}</Script>
         <ThemeProvider>
           <NavigationGuardProvider>
-            <GameProvider>
+            <QuizProvider>
               <Header />
               <CountriesProvider initialCountries={countries}>
                 <main id="app-main" className="container">
                   {children}
                 </main>
               </CountriesProvider>
-            </GameProvider>
+            </QuizProvider>
           </NavigationGuardProvider>
         </ThemeProvider>
       </body>

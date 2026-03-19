@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { CountryResponse } from '@/types/country';
 import styles from './CountriesTable.module.css';
-import CountryRow from '@/components/features/CountriesTable/CountryRow/CountryRow';
+import CountryRow from '@/components/features/CountriesPage/CountryRow/CountryRow';
 import PageDescription from '@/components/UI/PageDescription/PageDescription';
 import { motion } from 'motion/react';
 import { SPRING_INDICATOR } from '@/animations';
@@ -86,19 +86,22 @@ export default function CountriesTable({
 
         <tbody id="countries-table-body">
           {displayedCountries.length === 0 ? (
-              <tr id="countries-table-empty">
-                <td colSpan={COUNTRIES_TABLE_COLUMN_COUNT} className={styles.noCountriesMessage}>
-                  <PageDescription>
-                    No countries found{' '}
-                    {selectedLetter && ` starting with "${selectedLetter}"`}.
-                  </PageDescription>
-                </td>
-              </tr>
-            ) : (
-              displayedCountries.map((country, i) => (
-                <CountryRow key={country.name} country={country} index={i} />
-              ))
-            )}
+            <tr id="countries-table-empty">
+              <td
+                colSpan={COUNTRIES_TABLE_COLUMN_COUNT}
+                className={styles.noCountriesMessage}
+              >
+                <PageDescription>
+                  No countries found{' '}
+                  {selectedLetter && ` starting with "${selectedLetter}"`}.
+                </PageDescription>
+              </td>
+            </tr>
+          ) : (
+            displayedCountries.map((country, i) => (
+              <CountryRow key={country.name} country={country} index={i} />
+            ))
+          )}
         </tbody>
       </table>
     </div>

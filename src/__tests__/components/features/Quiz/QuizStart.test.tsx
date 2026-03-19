@@ -1,28 +1,28 @@
 import { describe, it, expect, vi } from 'vitest';
 import { render, screen, fireEvent } from '@testing-library/react';
-import GameStart from '@/components/features/Game/GameStart/GameStart';
-import { GameProvider, useGame } from '@/context/GameContext';
+import QuizStart from '@/components/features/Quiz/QuizStart/QuizStart';
+import { QuizProvider, useQuiz } from '@/context/QuizContext';
 import { ReactNode, useEffect } from 'react';
 
 vi.mock('motion/react', () => import('@/__tests__/__mocks__/motionMock'));
 
 const wrapper = ({ children }: { children: ReactNode }) => (
-  <GameProvider>{children}</GameProvider>
+  <QuizProvider>{children}</QuizProvider>
 );
 
-describe('GameStart', () => {
+describe('QuizStart', () => {
   it('renders the quiz title', () => {
-    render(<GameStart />, { wrapper });
+    render(<QuizStart />, { wrapper });
     expect(screen.getByText(/Countries Quiz/)).toBeInTheDocument();
   });
 
   it('renders the description', () => {
-    render(<GameStart />, { wrapper });
+    render(<QuizStart />, { wrapper });
     expect(screen.getByText(/Choose a region/i)).toBeInTheDocument();
   });
 
   it('renders the Start button', () => {
-    render(<GameStart />, { wrapper });
+    render(<QuizStart />, { wrapper });
     expect(screen.getByRole('button', { name: 'Start countries quiz' })).toBeInTheDocument();
   });
 
@@ -30,16 +30,16 @@ describe('GameStart', () => {
     let capturedPhase = '';
 
     const PhaseCapture = () => {
-      const { phase } = useGame();
+      const { phase } = useQuiz();
       useEffect(() => { capturedPhase = phase; }, [phase]);
       return null;
     };
 
     render(
-      <GameProvider>
-        <GameStart />
+      <QuizProvider>
+        <QuizStart />
         <PhaseCapture />
-      </GameProvider>
+      </QuizProvider>
     );
 
     fireEvent.click(screen.getByRole('button', { name: 'Start countries quiz' }));

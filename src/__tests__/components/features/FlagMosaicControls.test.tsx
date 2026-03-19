@@ -1,6 +1,6 @@
 import { describe, it, expect, vi } from 'vitest';
 import { render, screen, fireEvent } from '@testing-library/react';
-import FlagMosaicControls from '@/components/features/FlagMosaic/FlagMosaicControls/FlagMosaicControls';
+import FlagMosaicControls from '@/components/features/HomePage/FlagMosaicControls/FlagMosaicControls';
 
 vi.mock('motion/react', () => import('@/__tests__/__mocks__/motionMock'));
 
@@ -37,7 +37,9 @@ describe('FlagMosaicControls', () => {
 
   it('calls setSortOrder when sort button is clicked', () => {
     const setSortOrder = vi.fn();
-    render(<FlagMosaicControls {...defaultProps} setSortOrder={setSortOrder} />);
+    render(
+      <FlagMosaicControls {...defaultProps} setSortOrder={setSortOrder} />
+    );
     fireEvent.click(screen.getByRole('button'));
     expect(setSortOrder).toHaveBeenCalledTimes(1);
   });
@@ -50,14 +52,23 @@ describe('FlagMosaicControls', () => {
 
   it('calls setSearchTerm when typing in the search box', () => {
     const setSearchTerm = vi.fn();
-    render(<FlagMosaicControls {...defaultProps} setSearchTerm={setSearchTerm} />);
-    fireEvent.change(screen.getByRole('searchbox'), { target: { value: 'france' } });
+    render(
+      <FlagMosaicControls {...defaultProps} setSearchTerm={setSearchTerm} />
+    );
+    fireEvent.change(screen.getByRole('searchbox'), {
+      target: { value: 'france' },
+    });
     expect(setSearchTerm).toHaveBeenCalledWith('france');
   });
 
   it('calls setSelectedContinent when a continent is chosen from dropdown', () => {
     const setSelectedContinent = vi.fn();
-    render(<FlagMosaicControls {...defaultProps} setSelectedContinent={setSelectedContinent} />);
+    render(
+      <FlagMosaicControls
+        {...defaultProps}
+        setSelectedContinent={setSelectedContinent}
+      />
+    );
     fireEvent.click(screen.getByRole('combobox').querySelector('div')!);
     fireEvent.click(screen.getByText('Europe'));
     expect(setSelectedContinent).toHaveBeenCalledWith('Europe');

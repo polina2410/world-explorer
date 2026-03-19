@@ -1,6 +1,6 @@
 export const APP_ROUTES = {
   home: '/',
-  game: '/game',
+  quiz: '/quiz',
   countries: '/countries',
 } as const;
 

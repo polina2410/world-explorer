@@ -1,33 +1,33 @@
 'use client';
 
 import Button from '@/components/UI/Button/Button';
-import styles from './GameSetup.module.css';
+import styles from './QuizSetup.module.css';
 import SecondaryTitle from '@/components/UI/SecondaryTitle/SecondaryTitle';
 import { motion } from 'motion/react';
 import { containerVariants, fadeUpVariants } from '@/animations';
-import { useGame } from '@/context/GameContext';
+import { useQuiz } from '@/context/QuizContext';
 
-type GameSetupProps = {
+type QuizSetupProps = {
   continents: string[];
 };
 
 export const QUESTION_OPTIONS = [5, 10, 20];
 
-export default function GameSetup({ continents }: GameSetupProps) {
-  const { selectedContinent, setSelectedContinent, questionCount, setQuestionCount, setPhase } = useGame();
+export default function QuizSetup({ continents }: QuizSetupProps) {
+  const { selectedContinent, setSelectedContinent, questionCount, setQuestionCount, setPhase } = useQuiz();
   const isReadyToStart = selectedContinent !== null && questionCount !== null;
 
   return (
     <motion.div
       className="section container flex-center"
-      id="game-setup"
+      id="quiz-setup"
       variants={containerVariants}
       initial="hidden"
       animate="visible"
     >
       <motion.div
         className={`${styles.menuCard} stack`}
-        id="game-setup-card"
+        id="quiz-setup-card"
         variants={fadeUpVariants}
       >
         <motion.div

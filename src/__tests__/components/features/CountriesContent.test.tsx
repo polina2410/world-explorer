@@ -1,6 +1,6 @@
 import { describe, it, expect, vi } from 'vitest';
 import { render, screen, fireEvent } from '@testing-library/react';
-import CountriesContent from '@/components/features/CountriesContent/CountriesContent';
+import CountriesContent from '@/components/features/CountriesPage/CountriesContent/CountriesContent';
 import type { Country } from '@/utils/generateQuestions';
 
 vi.mock('motion/react', () => import('@/__tests__/__mocks__/motionMock'));
@@ -8,7 +8,12 @@ vi.mock('motion/react', () => import('@/__tests__/__mocks__/motionMock'));
 const countries: Country[] = [
   { name: 'France', capital: 'Paris', flag: 'fr.svg', continents: ['Europe'] },
   { name: 'Japan', capital: 'Tokyo', flag: 'jp.svg', continents: ['Asia'] },
-  { name: 'Germany', capital: 'Berlin', flag: 'de.svg', continents: ['Europe'] },
+  {
+    name: 'Germany',
+    capital: 'Berlin',
+    flag: 'de.svg',
+    continents: ['Europe'],
+  },
 ];
 
 describe('CountriesContent', () => {
@@ -20,7 +25,9 @@ describe('CountriesContent', () => {
         setSelectedLetter={vi.fn()}
       />
     );
-    expect(screen.getByText(/Alphabetical list of countries/i)).toBeInTheDocument();
+    expect(
+      screen.getByText(/Alphabetical list of countries/i)
+    ).toBeInTheDocument();
   });
 
   it('renders the alphabet filter', () => {

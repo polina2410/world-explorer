@@ -2,7 +2,7 @@
 
 import { useRef } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import FlagMosaicCard from '@/components/features/FlagMosaic/FlagMosaicCard/FlagMosaicCard';
+import FlagMosaicCard from '@/components/features/HomePage/FlagMosaicCard/FlagMosaicCard';
 import styles from './FlagMosaicGrid.module.css';
 import { Country } from '@/utils/generateQuestions';
 import { gridVariants } from '@/animations';
@@ -17,7 +17,12 @@ export default function FlagMosaicGrid({ countries }: Props) {
   const { close, state } = useFlagMosaic();
   const gridRef = useRef<HTMLDivElement>(null);
 
-  useClickOutside(() => { if (state.flipped) close(); }, { ref: gridRef, escape: true });
+  useClickOutside(
+    () => {
+      if (state.flipped) close();
+    },
+    { ref: gridRef, escape: true }
+  );
 
   return (
     <motion.div
