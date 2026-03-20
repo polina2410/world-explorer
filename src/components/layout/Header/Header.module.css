@@ -2,7 +2,7 @@
     position: sticky;
     top: 0;
     z-index: var(--z-sticky);
-    background-color: color-mix(in srgb, var(--color-surface) 85%, transparent);
+    background-color: color-mix(in srgb, var(--color-surface) 95%, transparent);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--color-border);
@@ -35,7 +35,7 @@
     width: 100%;
     background-color: var(--color-accent);
     border-radius: var(--radius-sm);
-    transition: all var(--transition-medium);
+    transition: background-color var(--transition-fast);
 }
 
 .nav {

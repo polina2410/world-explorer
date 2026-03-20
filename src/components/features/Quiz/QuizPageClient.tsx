@@ -21,8 +21,9 @@ export default function QuizPageClient() {
 
   const [showExitModal, setShowExitModal] = useState(false);
   const [pendingNav, setPendingNav] = useState<(() => void) | null>(null);
+  const [quizFinished, setQuizFinished] = useState(false);
 
-  useNavigationGuard(phase === 'quiz', (proceed) => {
+  useNavigationGuard(phase === 'quiz' && !quizFinished, (proceed) => {
     setPendingNav(() => proceed);
     setShowExitModal(true);
   });
@@ -86,7 +87,9 @@ export default function QuizPageClient() {
                   <QuizPanel
                     continent={selectedContinent}
                     questionCount={questionCount}
+                    onFinish={() => setQuizFinished(true)}
                     onRestart={() => {
+                      setQuizFinished(false);
                       setPhase('setup');
                       setSelectedContinent(null);
                       setQuestionCount(null);

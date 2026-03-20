@@ -1,7 +1,7 @@
 'use client';
 
 import { useCountries } from '@/context/CountriesContext';
-import { useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
 import { generateQuestions, QuizQuestion } from '@/utils/generateQuestions';
 import Question from '@/components/features/Quiz/Question/Question';
 import Loading from '@/components/UI/Loading/Loading';
@@ -14,12 +14,14 @@ type QuizPanelProps = {
   continent: string;
   questionCount: number;
   onRestart: () => void;
+  onFinish?: () => void;
 };
 
 export default function QuizPanel({
   continent,
   questionCount,
   onRestart,
+  onFinish,
 }: QuizPanelProps) {
   const { countries } = useCountries();
   const questions: QuizQuestion[] = useMemo(() => {
@@ -28,6 +30,10 @@ export default function QuizPanel({
   }, [countries, continent, questionCount]);
 
   const quiz = useQuiz(questions);
+
+  useEffect(() => {
+    if (quiz.finished) onFinish?.();
+  }, [onFinish, quiz.finished]);
 
   if (!countries || questions.length === 0)
     return <Loading aria-label="Loading quiz questions" />;
