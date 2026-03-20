@@ -2,9 +2,6 @@
     cursor: pointer;
 }
 
-.countryRow td {
-    transition: background-color var(--transition-fast);
-}
 
 .countryIndex {
     text-align: left;

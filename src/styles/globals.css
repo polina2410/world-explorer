@@ -95,6 +95,10 @@
     box-sizing: border-box;
 }
 
+* {
+    transition: background-color var(--transition-fast), color var(--transition-fast);
+}
+
 html,
 body {
     margin: 0;
@@ -117,6 +121,9 @@ body {
     font-size: var(--fs-md);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
 button,
@@ -193,6 +200,10 @@ a.active {
     max-width: 1200px;
     margin-inline: auto;
     width: 100%;
+}
+
+#app-main {
+    flex: 1;
 }
 
 .section {
