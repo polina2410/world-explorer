@@ -33,6 +33,24 @@
     color: var(--color-accent);
 }
 
+.feedbackBtn {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    color: var(--color-text-secondary);
+    font-size: var(--fs-base);
+    font-family: var(--font-secondary), serif;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    transition: color var(--transition-fast);
+}
+
+.feedbackBtn:hover {
+    color: var(--color-accent);
+}
+
 @media (max-width: 768px) {
     .inner {
         flex-direction: column;

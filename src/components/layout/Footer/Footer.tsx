@@ -1,4 +1,8 @@
+'use client';
+
+import { useState } from 'react';
 import styles from './Footer.module.css';
+import FeedbackModal from '@/components/UI/FeedbackModal/FeedbackModal';
 
 const LINKS = [
   {
@@ -49,6 +53,8 @@ const LINKS = [
 ];
 
 export default function Footer() {
+  const [feedbackOpen, setFeedbackOpen] = useState(false);
+
   return (
     <footer className={styles.footer}>
       <div className={`container flex-between ${styles.inner}`}>
@@ -73,8 +79,25 @@ export default function Footer() {
               <span>{label}</span>
             </a>
           ))}
+          <button
+            className={styles.feedbackBtn}
+            onClick={() => setFeedbackOpen(true)}
+            aria-label="Send feedback"
+          >
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              aria-hidden="true"
+            >
+              <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-2 2V4h16v12z" />
+            </svg>
+            <span>Feedback</span>
+          </button>
         </nav>
       </div>
+      <FeedbackModal isOpen={feedbackOpen} onClose={() => setFeedbackOpen(false)} />
     </footer>
   );
 }
