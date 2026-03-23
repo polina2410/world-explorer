@@ -1,6 +1,10 @@
 # 🌍 Country Explorer
 
-[![Live Demo](https://img.shields.io/badge/demo-live-brightgreen)](https://world-explorer-phi.vercel.app/)
+<div>
+
+[![Live Demo](https://img.shields.io/badge/🚀%20Live%20Demo-world--explorer--phi.vercel.app-brightgreen?style=for-the-badge)](https://world-explorer-phi.vercel.app/)
+</div>
+
 [![Next.js](https://img.shields.io/badge/Next.js-16-black)](https://nextjs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5-blue)](https://www.typescriptlang.org/)
 [![Motion](https://img.shields.io/badge/Motion-12-purple)](https://motion.dev/)
@@ -47,6 +51,14 @@ This project was built as a frontend learning exercise to practice:
 - **Celebration effects**: Confetti animation on quiz completion
 - **Navigation guard**: Prevents accidental navigation away mid-quiz
 
+### 💬 Feedback Form
+
+- Accessible modal triggered from the footer, available on every page
+- Fields: optional name, required email, required message
+- Submissions saved to **Supabase** via a Next.js Server Action
+- Inline validation with error and success states
+- Modal stays open if email or message has content (prevents accidental dismissal)
+
 ### 🌙 Theming
 
 - Light and dark mode toggle, persisted across sessions
@@ -73,6 +85,7 @@ This project was built as a frontend learning exercise to practice:
 - **Validation**: [Zod](https://zod.dev/)
 - **Testing**: [Vitest](https://vitest.dev/) + [Testing Library](https://testing-library.com/)
 - **Styling**: CSS Modules
+- **Database**: [Supabase](https://supabase.com/)
 - **Confetti**: [canvas-confetti](https://github.com/catdad/canvas-confetti)
 - **Fonts**: [Fontshare](https://www.fontshare.com/) — *Synonym (400), Amulya (700)*
 
@@ -91,13 +104,37 @@ cd world-explorer
 npm install
 ```
 
-3. **Run the development server**
+3. **Set up environment variables**
+
+Create a `.env.local` file in the project root:
+
+```env
+SUPABASE_URL=your-project-url
+SUPABASE_SERVICE_ROLE_KEY=your-service-role-key
+```
+
+Get these values from your Supabase project under **Settings → API**.
+
+Then create the `feedback` table in your Supabase SQL editor:
+
+```sql
+create table feedback
+(
+    id         uuid primary key default gen_random_uuid(),
+    name       text,
+    email      text not null,
+    message    text not null,
+    created_at timestamptz      default now()
+);
+```
+
+4. **Run the development server**
 
 ```bash
 npm run dev
 ```
 
-4. **Open the app**
+5. **Open the app**
 
 Visit **http://localhost:3000** in your browser.
 
