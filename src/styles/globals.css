@@ -95,14 +95,11 @@
     box-sizing: border-box;
 }
 
-* {
-    transition: background-color var(--transition-fast), color var(--transition-fast);
-}
-
 html,
 body {
     margin: 0;
     padding: 0;
+    transition: background-color var(--transition-fast), color var(--transition-fast);
 }
 
 html {

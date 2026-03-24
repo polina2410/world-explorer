@@ -11,7 +11,7 @@ import { EMPTY_COUNTRIES_MESSAGE } from '@/constants';
 import { fadeUpVariants, pageVariants } from '@/animations';
 
 export default function CountriesPageClient() {
-  const { countries, loading, error } = useCountries();
+  const { countries, error } = useCountries();
   const [selectedLetter, setSelectedLetter] = useState<string | null>(null);
 
   const filteredCountries =
@@ -29,7 +29,6 @@ export default function CountriesPageClient() {
     <section id="countries-page">
       <DataLoader
         data={countries}
-        loading={loading}
         error={error}
         emptyMessage={EMPTY_COUNTRIES_MESSAGE}
       >

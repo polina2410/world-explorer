@@ -27,12 +27,16 @@ export default function FeedbackModal({ isOpen, onClose }: FeedbackModalProps) {
     setError(null);
     setFormState('loading');
 
-    const result = await submitFeedback({ name, email, message });
-
-    if (result.success) {
-      setFormState('submitted');
-    } else {
-      setError(result.error);
+    try {
+      const result = await submitFeedback({ name, email, message });
+      if (result.success) {
+        setFormState('submitted');
+      } else {
+        setError(result.error);
+        setFormState('idle');
+      }
+    } catch {
+      setError('Something went wrong. Please try again.');
       setFormState('idle');
     }
   }

@@ -18,14 +18,17 @@ describe('CountriesContext', () => {
     expect(result.current.countries).toEqual(mockCountries);
   });
 
-  it('loading is always false', () => {
-    const { result } = renderHook(() => useCountries(), { wrapper });
-    expect(result.current.loading).toBe(false);
-  });
-
-  it('error is always null', () => {
+  it('error is null by default', () => {
     const { result } = renderHook(() => useCountries(), { wrapper });
     expect(result.current.error).toBeNull();
+  });
+
+  it('exposes initialError via context', () => {
+    const errorWrapper = ({ children }: { children: ReactNode }) => (
+      <CountriesProvider initialCountries={[]} initialError="fetch failed">{children}</CountriesProvider>
+    );
+    const { result } = renderHook(() => useCountries(), { wrapper: errorWrapper });
+    expect(result.current.error).toBe('fetch failed');
   });
 
   it('provides empty array when no countries given', () => {

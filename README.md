@@ -176,6 +176,3 @@ This project is open source and available under the **MIT License**.
 ## 📧 Contact
 
 Polina – [polinasmekhova@gmail.com](mailto:polinasmekhova@gmail.com)
-
-Project Link:
-https://github.com/polina2410/world-explorer

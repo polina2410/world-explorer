@@ -12,7 +12,7 @@ const countries: CountryResponse[] = [
 ];
 
 vi.mock('@/context/CountriesContext', () => ({
-  useCountries: () => ({ countries, loading: false, error: null }),
+  useCountries: () => ({ countries, error: null }),
 }));
 
 describe('CountriesPageClient', () => {
