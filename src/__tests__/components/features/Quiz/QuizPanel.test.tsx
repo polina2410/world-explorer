@@ -22,7 +22,7 @@ vi.mock('@/context/CountriesContext', () => ({
 }));
 
 describe('QuizPanel', () => {
-  beforeEach(() => vi.useFakeTimers());
+  beforeEach(() => vi.useFakeTimers({ toFake: ['setTimeout', 'clearTimeout'] }));
   afterEach(() => vi.useRealTimers());
 
   it('shows loading when countries is null', () => {
