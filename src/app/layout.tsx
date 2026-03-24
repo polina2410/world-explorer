@@ -15,7 +15,8 @@ type RootLayoutProps = {
 
 const APP_URL = process.env.NEXT_PUBLIC_APP_URL ?? 'http://localhost:3000';
 const TITLE = 'Countries Explorer';
-const DESCRIPTION = 'Explore countries around the world and test your geography knowledge with interactive quizzes.';
+const DESCRIPTION =
+  'Explore countries around the world and test your geography knowledge with interactive quizzes.';
 
 export const metadata: Metadata = {
   metadataBase: new URL(APP_URL),
@@ -39,7 +40,14 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: TITLE,
     description: DESCRIPTION,
-    images: ['/og-image.png'],
+    images: [
+      {
+        url: `${APP_URL}/og-image.png`,
+        width: 1200,
+        height: 630,
+        alt: TITLE,
+      },
+    ],
   },
 };
 
@@ -72,7 +80,10 @@ export default async function RootLayout({ children }: RootLayoutProps) {
           <NavigationGuardProvider>
             <QuizProvider>
               <Header />
-              <CountriesProvider initialCountries={countries} initialError={fetchError}>
+              <CountriesProvider
+                initialCountries={countries}
+                initialError={fetchError}
+              >
                 <main id="app-main" className="container">
                   {children}
                 </main>
