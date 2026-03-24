@@ -28,7 +28,7 @@ const wrapper = ({ children }: { children: ReactNode }) => (
 );
 
 describe('FlagMosaicGrid', () => {
-  beforeEach(() => vi.useFakeTimers());
+  beforeEach(() => vi.useFakeTimers({ toFake: ['setTimeout', 'clearTimeout'] }));
   afterEach(() => vi.useRealTimers());
 
   it('renders a card for each country', () => {

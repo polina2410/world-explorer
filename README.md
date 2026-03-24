@@ -56,6 +56,7 @@ This project was built as a frontend learning exercise to practice:
 - Accessible modal triggered from the footer, available on every page
 - Fields: optional name, required email, required message
 - Submissions saved to **Supabase** via a Next.js Server Action
+- **Rate limiting** via Upstash Redis — max 2 submissions per IP per minute
 - Inline validation with error and success states
 - Modal stays open if email or message has content (prevents accidental dismissal)
 
@@ -86,6 +87,7 @@ This project was built as a frontend learning exercise to practice:
 - **Testing**: [Vitest](https://vitest.dev/) + [Testing Library](https://testing-library.com/)
 - **Styling**: CSS Modules
 - **Database**: [Supabase](https://supabase.com/)
+- **Rate limiting**: [Upstash Redis](https://upstash.com/)
 - **Confetti**: [canvas-confetti](https://github.com/catdad/canvas-confetti)
 - **Fonts**: [Fontshare](https://www.fontshare.com/) — *Synonym (400), Amulya (700)*
 
@@ -111,9 +113,16 @@ Create a `.env.local` file in the project root:
 ```env
 SUPABASE_URL=your-project-url
 SUPABASE_SERVICE_ROLE_KEY=your-service-role-key
+
+UPSTASH_REDIS_REST_URL=your-upstash-redis-url
+UPSTASH_REDIS_REST_TOKEN=your-upstash-redis-token
+
+NEXT_PUBLIC_APP_URL=https://your-domain.com
 ```
 
-Get these values from your Supabase project under **Settings → API**.
+Get Supabase values from your project under **Settings → API**.
+Get Upstash values from your [Upstash Console](https://console.upstash.com/) after creating a Redis database — find them under **REST API**.
+Set `NEXT_PUBLIC_APP_URL` to your production domain for correct Open Graph URLs (defaults to `http://localhost:3000` in development).
 
 Then create the `feedback` table in your Supabase SQL editor:
 
@@ -137,6 +146,12 @@ npm run dev
 5. **Open the app**
 
 Visit **http://localhost:3000** in your browser.
+
+---
+
+## 🖼️ Open Graph Image
+
+To enable rich link previews on social media, add an `og-image.png` (1200×630px) to the `/public` directory. Until then the OG image tag will point to a 404.
 
 ---
 
@@ -176,6 +191,3 @@ This project is open source and available under the **MIT License**.
 ## 📧 Contact
 
 Polina – [polinasmekhova@gmail.com](mailto:polinasmekhova@gmail.com)
-
-Project Link:
-https://github.com/polina2410/world-explorer

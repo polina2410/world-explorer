@@ -24,7 +24,11 @@ function subscribe(callback: () => void) {
 }
 
 function getSnapshot(): Theme {
-  return (localStorage.getItem(THEME_KEY) as Theme) ?? 'light';
+  try {
+    return (localStorage.getItem(THEME_KEY) as Theme) ?? 'light';
+  } catch {
+    return 'light';
+  }
 }
 
 function getServerSnapshot(): Theme {
@@ -38,7 +42,11 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
 
   const toggleTheme = useCallback(() => {
     const next = theme === 'light' ? 'dark' : 'light';
-    localStorage.setItem(THEME_KEY, next);
+    try {
+      localStorage.setItem(THEME_KEY, next);
+    } catch {
+      // storage unavailable — theme still switches for this session
+    }
     document.documentElement.setAttribute('data-theme', next);
     window.dispatchEvent(new Event(THEME_EVENT));
   }, [theme]);

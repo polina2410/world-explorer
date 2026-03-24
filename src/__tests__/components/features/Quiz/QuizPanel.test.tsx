@@ -22,29 +22,29 @@ vi.mock('@/context/CountriesContext', () => ({
 }));
 
 describe('QuizPanel', () => {
-  beforeEach(() => vi.useFakeTimers());
+  beforeEach(() => vi.useFakeTimers({ toFake: ['setTimeout', 'clearTimeout'] }));
   afterEach(() => vi.useRealTimers());
 
   it('shows loading when countries is null', () => {
-    mockUseCountries.mockReturnValue({ countries: null, loading: true, error: null });
+    mockUseCountries.mockReturnValue({ countries: null, error: null });
     render(<QuizPanel continent="All" questionCount={3} onRestart={vi.fn()} />);
     expect(screen.getByRole('status')).toBeInTheDocument();
   });
 
   it('renders a question when countries are available', () => {
-    mockUseCountries.mockReturnValue({ countries: mockCountries, loading: false, error: null });
+    mockUseCountries.mockReturnValue({ countries: mockCountries, error: null });
     render(<QuizPanel continent="All" questionCount={3} onRestart={vi.fn()} />);
     expect(screen.getByText(/What is the capital of/i)).toBeInTheDocument();
   });
 
   it('shows progress badge with total questions', () => {
-    mockUseCountries.mockReturnValue({ countries: mockCountries, loading: false, error: null });
+    mockUseCountries.mockReturnValue({ countries: mockCountries, error: null });
     render(<QuizPanel continent="All" questionCount={3} onRestart={vi.fn()} />);
     expect(screen.getByText('3')).toBeInTheDocument();
   });
 
   it('shows Result after all questions are answered', () => {
-    mockUseCountries.mockReturnValue({ countries: mockCountries, loading: false, error: null });
+    mockUseCountries.mockReturnValue({ countries: mockCountries, error: null });
     render(<QuizPanel continent="All" questionCount={1} onRestart={vi.fn()} />);
 
     const options = screen.getAllByRole('radio');
@@ -56,7 +56,7 @@ describe('QuizPanel', () => {
 
   it('calls onRestart when restarting from result screen', () => {
     const onRestart = vi.fn();
-    mockUseCountries.mockReturnValue({ countries: mockCountries, loading: false, error: null });
+    mockUseCountries.mockReturnValue({ countries: mockCountries, error: null });
     render(<QuizPanel continent="All" questionCount={1} onRestart={onRestart} />);
 
     const options = screen.getAllByRole('radio');

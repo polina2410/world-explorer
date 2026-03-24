@@ -1,6 +1,8 @@
 'use server';
 
+import { headers } from 'next/headers';
 import { supabase } from '@/lib/supabase';
+import { checkRateLimit } from '@/lib/rateLimit';
 
 type FeedbackInput = {
   name: string;
@@ -10,7 +12,23 @@ type FeedbackInput = {
 
 type ActionResult = { success: true } | { success: false; error: string };
 
-export async function submitFeedback(input: FeedbackInput): Promise<ActionResult> {
+export async function submitFeedback(
+  input: FeedbackInput
+): Promise<ActionResult> {
+  const headersList = await headers();
+  const ip =
+    headersList.get('x-forwarded-for')?.split(',')[0].trim() ??
+    headersList.get('x-real-ip') ??
+    'unknown';
+
+  const { allowed, retryAfterSeconds } = await checkRateLimit(ip);
+  if (!allowed) {
+    return {
+      success: false,
+      error: `Too many requests. Please try again in ${retryAfterSeconds}s.`,
+    };
+  }
+
   const { name, email, message } = input;
 
   if (!email.trim()) {

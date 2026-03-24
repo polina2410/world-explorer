@@ -58,7 +58,7 @@ export default function QuizPanel({
   }
 
   return (
-    <motion.main
+    <motion.div
       className="container"
       id="quiz-panel"
       role="region"
@@ -80,6 +80,6 @@ export default function QuizPanel({
           onRestart={onRestart}
         />
       </motion.div>
-    </motion.main>
+    </motion.div>
   );
 }

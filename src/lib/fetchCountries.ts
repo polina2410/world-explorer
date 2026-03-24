@@ -4,14 +4,24 @@ import { CountryResponse } from '@/types/country';
 const SIX_MONTHS_IN_SECONDS = 60 * 60 * 24 * 180;
 
 export async function fetchCountries(): Promise<CountryResponse[]> {
-  const res = await fetch(
-    'https://restcountries.com/v3.1/all?fields=name,capital,flags,population,continents,maps,independent',
-    { headers: { Accept: 'application/json' }, next: { revalidate: SIX_MONTHS_IN_SECONDS } },
-  );
+  let res: Response;
+  try {
+    res = await fetch(
+      'https://restcountries.com/v3.1/all?fields=name,capital,flags,population,continents,maps,independent',
+      { headers: { Accept: 'application/json' }, next: { revalidate: SIX_MONTHS_IN_SECONDS } },
+    );
+  } catch (e) {
+    throw new Error(`REST Countries network error: ${e}`);
+  }
 
   if (!res.ok) throw new Error(`REST Countries failed: ${res.status}`);
 
-  const raw = CountriesSchema.parse(await res.json());
+  let raw: ReturnType<typeof CountriesSchema.parse>;
+  try {
+    raw = CountriesSchema.parse(await res.json());
+  } catch (e) {
+    throw new Error(`REST Countries response validation failed: ${e}`);
+  }
 
   const countries = raw
     .filter((c) => c.independent === true)
@@ -24,7 +34,11 @@ export async function fetchCountries(): Promise<CountryResponse[]> {
       mapUrl: c.maps?.googleMaps ?? '',
     }));
 
-  CountriesResponseSchema.parse(countries);
+  try {
+    CountriesResponseSchema.parse(countries);
+  } catch (e) {
+    throw new Error(`Mapped countries failed validation: ${e}`);
+  }
 
   return countries;
 }

@@ -45,20 +45,9 @@ import { useCountries } from '@/context/CountriesContext';
 const mockUseCountries = useCountries as ReturnType<typeof vi.fn>;
 
 describe('FlagMosaic', () => {
-  it('shows loading state', () => {
-    mockUseCountries.mockReturnValue({
-      countries: null,
-      loading: true,
-      error: null,
-    });
-    render(<FlagMosaic />);
-    expect(screen.getByRole('status')).toBeInTheDocument();
-  });
-
   it('shows error message', () => {
     mockUseCountries.mockReturnValue({
       countries: null,
-      loading: false,
       error: 'Failed',
     });
     render(<FlagMosaic />);
@@ -68,7 +57,6 @@ describe('FlagMosaic', () => {
   it('renders flag cards when countries load', () => {
     mockUseCountries.mockReturnValue({
       countries: mockCountries,
-      loading: false,
       error: null,
     });
     render(<FlagMosaic />);
@@ -79,7 +67,6 @@ describe('FlagMosaic', () => {
   it('filters countries by search term', () => {
     mockUseCountries.mockReturnValue({
       countries: mockCountries,
-      loading: false,
       error: null,
     });
     render(<FlagMosaic />);
@@ -93,7 +80,6 @@ describe('FlagMosaic', () => {
   it('shows no-match message when search finds nothing', () => {
     mockUseCountries.mockReturnValue({
       countries: mockCountries,
-      loading: false,
       error: null,
     });
     render(<FlagMosaic />);
@@ -108,7 +94,6 @@ describe('FlagMosaic', () => {
   it('sorts A–Z by default', () => {
     mockUseCountries.mockReturnValue({
       countries: mockCountries,
-      loading: false,
       error: null,
     });
     render(<FlagMosaic />);
@@ -122,7 +107,6 @@ describe('FlagMosaic', () => {
   it('sorts Z–A after clicking sort button', () => {
     mockUseCountries.mockReturnValue({
       countries: mockCountries,
-      loading: false,
       error: null,
     });
     render(<FlagMosaic />);

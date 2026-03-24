@@ -16,7 +16,7 @@ import { useNavigationGuard } from '@/hooks/useNavigationGuard';
 
 export default function QuizPageClient() {
   const { phase, setPhase, selectedContinent, setSelectedContinent, questionCount, setQuestionCount } = useQuiz();
-  const { countries, loading, error } = useCountries();
+  const { countries, error } = useCountries();
   const continents = getContinents(countries);
 
   const [showExitModal, setShowExitModal] = useState(false);
@@ -43,7 +43,6 @@ export default function QuizPageClient() {
     <>
       <DataLoader
         data={countries}
-        loading={loading}
         error={error}
         emptyMessage={EMPTY_COUNTRIES_MESSAGE}
       >

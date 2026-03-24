@@ -5,27 +5,25 @@ import { CountryResponse } from '@/types/country';
 
 interface CountriesContextType {
   countries: CountryResponse[];
-  loading: false;
-  error: null;
+  error: string | null;
 }
 
 const CountriesContext = createContext<CountriesContextType>({
   countries: [],
-  loading: false,
   error: null,
 });
 
 export function CountriesProvider({
   children,
   initialCountries,
+  initialError = null,
 }: {
   children: ReactNode;
   initialCountries: CountryResponse[];
+  initialError?: string | null;
 }) {
   return (
-    <CountriesContext.Provider
-      value={{ countries: initialCountries, loading: false, error: null }}
-    >
+    <CountriesContext.Provider value={{ countries: initialCountries, error: initialError }}>
       {children}
     </CountriesContext.Provider>
   );

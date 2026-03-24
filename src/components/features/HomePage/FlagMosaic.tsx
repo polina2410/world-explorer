@@ -12,7 +12,7 @@ import { containerVariants, fadeUpVariants } from '@/animations';
 import PageDescription from '@/components/UI/PageDescription/PageDescription';
 
 export default function FlagMosaic() {
-  const { countries, loading, error } = useCountries();
+  const { countries, error } = useCountries();
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc');
   const [selectedContinent, setSelectedContinent] = useState<string>('All');
   const [searchTerm, setSearchTerm] = useState('');
@@ -54,7 +54,6 @@ export default function FlagMosaic() {
         <motion.div variants={fadeUpVariants}>
           <DataLoader
             data={countries}
-            loading={loading}
             error={error}
             emptyMessage="No countries available"
           >

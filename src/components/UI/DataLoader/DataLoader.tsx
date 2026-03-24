@@ -5,7 +5,7 @@ import React, { ReactNode } from 'react';
 
 type DataLoaderProps<T> = {
   data: T | null | undefined;
-  loading: boolean;
+  loading?: boolean;
   error: string | null;
   emptyMessage?: string;
   children: (data: T) => ReactNode;
@@ -13,7 +13,7 @@ type DataLoaderProps<T> = {
 
 export default function DataLoader<T>({
   data,
-  loading,
+  loading = false,
   error,
   emptyMessage = 'No data available',
   children,
