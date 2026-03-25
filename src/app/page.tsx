@@ -5,23 +5,17 @@ import { APP_URL } from '@/constants/routes';
 export async function generateMetadata({
   searchParams,
 }: {
-  searchParams: {
+  searchParams: Promise<{
     continent?: string;
     search?: string;
     sort?: string;
-  };
+  }>;
 }): Promise<Metadata> {
-  const { continent, search, sort } = searchParams;
+  const { continent, search, sort } = await searchParams;
 
-  const titleParts: string[] = [];
-
-  if (continent) titleParts.push(continent);
-  if (search) titleParts.push(`"${search}"`);
-
-  const title =
-    titleParts.length > 0
-      ? `${titleParts.join(' • ')} | Countries Explorer`
-      : 'Countries Explorer';
+  const title = continent
+    ? `${continent} | Countries Explorer`
+    : 'Countries Explorer';
 
   const descriptionParts: string[] = [];
 
@@ -51,9 +45,7 @@ export async function generateMetadata({
       url,
       images: [
         {
-          url: continent
-            ? `${APP_URL}/api/og?continent=${encodeURIComponent(continent)}`
-            : `${APP_URL}/og-image-default.png`,
+          url: `${APP_URL}/og-image-default.png`,
           width: 1200,
           height: 630,
           alt: title,
@@ -66,9 +58,7 @@ export async function generateMetadata({
       description,
       images: [
         {
-          url: continent
-            ? `${APP_URL}/api/og?continent=${encodeURIComponent(continent)}`
-            : `${APP_URL}/og-image-default.png`,
+          url: `${APP_URL}/og-image-default.png`,
           alt: title,
         },
       ],
