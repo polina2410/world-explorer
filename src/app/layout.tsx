@@ -8,12 +8,11 @@ import { ThemeProvider } from '@/context/ThemeContext';
 import { NavigationGuardProvider } from '@/context/NavigationGuardContext';
 import { fetchCountries } from '@/lib/fetchCountries';
 import Footer from '@/components/layout/Footer/Footer';
+import { APP_URL } from '@/constants/routes';
 
 type RootLayoutProps = {
   children: ReactNode;
 };
-
-const APP_URL = process.env.NEXT_PUBLIC_APP_URL ?? 'http://localhost:3000';
 const TITLE = 'Countries Explorer';
 const DESCRIPTION =
   'Explore countries around the world and test your geography knowledge with interactive quizzes.';
@@ -34,12 +33,7 @@ export const metadata: Metadata = {
     title: TITLE,
     description: DESCRIPTION,
     url: APP_URL,
-    images: [{ url: '/og-image.png', width: 1200, height: 630, alt: TITLE }],
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: TITLE,
-    description: DESCRIPTION,
+    locale: 'en_US',
     images: [
       {
         url: `${APP_URL}/og-image.png`,
@@ -48,6 +42,19 @@ export const metadata: Metadata = {
         alt: TITLE,
       },
     ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: TITLE,
+    description: DESCRIPTION,
+    images: [`${APP_URL}/og-image.png`],
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
+  alternates: {
+    canonical: APP_URL,
   },
 };
 

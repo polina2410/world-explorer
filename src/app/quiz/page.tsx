@@ -3,10 +3,15 @@ import QuizPageClient from '@/components/features/Quiz/QuizPageClient';
 
 export const metadata: Metadata = {
   title: 'Quiz',
-  description: 'Test your world geography knowledge — guess capitals, countries, and more across different continents.',
+  description:
+    'Test your world geography knowledge — guess capitals, countries, and more across different continents.',
+  alternates: {
+    canonical: '/quiz',
+  },
   openGraph: {
-    title: 'Geography Quiz | Countries Explorer',
-    description: 'Test your world geography knowledge — guess capitals, countries, and more across different continents.',
+    title: 'Quiz | Countries Explorer',
+    description:
+      'Test your world geography knowledge — guess capitals, countries, and more across different continents.',
     url: '/quiz',
   },
 };
