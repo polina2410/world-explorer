@@ -1,5 +1,6 @@
 'use client';
 
+import { Suspense } from 'react';
 import FlagMosaic from '@/components/features/HomePage/FlagMosaic';
 import { motion } from 'motion/react';
 import { fadeUpVariants, pageVariants } from '@/animations';
@@ -24,7 +25,9 @@ export default function HomePageClient() {
         variants={fadeUpVariants}
         aria-labelledby="home-page-flag-mosaic"
       >
-        <FlagMosaic />
+        <Suspense>
+          <FlagMosaic />
+        </Suspense>
       </motion.section>
     </motion.div>
   );

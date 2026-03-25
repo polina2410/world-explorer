@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import QuizPageClient from '@/components/features/Quiz/QuizPageClient';
+import { APP_URL } from '@/constants/routes';
 
 export const metadata: Metadata = {
   title: 'Quiz',
@@ -13,6 +14,19 @@ export const metadata: Metadata = {
     description:
       'Test your world geography knowledge — guess capitals, countries, and more across different continents.',
     url: '/quiz',
+    images: [
+      {
+        url: `${APP_URL}/og/og-image-default.png`,
+        width: 1200,
+        height: 630,
+        alt: 'Countries Explorer',
+      },
+    ],
+  },
+  twitter: {
+    title: 'Quiz | Countries Explorer',
+    description:
+      'Test your world geography knowledge — guess capitals, countries, and more across different continents.',
   },
 };
 
