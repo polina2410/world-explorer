@@ -3,10 +3,15 @@ import CountriesPageClient from '@/components/features/CountriesPage/CountriesPa
 
 export const metadata: Metadata = {
   title: 'Countries',
-  description: 'Browse an alphabetical list of all independent countries with capitals, populations, and more.',
+  description:
+    'Browse an alphabetical list of all independent countries with capitals, populations, and more.',
+  alternates: {
+    canonical: '/countries',
+  },
   openGraph: {
     title: 'Countries | Countries Explorer',
-    description: 'Browse an alphabetical list of all independent countries with capitals, populations, and more.',
+    description:
+      'Browse an alphabetical list of all independent countries with capitals, populations, and more.',
     url: '/countries',
   },
 };
