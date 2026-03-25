@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     url: '/quiz',
     images: [
       {
-        url: `${APP_URL}/og-image.png`,
+        url: `${APP_URL}/og/og-image-default.png`,
         width: 1200,
         height: 630,
         alt: 'Countries Explorer',

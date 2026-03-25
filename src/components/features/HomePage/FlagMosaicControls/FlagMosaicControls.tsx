@@ -10,7 +10,7 @@ type Props = {
   searchTerm: string;
   setSearchTerm: (v: string) => void;
   sortOrder: 'asc' | 'desc';
-  setSortOrder: React.Dispatch<React.SetStateAction<'asc' | 'desc'>>;
+  toggleSortOrder: () => void;
   selectedContinent: string;
   setSelectedContinent: (v: string) => void;
   continents: string[];
@@ -20,7 +20,7 @@ export default function FlagMosaicControls({
   searchTerm,
   setSearchTerm,
   sortOrder,
-  setSortOrder,
+  toggleSortOrder,
   selectedContinent,
   setSelectedContinent,
   continents,
@@ -39,9 +39,7 @@ export default function FlagMosaicControls({
       <div className={styles.sortButton}>
         <Button
           id="flag-mosaic-sort"
-          onClick={() =>
-            setSortOrder((prev) => (prev === 'asc' ? 'desc' : 'asc'))
-          }
+          onClick={toggleSortOrder}
         >
           <span className={styles.sortValue}>
             <AnimatePresence mode="wait" initial={false}>

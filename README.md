@@ -93,7 +93,7 @@ npm run dev
 
 ## Open Graph Image
 
-To enable rich link previews on social media, add an `og-image.png` (1200×630px) to the `/public` directory.
+To enable rich link previews on social media, add an `og-image-default.png` (1200×630px) to the `/public` directory.
 
 ---
 

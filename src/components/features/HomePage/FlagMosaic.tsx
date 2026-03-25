@@ -1,7 +1,8 @@
 'use client';
 
 import { motion } from 'motion/react';
-import { useMemo, useState } from 'react';
+import { useMemo, useCallback } from 'react';
+import { useRouter, useSearchParams, usePathname } from 'next/navigation';
 import { useCountries } from '@/context/CountriesContext';
 import DataLoader from '@/components/UI/DataLoader/DataLoader';
 import { getContinents } from '@/utils/getContinents';
@@ -13,9 +14,42 @@ import PageDescription from '@/components/UI/PageDescription/PageDescription';
 
 export default function FlagMosaic() {
   const { countries, error } = useCountries();
-  const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc');
-  const [selectedContinent, setSelectedContinent] = useState<string>('All');
-  const [searchTerm, setSearchTerm] = useState('');
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+
+  const sortOrder = (searchParams.get('sort') as 'asc' | 'desc') ?? 'asc';
+  const selectedContinent = searchParams.get('continent') ?? 'All';
+  const searchTerm = searchParams.get('search') ?? '';
+
+  const updateParam = useCallback(
+    (key: string, value: string, defaultValue: string) => {
+      const params = new URLSearchParams(searchParams.toString());
+      if (value === defaultValue) {
+        params.delete(key);
+      } else {
+        params.set(key, value);
+      }
+      const query = params.toString();
+      router.replace(`${pathname}${query ? `?${query}` : ''}`);
+    },
+    [router, pathname, searchParams],
+  );
+
+  const toggleSortOrder = useCallback(
+    () => updateParam('sort', sortOrder === 'asc' ? 'desc' : 'asc', 'asc'),
+    [sortOrder, updateParam],
+  );
+
+  const setSelectedContinent = useCallback(
+    (v: string) => updateParam('continent', v, 'All'),
+    [updateParam],
+  );
+
+  const setSearchTerm = useCallback(
+    (v: string) => updateParam('search', v, ''),
+    [updateParam],
+  );
 
   const continents = getContinents(countries);
 
@@ -44,7 +78,7 @@ export default function FlagMosaic() {
             searchTerm={searchTerm}
             setSearchTerm={setSearchTerm}
             sortOrder={sortOrder}
-            setSortOrder={setSortOrder}
+            toggleSortOrder={toggleSortOrder}
             selectedContinent={selectedContinent}
             setSelectedContinent={setSelectedContinent}
             continents={continents}

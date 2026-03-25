@@ -8,7 +8,7 @@ const defaultProps = {
   searchTerm: '',
   setSearchTerm: vi.fn(),
   sortOrder: 'asc' as const,
-  setSortOrder: vi.fn(),
+  toggleSortOrder: vi.fn(),
   selectedContinent: 'All',
   setSelectedContinent: vi.fn(),
   continents: ['Europe', 'Asia', 'Africa'],
@@ -35,13 +35,13 @@ describe('FlagMosaicControls', () => {
     expect(screen.getByText('Z – A')).toBeInTheDocument();
   });
 
-  it('calls setSortOrder when sort button is clicked', () => {
-    const setSortOrder = vi.fn();
+  it('calls toggleSortOrder when sort button is clicked', () => {
+    const toggleSortOrder = vi.fn();
     render(
-      <FlagMosaicControls {...defaultProps} setSortOrder={setSortOrder} />
+      <FlagMosaicControls {...defaultProps} toggleSortOrder={toggleSortOrder} />
     );
     fireEvent.click(screen.getByRole('button'));
-    expect(setSortOrder).toHaveBeenCalledTimes(1);
+    expect(toggleSortOrder).toHaveBeenCalledTimes(1);
   });
 
   it('renders the continent dropdown with All option', () => {
