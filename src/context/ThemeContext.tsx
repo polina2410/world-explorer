@@ -45,7 +45,7 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     try {
       localStorage.setItem(THEME_KEY, next);
     } catch {
-      // storage unavailable — theme still switches for this session
+      // intentionally empty
     }
     document.documentElement.setAttribute('data-theme', next);
     window.dispatchEvent(new Event(THEME_EVENT));

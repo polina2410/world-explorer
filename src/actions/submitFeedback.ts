@@ -3,6 +3,7 @@
 import { headers } from 'next/headers';
 import { supabase } from '@/lib/supabase';
 import { checkRateLimit } from '@/lib/rateLimit';
+import { logger } from '@/lib/logger';
 
 type FeedbackInput = {
   name: string;
@@ -23,6 +24,7 @@ export async function submitFeedback(
 
   const { allowed, retryAfterSeconds } = await checkRateLimit(ip);
   if (!allowed) {
+    logger.warn('Feedback rate limit hit', { ip, retryAfterSeconds });
     return {
       success: false,
       error: `Too many requests. Please try again in ${retryAfterSeconds}s.`,
@@ -51,8 +53,10 @@ export async function submitFeedback(
   });
 
   if (error) {
+    logger.error('Supabase insert failed', { error: error.message, ip });
     return { success: false, error: error.message };
   }
 
+  logger.info('Feedback submitted', { ip });
   return { success: true };
 }

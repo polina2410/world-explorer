@@ -6,19 +6,19 @@
 [![TypeScript](https://img.shields.io/badge/TypeScript-5-blue)](https://www.typescriptlang.org/)
 [![Motion](https://img.shields.io/badge/Motion-12-purple)](https://motion.dev/)
 
-![App Demo](./gifs/demo.gif)
+![App Demo](./public/demo.gif)
 
 An interactive web application for exploring countries and testing your knowledge of world capitals.
 Built with Next.js, TypeScript, and Motion to deliver smooth animations and an engaging learning experience.
 
 ## Features
 
-- **Home** — flag mosaic grid with continent filter and real-time search
-- **Countries** — alphabetical list with A–Z filter, population sort, flag zoom, and map links
-- **Quiz** — customizable capital-guessing quiz with progress tracking, scoring, and confetti
-- **Feedback** — modal form saved to Supabase with rate limiting via Upstash Redis
-- **Theming** — light/dark mode persisted across sessions
-- **Accessibility** — semantic HTML, ARIA labels, keyboard navigation throughout
+- **Home** - flag mosaic grid with continent filter and real-time search
+- **Countries** - alphabetical list with A–Z filter, population sort, flag zoom, and map links
+- **Quiz** - customizable capital-guessing quiz with progress tracking, scoring, and confetti
+- **Feedback** - modal form saved to Supabase with rate limiting via Upstash Redis
+- **Theming** - light/dark mode persisted across sessions
+- **Accessibility** - semantic HTML, ARIA labels, keyboard navigation throughout
 
 ## Tech Stack
 
@@ -31,7 +31,7 @@ Built with Next.js, TypeScript, and Motion to deliver smooth animations and an e
 - **Database**: [Supabase](https://supabase.com/)
 - **Rate limiting**: [Upstash Redis](https://upstash.com/)
 - **Confetti**: [canvas-confetti](https://github.com/catdad/canvas-confetti)
-- **Fonts**: [Fontshare](https://www.fontshare.com/) — *Synonym (400), Amulya (700)*
+- **Fonts**: [Fontshare](https://www.fontshare.com/) - *Synonym (400), Amulya (700)*
 
 ## Installation
 
@@ -63,7 +63,7 @@ NEXT_PUBLIC_APP_URL=https://your-domain.com
 ```
 
 Get Supabase values from your project under **Settings → API**.
-Get Upstash values from your [Upstash Console](https://console.upstash.com/) after creating a Redis database — find them
+Get Upstash values from your [Upstash Console](https://console.upstash.com/) after creating a Redis database - find them
 under **REST API**.
 Set `NEXT_PUBLIC_APP_URL` to your production domain for correct Open Graph URLs (defaults to `http://localhost:3000` in
 development).
@@ -91,9 +91,20 @@ npm run dev
 
 ---
 
+## Logging
+
+Structured logging via `src/lib/logger.ts`:
+
+- **Development**: colored console output
+- **Production**: JSON per line, visible in Vercel's free function logs (Project → Logs)
+
+Logged events: countries fetch, API route errors, feedback submissions, and rate limit blocks.
+
 ## Open Graph Image
 
 To enable rich link previews on social media, add an `og-image-default.png` (1200×630px) to the `/public` directory.
+
+![OG tag example](./public/og-tag-example.jpg)
 
 ---
 

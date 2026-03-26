@@ -13,28 +13,33 @@ npm run test:run     # Run Vitest once (CI)
 ```
 
 Run a single test file:
+
 ```bash
 npx vitest run src/__tests__/hooks/useQuiz.test.ts
 ```
 
 ## Architecture
 
-**world-explorer** is a Next.js App Router application for exploring countries and quizzing world geography knowledge. Data flows from the REST Countries API → Zod validation → React Context → components.
+**world-explorer** is a Next.js App Router application for exploring countries and quizzing world geography knowledge.
+Data flows from the REST Countries API → Zod validation → React Context → components.
 
 ### Data Flow
 
-- `src/app/api/countries/route.ts` — single API route that fetches from `restcountries.com/v3.1/all`, validates with Zod (`src/schemas/country.ts`), filters to independent countries, and returns a simplified shape
-- `src/context/CountriesContext.tsx` — fetches `/api/countries` on mount and provides `{ countries, loading, error }` to the tree
-- Types are inferred from Zod schemas; `CountryResponse` in `src/types/country.ts` is the canonical shape used throughout the UI
+- `src/app/api/countries/route.ts` - single API route that fetches from `restcountries.com/v3.1/all`, validates with
+  Zod (`src/schemas/country.ts`), filters to independent countries, and returns a simplified shape
+- `src/context/CountriesContext.tsx` - fetches `/api/countries` on mount and provides `{ countries, loading, error }` to
+  the tree
+- Types are inferred from Zod schemas; `CountryResponse` in `src/types/country.ts` is the canonical shape used
+  throughout the UI
 
 ### Context Providers (nested in `src/app/layout.tsx`)
 
-| Provider | Purpose |
-|---|---|
-| `ThemeProvider` | Light/dark mode, persisted in localStorage |
-| `NavigationGuardProvider` | Blocks navigation while quiz is active (ref-based, no re-renders) |
-| `GameProvider` | Quiz phase (`start` → `setup` → `quiz`), continent, question count |
-| `CountriesProvider` | Country data, loading/error state |
+| Provider                  | Purpose                                                            |
+|---------------------------|--------------------------------------------------------------------|
+| `ThemeProvider`           | Light/dark mode, persisted in localStorage                         |
+| `NavigationGuardProvider` | Blocks navigation while quiz is active (ref-based, no re-renders)  |
+| `GameProvider`            | Quiz phase (`start` → `setup` → `quiz`), continent, question count |
+| `CountriesProvider`       | Country data, loading/error state                                  |
 
 Each provider exports a custom hook (e.g. `useCountries()`, `useGame()`).
 
@@ -50,20 +55,25 @@ src/components/
 
 ### Animations
 
-All Framer Motion presets live in `src/animations/index.ts` — page variants, card stagger configs, spring transitions, etc. Import from there rather than defining inline.
+All Framer Motion presets live in `src/animations/index.ts` - page variants, card stagger configs, spring transitions,
+etc. Import from there rather than defining inline.
 
 ### Constants & Routes
 
-- `src/constants/routes.ts` — `APP_ROUTES` and `API_ROUTES`
-- `src/constants/index.ts` — UI messages, timing constants (answer reveal: 1000ms, auto-close: 2500ms), scoring thresholds (≥50 confetti, ≥70 "good", 100 perfect)
+- `src/constants/routes.ts` - `APP_ROUTES` and `API_ROUTES`
+- `src/constants/index.ts` - UI messages, timing constants (answer reveal: 1000ms, auto-close: 2500ms), scoring
+  thresholds (≥50 confetti, ≥70 "good", 100 perfect)
 
 ### Testing
 
-Tests live under `src/__tests__/` mirroring the `src/` structure (`api/`, `components/`, `context/`, `hooks/`, `schemas/`, `utils/`). Setup file: `src/__tests__/setup.ts` (imports `@testing-library/jest-dom`). Config: `vitest.config.ts`.
+Tests live under `src/__tests__/` mirroring the `src/` structure (`api/`, `components/`, `context/`, `hooks/`,
+`schemas/`, `utils/`). Setup file: `src/__tests__/setup.ts` (imports `@testing-library/jest-dom`). Config:
+`vitest.config.ts`.
 
 ### Styling
 
-All global CSS variables and utility classes are in `src/styles/globals.css`. Theming uses `[data-theme="dark"]` on the root element.
+All global CSS variables and utility classes are in `src/styles/globals.css`. Theming uses `[data-theme="dark"]` on the
+root element.
 
 **Breakpoints:**
 | Breakpoint | What changes |
@@ -73,6 +83,7 @@ All global CSS variables and utility classes are in `src/styles/globals.css`. Th
 | `≤ 480px` | `.flex-between` stacks vertically, table font reduces to 0.9rem |
 
 **CSS custom properties (key tokens):**
+
 - Spacing: `--space-xs/sm/md/lg/xl/2xl` (4 → 80px)
 - Radii: `--radius-sm/md/lg/xl` (4 → 12px)
 - Shadows: `--shadow-sm/md/lg`

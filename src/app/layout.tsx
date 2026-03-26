@@ -9,6 +9,7 @@ import { NavigationGuardProvider } from '@/context/NavigationGuardContext';
 import { fetchCountries } from '@/lib/fetchCountries';
 import Footer from '@/components/layout/Footer/Footer';
 import { APP_URL } from '@/constants/routes';
+import { logger } from '@/lib/logger';
 
 type RootLayoutProps = {
   children: ReactNode;
@@ -63,8 +64,9 @@ export default async function RootLayout({ children }: RootLayoutProps) {
   let fetchError: string | null = null;
   try {
     countries = await fetchCountries();
+    logger.info('Countries fetched', { count: countries.length });
   } catch (e) {
-    console.error('Failed to fetch countries:', e);
+    logger.error('Failed to fetch countries', { error: e instanceof Error ? e.message : String(e) });
     fetchError = e instanceof Error ? e.message : 'Failed to load countries';
   }
 

@@ -8,5 +8,5 @@ export function calculatePercentage(value: number, total: number): number {
 }
 
 export function formatList(list: string[]): string {
-  return list.length ? list.join(', ') : '—';
+  return list.length ? list.join(', ') : '-';
 }

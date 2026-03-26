@@ -5,11 +5,11 @@ import { useNavigationGuardContext } from '@/context/NavigationGuardContext';
 
 /**
  * Blocks navigation while `isActive` is true.
- * Calls `onBlock(proceed)` — show confirmation UI, then call `proceed()` to allow.
+ * Calls `onBlock(proceed)` - show confirmation UI, then call `proceed()` to allow.
  */
 export function useNavigationGuard(
   isActive: boolean,
-  onBlock: (proceed: () => void) => void,
+  onBlock: (proceed: () => void) => void
 ) {
   const { guardRef } = useNavigationGuardContext();
   const onBlockRef = useRef(onBlock);
