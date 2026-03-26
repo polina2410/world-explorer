@@ -1,12 +1,13 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import styles from './FeedbackModal.module.css';
 import Button from '@/components/UI/Button/Button';
 import SecondaryTitle from '@/components/UI/SecondaryTitle/SecondaryTitle';
 import { SCALE, TRANSITION_OVERLAY } from '@/animations';
 import { submitFeedback } from '@/actions/submitFeedback';
+import { useFocusTrap } from '@/hooks/useFocusTrap';
 
 type FeedbackModalProps = {
   isOpen: boolean;
@@ -16,6 +17,9 @@ type FeedbackModalProps = {
 type FormState = 'idle' | 'loading' | 'submitted';
 
 export default function FeedbackModal({ isOpen, onClose }: FeedbackModalProps) {
+  const modalRef = useRef<HTMLDivElement>(null);
+  useFocusTrap(modalRef, isOpen);
+
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
@@ -72,6 +76,7 @@ export default function FeedbackModal({ isOpen, onClose }: FeedbackModalProps) {
           transition={TRANSITION_OVERLAY}
         >
           <motion.div
+            ref={modalRef}
             className={styles.modal}
             onClick={(e) => e.stopPropagation()}
             initial={{ opacity: 0, scale: SCALE.ENTER, y: 8 }}
