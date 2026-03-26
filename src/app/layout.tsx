@@ -10,6 +10,7 @@ import { fetchCountries } from '@/lib/fetchCountries';
 import Footer from '@/components/layout/Footer/Footer';
 import { APP_URL } from '@/constants/routes';
 import { logger } from '@/lib/logger';
+import { headers } from 'next/headers';
 
 type RootLayoutProps = {
   children: ReactNode;
@@ -60,6 +61,7 @@ export const metadata: Metadata = {
 };
 
 export default async function RootLayout({ children }: RootLayoutProps) {
+  const nonce = (await headers()).get('x-nonce') ?? '';
   let countries: Awaited<ReturnType<typeof fetchCountries>> = [];
   let fetchError: string | null = null;
   try {
@@ -74,6 +76,7 @@ export default async function RootLayout({ children }: RootLayoutProps) {
     <html lang="en" suppressHydrationWarning>
       <head>
         <script
+          nonce={nonce}
           dangerouslySetInnerHTML={{
             __html: `try{var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}`,
           }}

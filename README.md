@@ -50,7 +50,7 @@ npm install
 
 3. **Set up environment variables**
 
-Create a `.env.local` file in the project root:
+Copy `.env.example` to `.env.local` and fill in your values:
 
 ```env
 SUPABASE_URL=your-project-url
