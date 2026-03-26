@@ -50,7 +50,6 @@
     --black-overlay-strong: rgba(0, 0, 0, var(--opacity-overlay-strong));
     --black-overlay-medium: rgba(0, 0, 0, var(--opacity-overlay-medium));
     --black-overlay-soft: rgba(0, 0, 0, var(--opacity-overlay-soft));
-    --black-overlay-subtle: rgba(0, 0, 0, var(--opacity-border));
 
     --shadow-sm: 0 2px 8px rgba(0, 0, 0, var(--opacity-subtle));
     --shadow-md: 0 4px 12px var(--black-overlay-soft);
@@ -64,12 +63,8 @@
     --z-modal: 300;
 
     --scale-0: 0;
-    --scale-press: 0.92;
-    --scale-enter: 0.95;
     --scale-basic: 1;
-    --scale-hover: 1.1;
     --scale-hover-lg: 1.15;
-    --scale-active: 1.2;
 
     --control-height: 50px;
     --control-padding-x: 18px;

@@ -30,6 +30,14 @@
     font-variant-numeric: tabular-nums;
 }
 
+.truncated {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 120px;
+    display: inline-block;
+}
+
 .countryMap a {
     font-weight: var(--fw-semibold);
     color: var(--color-accent);

@@ -14,7 +14,7 @@ type Props = {
 };
 
 export default function FlagMosaicGrid({ countries }: Props) {
-  const { close, state } = useFlagMosaic();
+  const { close, flip, state } = useFlagMosaic();
   const gridRef = useRef<HTMLDivElement>(null);
 
   useClickOutside(
@@ -36,7 +36,15 @@ export default function FlagMosaicGrid({ countries }: Props) {
     >
       <AnimatePresence mode="popLayout">
         {countries.map((country, i) => (
-          <FlagMosaicCard key={country.name} country={country} index={i} />
+          <FlagMosaicCard
+            key={country.name}
+            country={country}
+            index={i}
+            isFlipped={state.flipped === country.name}
+            isDimmed={state.flipped !== null && state.flipped !== country.name}
+            flip={flip}
+            close={close}
+          />
         ))}
       </AnimatePresence>
     </motion.div>

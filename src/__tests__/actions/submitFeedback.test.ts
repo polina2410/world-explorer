@@ -26,7 +26,7 @@ const validInput = { name: 'Alice', email: 'alice@example.com', message: 'Great 
 
 beforeEach(() => {
   vi.clearAllMocks();
-  mockHeaders.mockReturnValue({ get: (h: string) => (h === 'x-forwarded-for' ? '1.2.3.4' : null) });
+  mockHeaders.mockReturnValue({ get: vi.fn((h: string) => (h === 'x-forwarded-for' ? '1.2.3.4' : null)) });
   mockCheckRateLimit.mockResolvedValue({ allowed: true, retryAfterSeconds: 0 });
   mockInsert.mockResolvedValue({ error: null });
 });
@@ -65,21 +65,21 @@ describe('submitFeedback', () => {
   });
 
   it('uses x-forwarded-for header for the IP', async () => {
-    mockHeaders.mockReturnValue({ get: (h: string) => (h === 'x-forwarded-for' ? '10.0.0.1, 10.0.0.2' : null) });
+    mockHeaders.mockReturnValue({ get: vi.fn((h: string) => (h === 'x-forwarded-for' ? '10.0.0.1, 10.0.0.2' : null)) });
     await submitFeedback(validInput);
     expect(mockCheckRateLimit).toHaveBeenCalledWith('10.0.0.1');
   });
 
   it('falls back to x-real-ip when x-forwarded-for is absent', async () => {
     mockHeaders.mockReturnValue({
-      get: (h: string) => (h === 'x-real-ip' ? '5.5.5.5' : null),
+      get: vi.fn((h: string) => (h === 'x-real-ip' ? '5.5.5.5' : null)),
     });
     await submitFeedback(validInput);
     expect(mockCheckRateLimit).toHaveBeenCalledWith('5.5.5.5');
   });
 
   it('falls back to "unknown" when no IP headers present', async () => {
-    mockHeaders.mockReturnValue({ get: () => null });
+    mockHeaders.mockReturnValue({ get: vi.fn(() => null) });
     await submitFeedback(validInput);
     expect(mockCheckRateLimit).toHaveBeenCalledWith('unknown');
   });

@@ -1,8 +1,6 @@
-import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
+import { describe, it, expect, vi } from 'vitest';
 import { render, screen, fireEvent } from '@testing-library/react';
 import FlagMosaicCard from '@/components/features/HomePage/FlagMosaicCard/FlagMosaicCard';
-import { FlagMosaicProvider } from '@/context/FlagMosaicContext';
-import { ReactNode } from 'react';
 
 vi.mock('motion/react', () => import('@/__tests__/__mocks__/motionMock'));
 
@@ -13,64 +11,77 @@ vi.mock('next/image', () => ({
   ),
 }));
 
-const wrapper = ({ children }: { children: ReactNode }) => (
-  <FlagMosaicProvider>{children}</FlagMosaicProvider>
-);
-
 const country = { name: 'France', flag: 'fr.svg' };
 
-describe('FlagMosaicCard', () => {
-  beforeEach(() => vi.useFakeTimers());
-  afterEach(() => vi.useRealTimers());
+const defaultProps = {
+  country,
+  index: 0,
+  isFlipped: false,
+  isDimmed: false,
+  flip: vi.fn(),
+  close: vi.fn(),
+};
 
+describe('FlagMosaicCard', () => {
   it('renders the flag image', () => {
-    render(<FlagMosaicCard country={country} index={0} />, { wrapper });
+    render(<FlagMosaicCard {...defaultProps} />);
     expect(screen.getByAltText('France')).toBeInTheDocument();
   });
 
   it('shows country name on the back face', () => {
-    render(<FlagMosaicCard country={country} index={0} />, { wrapper });
+    render(<FlagMosaicCard {...defaultProps} />);
     expect(screen.getByText('France')).toBeInTheDocument();
   });
 
   it('has role="button"', () => {
-    render(<FlagMosaicCard country={country} index={0} />, { wrapper });
+    render(<FlagMosaicCard {...defaultProps} />);
     expect(screen.getByRole('button')).toBeInTheDocument();
   });
 
-  it('aria-pressed is false initially', () => {
-    render(<FlagMosaicCard country={country} index={0} />, { wrapper });
+  it('aria-pressed is false when isFlipped=false', () => {
+    render(<FlagMosaicCard {...defaultProps} isFlipped={false} />);
     expect(screen.getByRole('button')).toHaveAttribute('aria-pressed', 'false');
   });
 
-  it('clicking the card flips it (aria-pressed becomes true)', () => {
-    render(<FlagMosaicCard country={country} index={0} />, { wrapper });
-    fireEvent.click(screen.getByRole('button'));
+  it('aria-pressed is true when isFlipped=true', () => {
+    render(<FlagMosaicCard {...defaultProps} isFlipped={true} />);
     expect(screen.getByRole('button')).toHaveAttribute('aria-pressed', 'true');
   });
 
-  it('clicking a flipped card closes it (aria-pressed becomes false)', () => {
-    render(<FlagMosaicCard country={country} index={0} />, { wrapper });
+  it('clicking an unflipped card calls flip with country name', () => {
+    const flip = vi.fn();
+    render(<FlagMosaicCard {...defaultProps} isFlipped={false} flip={flip} />);
     fireEvent.click(screen.getByRole('button'));
-    fireEvent.click(screen.getByRole('button'));
-    expect(screen.getByRole('button')).toHaveAttribute('aria-pressed', 'false');
+    expect(flip).toHaveBeenCalledWith('France');
   });
 
-  it('Enter key flips the card', () => {
-    render(<FlagMosaicCard country={country} index={0} />, { wrapper });
+  it('clicking a flipped card calls close', () => {
+    const close = vi.fn();
+    render(<FlagMosaicCard {...defaultProps} isFlipped={true} close={close} />);
+    fireEvent.click(screen.getByRole('button'));
+    expect(close).toHaveBeenCalledTimes(1);
+  });
+
+  it('Enter key calls flip when not flipped', () => {
+    const flip = vi.fn();
+    render(<FlagMosaicCard {...defaultProps} isFlipped={false} flip={flip} />);
     fireEvent.keyDown(screen.getByRole('button'), { key: 'Enter' });
-    expect(screen.getByRole('button')).toHaveAttribute('aria-pressed', 'true');
+    expect(flip).toHaveBeenCalledWith('France');
   });
 
-  it('Space key flips the card', () => {
-    render(<FlagMosaicCard country={country} index={0} />, { wrapper });
+  it('Space key calls flip when not flipped', () => {
+    const flip = vi.fn();
+    render(<FlagMosaicCard {...defaultProps} isFlipped={false} flip={flip} />);
     fireEvent.keyDown(screen.getByRole('button'), { key: ' ' });
-    expect(screen.getByRole('button')).toHaveAttribute('aria-pressed', 'true');
+    expect(flip).toHaveBeenCalledWith('France');
   });
 
-  it('other keys do not flip the card', () => {
-    render(<FlagMosaicCard country={country} index={0} />, { wrapper });
+  it('other keys do not call flip or close', () => {
+    const flip = vi.fn();
+    const close = vi.fn();
+    render(<FlagMosaicCard {...defaultProps} flip={flip} close={close} />);
     fireEvent.keyDown(screen.getByRole('button'), { key: 'Tab' });
-    expect(screen.getByRole('button')).toHaveAttribute('aria-pressed', 'false');
+    expect(flip).not.toHaveBeenCalled();
+    expect(close).not.toHaveBeenCalled();
   });
 });

@@ -39,12 +39,6 @@
     box-shadow: var(--shadow-sm);
 }
 
-.label {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-
 .arrow {
     margin-left: var(--space-sm);
     transition: transform var(--transition-fast);
@@ -87,6 +81,11 @@
     background: var(--color-accent);
     color: var(--color-surface);
     font-weight: var(--fw-medium);
+}
+
+.option.highlighted {
+    background: var(--color-accent);
+    color: var(--color-surface);
 }
 
 @media (max-width: 768px) {
