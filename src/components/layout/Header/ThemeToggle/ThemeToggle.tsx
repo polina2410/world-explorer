@@ -1,4 +1,5 @@
 'use client';
+import { useEffect, useState } from 'react';
 import { motion, AnimatePresence, Variants } from 'motion/react';
 import styles from './ThemeToggle.module.css';
 import { MoonIcon, SunIcon } from '@/components/icons/ThemeIcons';
@@ -31,12 +32,15 @@ const iconVariants: Variants = {
 };
 
 export default function ThemeToggle({ theme, toggleTheme, onClick }: Props) {
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => { setMounted(true); }, []);
+
   const handleClick = () => {
     toggleTheme();
     if (onClick) onClick();
   };
 
-  const isDark = theme === 'dark';
+  const isDark = mounted && theme === 'dark';
 
   return (
     <motion.button
