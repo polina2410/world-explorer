@@ -1,10 +1,12 @@
 'use client';
 
+import { useRef } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import styles from './Modal.module.css';
 import Button from '@/components/UI/Button/Button';
 import SecondaryTitle from '@/components/UI/SecondaryTitle/SecondaryTitle';
 import { SCALE, TRANSITION_OVERLAY } from '@/animations';
+import { useFocusTrap } from '@/hooks/useFocusTrap';
 
 type ConfirmModalProps = {
   isOpen: boolean;
@@ -19,6 +21,9 @@ export default function Modal({
   onConfirm,
   onCancel,
 }: ConfirmModalProps) {
+  const modalRef = useRef<HTMLDivElement>(null);
+  useFocusTrap(modalRef, isOpen);
+
   return (
     <AnimatePresence>
       {isOpen && (
@@ -34,6 +39,7 @@ export default function Modal({
           transition={TRANSITION_OVERLAY}
         >
           <motion.div
+            ref={modalRef}
             className={styles.modal}
             onClick={(e) => e.stopPropagation()}
             initial={{ opacity: 0, scale: SCALE.ENTER, y: 8 }}

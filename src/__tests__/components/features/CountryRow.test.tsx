@@ -22,7 +22,7 @@ vi.mock('next/image', () => ({
   ),
 }));
 
-// FlagZoomOverlay uses createPortal — render into body which jsdom supports fine
+// FlagZoomOverlay uses createPortal - render into body which jsdom supports fine
 vi.mock('@/components/UI/FlagZoomOverlay/FlagZoomOverlay', () => ({
   default: ({
     countryName,
@@ -102,7 +102,7 @@ describe('CountryRow', () => {
 
   it('renders em dash when capital is absent', () => {
     renderRow({ ...france, capital: undefined });
-    expect(screen.getByText('—')).toBeInTheDocument();
+    expect(screen.getByText('-')).toBeInTheDocument();
   });
 
   it('clicking the flag image opens the zoom overlay', () => {

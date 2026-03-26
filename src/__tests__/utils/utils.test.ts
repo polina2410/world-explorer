@@ -1,5 +1,9 @@
 import { describe, it, expect } from 'vitest';
-import { formatPopulation, calculatePercentage, formatList } from '@/utils/utils';
+import {
+  formatPopulation,
+  calculatePercentage,
+  formatList,
+} from '@/utils/utils';
 
 describe('formatPopulation', () => {
   it('formats large numbers with commas', () => {
@@ -57,7 +61,7 @@ describe('formatList', () => {
   });
 
   it('returns em dash for empty array', () => {
-    expect(formatList([])).toBe('—');
+    expect(formatList([])).toBe('-');
   });
 
   it('joins three items', () => {

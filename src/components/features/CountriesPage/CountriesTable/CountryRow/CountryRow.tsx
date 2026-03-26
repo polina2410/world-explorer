@@ -48,7 +48,7 @@ export default function CountryRow({ country, index }: CountryRowProps) {
           {country.name}
         </td>
 
-        <td data-label="Capital">{country.capital ?? '—'}</td>
+        <td data-label="Capital">{country.capital ?? '-'}</td>
 
         <td data-label="Flag">
           {country.flag && (
@@ -72,7 +72,7 @@ export default function CountryRow({ country, index }: CountryRowProps) {
           {formatPopulation(country.population ?? 0)}
         </td>
 
-        <td data-label="Regions">{formatList(country.continents) ?? '—'}</td>
+        <td data-label="Regions">{formatList(country.continents) ?? '-'}</td>
 
         <td data-label="Link" className={styles.countryMap}>
           {country.mapUrl ? (
@@ -87,7 +87,7 @@ export default function CountryRow({ country, index }: CountryRowProps) {
               </a>
             </Tooltip>
           ) : (
-            '—'
+            '-'
           )}
         </td>
       </motion.tr>

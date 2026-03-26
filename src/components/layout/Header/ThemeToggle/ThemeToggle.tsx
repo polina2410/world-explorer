@@ -1,4 +1,5 @@
 'use client';
+import { useSyncExternalStore } from 'react';
 import { motion, AnimatePresence, Variants } from 'motion/react';
 import styles from './ThemeToggle.module.css';
 import { MoonIcon, SunIcon } from '@/components/icons/ThemeIcons';
@@ -30,13 +31,18 @@ const iconVariants: Variants = {
   }),
 };
 
+const emptySubscribe = () => () => {};
+const useIsClient = () => useSyncExternalStore(emptySubscribe, () => true, () => false);
+
 export default function ThemeToggle({ theme, toggleTheme, onClick }: Props) {
+  const isClient = useIsClient();
+
   const handleClick = () => {
     toggleTheme();
     if (onClick) onClick();
   };
 
-  const isDark = theme === 'dark';
+  const isDark = isClient && theme === 'dark';
 
   return (
     <motion.button

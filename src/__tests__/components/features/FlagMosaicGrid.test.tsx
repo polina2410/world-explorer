@@ -1,4 +1,4 @@
-import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
+import { describe, it, expect, vi } from 'vitest';
 import { render, screen, fireEvent } from '@testing-library/react';
 import FlagMosaicGrid from '@/components/features/HomePage/FlagMosaicGrid/FlagMosaicGrid';
 import { FlagMosaicProvider } from '@/context/FlagMosaicContext';
@@ -28,8 +28,6 @@ const wrapper = ({ children }: { children: ReactNode }) => (
 );
 
 describe('FlagMosaicGrid', () => {
-  beforeEach(() => vi.useFakeTimers({ toFake: ['setTimeout', 'clearTimeout'] }));
-  afterEach(() => vi.useRealTimers());
 
   it('renders a card for each country', () => {
     render(<FlagMosaicGrid countries={countries} />, { wrapper });

@@ -5,14 +5,14 @@ import { APP_URL } from '@/constants/routes';
 export const metadata: Metadata = {
   title: 'Quiz',
   description:
-    'Test your world geography knowledge — guess capitals, countries, and more across different continents.',
+    'Test your world geography knowledge - guess capitals across different continents.',
   alternates: {
     canonical: '/quiz',
   },
   openGraph: {
     title: 'Quiz | Countries Explorer',
     description:
-      'Test your world geography knowledge — guess capitals, countries, and more across different continents.',
+      'Test your world geography knowledge - guess capitals across different continents.',
     url: '/quiz',
     images: [
       {
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
   twitter: {
     title: 'Quiz | Countries Explorer',
     description:
-      'Test your world geography knowledge — guess capitals, countries, and more across different continents.',
+      'Test your world geography knowledge - guess capitals across different continents.',
   },
 };
 

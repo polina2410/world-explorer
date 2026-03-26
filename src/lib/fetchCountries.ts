@@ -8,7 +8,10 @@ export async function fetchCountries(): Promise<CountryResponse[]> {
   try {
     res = await fetch(
       'https://restcountries.com/v3.1/all?fields=name,capital,flags,population,continents,maps,independent',
-      { headers: { Accept: 'application/json' }, next: { revalidate: SIX_MONTHS_IN_SECONDS } },
+      {
+        headers: { Accept: 'application/json' },
+        next: { revalidate: SIX_MONTHS_IN_SECONDS },
+      }
     );
   } catch (e) {
     throw new Error(`REST Countries network error: ${e}`);
@@ -27,7 +30,7 @@ export async function fetchCountries(): Promise<CountryResponse[]> {
     .filter((c) => c.independent === true)
     .map((c) => ({
       name: c.name.common,
-      capital: Array.isArray(c.capital) ? c.capital[0] : '—',
+      capital: Array.isArray(c.capital) ? c.capital[0] : '-',
       flag: c.flags?.svg ?? '',
       population: c.population ?? 0,
       continents: c.continents ?? '',

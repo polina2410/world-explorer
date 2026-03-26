@@ -9,6 +9,8 @@ import { NavigationGuardProvider } from '@/context/NavigationGuardContext';
 import { fetchCountries } from '@/lib/fetchCountries';
 import Footer from '@/components/layout/Footer/Footer';
 import { APP_URL } from '@/constants/routes';
+import { logger } from '@/lib/logger';
+import { headers } from 'next/headers';
 
 type RootLayoutProps = {
   children: ReactNode;
@@ -59,12 +61,14 @@ export const metadata: Metadata = {
 };
 
 export default async function RootLayout({ children }: RootLayoutProps) {
+  const nonce = (await headers()).get('x-nonce') ?? '';
   let countries: Awaited<ReturnType<typeof fetchCountries>> = [];
   let fetchError: string | null = null;
   try {
     countries = await fetchCountries();
+    logger.info('Countries fetched', { count: countries.length });
   } catch (e) {
-    console.error('Failed to fetch countries:', e);
+    logger.error('Failed to fetch countries', { error: e instanceof Error ? e.message : String(e) });
     fetchError = e instanceof Error ? e.message : 'Failed to load countries';
   }
 
@@ -72,6 +76,8 @@ export default async function RootLayout({ children }: RootLayoutProps) {
     <html lang="en" suppressHydrationWarning>
       <head>
         <script
+          nonce={nonce}
+          suppressHydrationWarning
           dangerouslySetInnerHTML={{
             __html: `try{var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}`,
           }}

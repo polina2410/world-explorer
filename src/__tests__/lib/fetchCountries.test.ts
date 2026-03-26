@@ -14,7 +14,9 @@ const rawCountry = (overrides = {}) => ({
 });
 
 const mockFetch = (ok: boolean, body: unknown) =>
-  vi.fn().mockResolvedValue({ ok, status: ok ? 200 : 503, json: async () => body });
+  vi
+    .fn()
+    .mockResolvedValue({ ok, status: ok ? 200 : 503, json: async () => body });
 
 beforeEach(() => {
   vi.restoreAllMocks();
@@ -38,17 +40,23 @@ describe('fetchCountries', () => {
   it('filters out non-independent countries', async () => {
     vi.stubGlobal(
       'fetch',
-      mockFetch(true, [rawCountry(), rawCountry({ name: { common: 'Kosovo' }, independent: false })])
+      mockFetch(true, [
+        rawCountry(),
+        rawCountry({ name: { common: 'Kosovo' }, independent: false }),
+      ])
     );
     const result = await fetchCountries();
     expect(result).toHaveLength(1);
     expect(result[0].name).toBe('France');
   });
 
-  it('uses "—" as capital when capital array is missing', async () => {
-    vi.stubGlobal('fetch', mockFetch(true, [rawCountry({ capital: undefined })]));
+  it('uses "-" as capital when capital array is missing', async () => {
+    vi.stubGlobal(
+      'fetch',
+      mockFetch(true, [rawCountry({ capital: undefined })])
+    );
     const result = await fetchCountries();
-    expect(result[0].capital).toBe('—');
+    expect(result[0].capital).toBe('-');
   });
 
   it('uses empty string for flag when flags is missing', async () => {
@@ -69,12 +77,19 @@ describe('fetchCountries', () => {
   });
 
   it('throws when fetch itself throws (network error)', async () => {
-    vi.stubGlobal('fetch', vi.fn().mockRejectedValue(new Error('Network down')));
-    await expect(fetchCountries()).rejects.toThrow('REST Countries network error');
+    vi.stubGlobal(
+      'fetch',
+      vi.fn().mockRejectedValue(new Error('Network down'))
+    );
+    await expect(fetchCountries()).rejects.toThrow(
+      'REST Countries network error'
+    );
   });
 
   it('throws when the response body fails schema validation', async () => {
     vi.stubGlobal('fetch', mockFetch(true, [{ invalid: 'data' }]));
-    await expect(fetchCountries()).rejects.toThrow('REST Countries response validation failed');
+    await expect(fetchCountries()).rejects.toThrow(
+      'REST Countries response validation failed'
+    );
   });
 });
