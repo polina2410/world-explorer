@@ -8,7 +8,6 @@ vi.mock('motion/react', () => import('@/__tests__/__mocks__/motionMock'));
 
 const question: QuizQuestion = {
   country: 'France',
-  question: 'What is the capital of France?',
   correct: 'Paris',
   options: ['Paris', 'Berlin', 'Rome', 'Madrid'],
 };

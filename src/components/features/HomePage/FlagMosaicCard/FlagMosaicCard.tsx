@@ -1,9 +1,9 @@
 'use client';
 
+import { memo } from 'react';
 import { motion } from 'motion/react';
 import Image from 'next/image';
 import styles from './FlagMosaicCard.module.css';
-import { useFlagMosaic } from '@/context/FlagMosaicContext';
 import { SCALE, SPRING_CARD, SPRING_LAYOUT, CARD_STAGGER_INCREMENT, CARD_STAGGER_MAX_DELAY } from '@/animations';
 import { useState } from 'react';
 
@@ -13,13 +13,13 @@ type Props = {
     flag: string;
   };
   index: number;
+  isFlipped: boolean;
+  isDimmed: boolean;
+  flip: (name: string) => void;
+  close: () => void;
 };
 
-export default function FlagMosaicCard({ country, index }: Props) {
-  const { state, flip, close } = useFlagMosaic();
-
-  const isFlipped = state.flipped === country.name;
-  const isDimmed = Boolean(state.flipped && state.flipped !== country.name);
+const FlagMosaicCard = memo(function FlagMosaicCard({ country, index, isFlipped, isDimmed, flip, close }: Props) {
 
   const [mounted, setMounted] = useState(false);
 
@@ -76,4 +76,6 @@ export default function FlagMosaicCard({ country, index }: Props) {
       </div>
     </motion.div>
   );
-}
+});
+
+export default FlagMosaicCard;

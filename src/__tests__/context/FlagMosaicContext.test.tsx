@@ -28,11 +28,11 @@ describe('FlagMosaicContext', () => {
     expect(result.current.state.flipped).toBe('France');
   });
 
-  it('flip on the same card closes it (toggle)', () => {
+  it('flip called twice with the same name keeps it flipped (toggle is card responsibility)', () => {
     const { result } = renderHook(() => useFlagMosaic(), { wrapper });
     act(() => { result.current.flip('France'); });
     act(() => { result.current.flip('France'); });
-    expect(result.current.state.flipped).toBeNull();
+    expect(result.current.state.flipped).toBe('France');
   });
 
   it('flip on a different card switches to the new card', () => {

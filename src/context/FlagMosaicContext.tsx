@@ -3,6 +3,7 @@
 import {
   createContext,
   useContext,
+  useCallback,
   useEffect,
   useReducer,
   ReactNode,
@@ -44,30 +45,18 @@ export function FlagMosaicProvider({ children }: { children: ReactNode }) {
     };
   }, []);
 
-  const close = () => {
+  const close = useCallback(() => {
     dispatch({ type: 'CLOSE' });
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
+  }, []);
 
-    if (timeoutRef.current) {
-      clearTimeout(timeoutRef.current);
-    }
-  };
-
-  const flip = (name: string) => {
-    if (state.flipped === name) {
-      close();
-      return;
-    }
-
-    if (timeoutRef.current) {
-      clearTimeout(timeoutRef.current);
-    }
-
+  const flip = useCallback((name: string) => {
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
     dispatch({ type: 'FLIP', name });
-
     timeoutRef.current = setTimeout(() => {
       dispatch({ type: 'CLOSE' });
     }, FLAG_CARD_AUTO_CLOSE_MS);
-  };
+  }, []);
 
   return (
     <FlagMosaicContext.Provider value={{ state, flip, close }}>

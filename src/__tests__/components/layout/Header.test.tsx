@@ -26,7 +26,7 @@ vi.mock('next/link', () => ({
     href: string; children: ReactNode; onClick?: (e: React.MouseEvent) => void;
     className?: string; 'aria-current'?: string;
   }) => (
-    <a href={href} onClick={onClick} className={className} aria-current={ariaCurrent}>
+    <a href={href} onClick={onClick} className={className} aria-current={ariaCurrent as React.AriaAttributes['aria-current']}>
       {children}
     </a>
   ),
