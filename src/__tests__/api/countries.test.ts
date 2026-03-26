@@ -88,7 +88,7 @@ describe('GET /api/countries', () => {
     const res = await GET();
     expect(res.status).toBe(500);
     const data = await res.json();
-    expect(data.error).toMatch(/503/);
+    expect(data.error).toBe('Internal server error');
   });
 
   it('returns 500 when fetch throws', async () => {

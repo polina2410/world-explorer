@@ -17,13 +17,13 @@ describe('Tooltip', () => {
 
   it('shows tooltip content after mouseenter', () => {
     render(<Tooltip content="Visible tip"><span>Target</span></Tooltip>);
-    fireEvent.mouseEnter(screen.getByText('Target').closest('span[id="tooltip-trigger"]')!);
+    fireEvent.mouseEnter(screen.getByText('Target').closest('span')!);
     expect(screen.getByText('Visible tip')).toBeInTheDocument();
   });
 
   it('hides tooltip after mouseleave', () => {
     render(<Tooltip content="Gone tip"><span>Target</span></Tooltip>);
-    const trigger = screen.getByText('Target').closest('span[id="tooltip-trigger"]')!;
+    const trigger = screen.getByText('Target').closest('span')!;
     fireEvent.mouseEnter(trigger);
     expect(screen.getByText('Gone tip')).toBeInTheDocument();
     fireEvent.mouseLeave(trigger);
@@ -32,10 +32,9 @@ describe('Tooltip', () => {
 
   it('renders tooltip content in document.body (portal)', () => {
     render(<Tooltip content="Portal tip"><span>Target</span></Tooltip>);
-    const trigger = screen.getByText('Target').closest('span[id="tooltip-trigger"]')!;
+    const trigger = screen.getByText('Target').closest('span')!;
     fireEvent.mouseEnter(trigger);
-    const tooltip = document.getElementById('tooltip-portal');
-    expect(tooltip).toBeTruthy();
+    const tooltip = screen.getByRole('tooltip');
     expect(document.body.contains(tooltip)).toBe(true);
   });
 });

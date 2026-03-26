@@ -1,5 +1,5 @@
 import { createPortal } from 'react-dom';
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useId, useCallback } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { TRANSITION_POPUP } from '@/animations';
 import styles from './Tooltip.module.css';
@@ -20,7 +20,7 @@ const TOOLTIP_MAX_WIDTH = 200;
 const TOOLTIP_MAX_HEIGHT = 80;
 
 export default function Tooltip({ content, children }: TooltipProps) {
-  const [hovered, setHovered] = useState(false);
+  const [visible, setVisible] = useState(false);
   const [coords, setCoords] = useState<Coords>({
     top: 0,
     left: 0,
@@ -28,9 +28,13 @@ export default function Tooltip({ content, children }: TooltipProps) {
     flipY: false,
   });
   const wrapperRef = useRef<HTMLSpanElement>(null);
+  const tooltipId = useId();
+
+  const show = useCallback(() => setVisible(true), []);
+  const hide = useCallback(() => setVisible(false), []);
 
   useEffect(() => {
-    if (!hovered || !wrapperRef.current) return;
+    if (!visible || !wrapperRef.current) return;
     const rect = wrapperRef.current.getBoundingClientRect();
     const flipX = rect.right + TOOLTIP_MAX_WIDTH > window.innerWidth;
     const flipY = rect.bottom + TOOLTIP_MAX_HEIGHT > window.innerHeight;
@@ -41,7 +45,16 @@ export default function Tooltip({ content, children }: TooltipProps) {
       flipX,
       flipY,
     });
-  }, [hovered]);
+  }, [visible]);
+
+  useEffect(() => {
+    if (!visible) return;
+    function onKeyDown(e: KeyboardEvent) {
+      if (e.key === 'Escape') hide();
+    }
+    document.addEventListener('keydown', onKeyDown);
+    return () => document.removeEventListener('keydown', onKeyDown);
+  }, [visible, hide]);
 
   const transform = [
     coords.flipX ? 'translateX(-100%)' : 'translateX(0%)',
@@ -50,20 +63,23 @@ export default function Tooltip({ content, children }: TooltipProps) {
 
   return (
     <span
-      id="tooltip-trigger"
       ref={wrapperRef}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
+      onMouseEnter={show}
+      onMouseLeave={hide}
+      onFocus={show}
+      onBlur={hide}
       className={styles.wrapper}
+      aria-describedby={visible ? tooltipId : undefined}
     >
       {children}
 
       {typeof document !== 'undefined' &&
         createPortal(
           <AnimatePresence>
-            {hovered && (
+            {visible && (
               <motion.div
-                id="tooltip-portal"
+                id={tooltipId}
+                role="tooltip"
                 className={styles.tooltip}
                 style={{ top: coords.top, left: coords.left, transform }}
                 initial={{ opacity: 0 }}

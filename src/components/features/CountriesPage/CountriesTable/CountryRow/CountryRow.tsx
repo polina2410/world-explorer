@@ -16,7 +16,7 @@ type CountryRowProps = {
   index: number;
 };
 
-const flagImageStyle = { display: 'block', margin: '0 auto' };
+const flagImageStyle = { display: 'block', margin: '0 auto', width: 'auto' } as const;
 
 export default function CountryRow({ country, index }: CountryRowProps) {
   const [zoomedFlag, setZoomedFlag] = useState<string | null>(null);
