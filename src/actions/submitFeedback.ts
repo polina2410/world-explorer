@@ -22,13 +22,19 @@ export async function submitFeedback(
     headersList.get('x-real-ip') ??
     'unknown';
 
-  const { allowed, retryAfterSeconds } = await checkRateLimit(ip);
-  if (!allowed) {
-    logger.warn('Feedback rate limit hit', { ip, retryAfterSeconds });
-    return {
-      success: false,
-      error: `Too many requests. Please try again in ${retryAfterSeconds}s.`,
-    };
+  try {
+    const { allowed, retryAfterSeconds } = await checkRateLimit(ip);
+    if (!allowed) {
+      logger.warn('Feedback rate limit hit', { ip, retryAfterSeconds });
+      return {
+        success: false,
+        error: `Too many requests. Please try again in ${retryAfterSeconds}s.`,
+      };
+    }
+  } catch (e) {
+    logger.warn('Rate limit check failed, allowing request', {
+      error: e instanceof Error ? e.message : String(e),
+    });
   }
 
   const { name, email, message } = input;

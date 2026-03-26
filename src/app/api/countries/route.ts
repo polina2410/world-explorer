@@ -9,7 +9,7 @@ export async function GET() {
   } catch (err) {
     logger.error('GET /api/countries failed', { error: String(err) });
     return Response.json(
-      { error: `Internal server error ${err}` },
+      { error: 'Internal server error' },
       { status: 500 },
     );
   }
