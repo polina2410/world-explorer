@@ -74,7 +74,6 @@ export default async function RootLayout({ children }: RootLayoutProps) {
 
   return (
     <html lang="en" suppressHydrationWarning>
-      {/* noinspection HtmlRequiredTitleElement */}
       <head>
         <script
           nonce={nonce}
