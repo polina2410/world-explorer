@@ -6,18 +6,17 @@ import { APP_ROUTES } from '@/constants/routes';
 import { useQuiz } from '@/context/QuizContext';
 import { useTheme } from '@/context/ThemeContext';
 import ThemeToggle from '@/components/layout/Header/ThemeToggle/ThemeToggle';
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 import { motion } from 'motion/react';
 import { useClickOutside } from '@/hooks/useClickOutside';
+import { useToggle } from '@/hooks/useToggle';
 import { SCALE, SPRING_INTERACTIVE } from '@/animations';
 
 export default function Header() {
   const { resetGame } = useQuiz();
   const { theme, toggleTheme } = useTheme();
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, toggleMenu, setIsOpen] = useToggle(false);
   const headerRef = useRef<HTMLElement>(null);
-
-  const toggleMenu = () => setIsOpen((prev) => !prev);
 
   useClickOutside(() => setIsOpen(false), { ref: headerRef, touch: true });
 

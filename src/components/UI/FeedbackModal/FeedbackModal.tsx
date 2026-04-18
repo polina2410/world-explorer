@@ -39,8 +39,8 @@ export default function FeedbackModal({ isOpen, onClose }: FeedbackModalProps) {
         setError(result.error);
         setFormState('idle');
       }
-    } catch {
-      setError('Something went wrong. Please try again.');
+    } catch (e) {
+      setError(e instanceof Error ? e.message : 'Failed to submit feedback. Please try again.');
       setFormState('idle');
     }
   }

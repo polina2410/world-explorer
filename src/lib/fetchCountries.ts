@@ -4,6 +4,8 @@ import { CountryResponse } from '@/types/country';
 const SIX_MONTHS_IN_SECONDS = 60 * 60 * 24 * 180;
 
 export async function fetchCountries(): Promise<CountryResponse[]> {
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), 10_000);
   let res: Response;
   try {
     res = await fetch(
@@ -11,10 +13,13 @@ export async function fetchCountries(): Promise<CountryResponse[]> {
       {
         headers: { Accept: 'application/json' },
         next: { revalidate: SIX_MONTHS_IN_SECONDS },
+        signal: controller.signal,
       }
     );
   } catch (e) {
     throw new Error(`REST Countries network error: ${e}`);
+  } finally {
+    clearTimeout(timeoutId);
   }
 
   if (!res.ok) throw new Error(`REST Countries failed: ${res.status}`);

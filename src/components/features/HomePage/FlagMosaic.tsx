@@ -1,12 +1,13 @@
 'use client';
 
 import { motion } from 'motion/react';
-import { useMemo, useCallback } from 'react';
+import { useMemo, useCallback, useState, useEffect } from 'react';
 import { useRouter, useSearchParams, usePathname } from 'next/navigation';
 import { useCountries } from '@/context/CountriesContext';
 import DataLoader from '@/components/UI/DataLoader/DataLoader';
 import { getContinents } from '@/utils/getContinents';
 import { FlagMosaicProvider } from '@/context/FlagMosaicContext';
+import { useDebounce } from '@/hooks/useDebounce';
 import FlagMosaicGrid from '@/components/features/HomePage/FlagMosaicGrid/FlagMosaicGrid';
 import FlagMosaicControls from '@/components/features/HomePage/FlagMosaicControls/FlagMosaicControls';
 import { containerVariants, fadeUpVariants } from '@/animations';
@@ -33,22 +34,29 @@ export default function FlagMosaic() {
       const query = params.toString();
       router.replace(`${pathname}${query ? `?${query}` : ''}`);
     },
-    [router, pathname, searchParams],
+    [router, pathname, searchParams]
   );
+
+  const [localSearch, setLocalSearch] = useState(searchTerm);
+  const debouncedSearch = useDebounce(localSearch, 500);
+
+  useEffect(() => {
+    updateParam('search', debouncedSearch, '');
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [debouncedSearch]);
+
+  useEffect(() => {
+    setLocalSearch(searchTerm);
+  }, [searchTerm]);
 
   const toggleSortOrder = useCallback(
     () => updateParam('sort', sortOrder === 'asc' ? 'desc' : 'asc', 'asc'),
-    [sortOrder, updateParam],
+    [sortOrder, updateParam]
   );
 
   const setSelectedContinent = useCallback(
     (v: string) => updateParam('continent', v, 'All'),
-    [updateParam],
-  );
-
-  const setSearchTerm = useCallback(
-    (v: string) => updateParam('search', v, ''),
-    [updateParam],
+    [updateParam]
   );
 
   const continents = getContinents(countries);
@@ -61,22 +69,22 @@ export default function FlagMosaic() {
           : country.continents.includes(selectedContinent)
       )
       .filter((country) =>
-        country.name.toLowerCase().includes(searchTerm.toLowerCase())
+        country.name.toLowerCase().includes(localSearch.toLowerCase())
       )
       .sort((a, b) =>
         sortOrder === 'asc'
           ? a.name.localeCompare(b.name)
           : b.name.localeCompare(a.name)
       );
-  }, [countries, selectedContinent, searchTerm, sortOrder]);
+  }, [countries, selectedContinent, localSearch, sortOrder]);
 
   return (
     <FlagMosaicProvider>
       <motion.div variants={containerVariants}>
         <motion.div variants={fadeUpVariants}>
           <FlagMosaicControls
-            searchTerm={searchTerm}
-            setSearchTerm={setSearchTerm}
+            searchTerm={localSearch}
+            setSearchTerm={setLocalSearch}
             sortOrder={sortOrder}
             toggleSortOrder={toggleSortOrder}
             selectedContinent={selectedContinent}
