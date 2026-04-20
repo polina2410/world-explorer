@@ -1,7 +1,8 @@
 # Review Action
 
 1. Read current-feature.md to understand the goals
-2. Review all code changes made for this feature
+2. Use the `code-scanner` agent to run automated static analysis on all changed files — note any findings before proceeding
+3. Review all code changes made for this feature
 3. Evaluate across six dimensions:
     - **Correctness** — logic is right, edge cases handled, no null/undefined surprises
     - **Security** — no exposed secrets, no XSS, inputs validated at boundaries

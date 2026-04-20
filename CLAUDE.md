@@ -43,4 +43,5 @@ npx vitest run src/__tests__/hooks/useQuiz.test.ts #run a single test file
 - Never force-push main
 - Commit messages: imperative mood, under 72 chars
 - Never commit `.env` or secrets
-- Always confirm with the user before destructive git commands 
+- Always confirm with the user before destructive git commands
+- Never add `Co-Authored-By` lines to commit messages

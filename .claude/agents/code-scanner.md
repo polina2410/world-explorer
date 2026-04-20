@@ -1,6 +1,9 @@
 ---
 name: code-scanner
-description: Scans the codebase for code quality, security, and performance issues
+description: >
+  Scans the codebase for code quality, security, and performance issues. Read-only — reports
+  findings only, never modifies files. Trigger words: scan, audit, code quality, security issues,
+  vulnerabilities, performance problems, find bugs, check the codebase, static analysis.
 tools: Read, Glob, Grep
 model: sonnet
 ---

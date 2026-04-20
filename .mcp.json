@@ -6,6 +6,12 @@
       "args": ["@playwright/mcp@latest"],
       "env": {}
     },
+    "browser-tools": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["@agentdesks/mcp-server-browsertools"],
+      "env": {}
+    },
     "context7": {
       "type": "stdio",
       "command": "npx",

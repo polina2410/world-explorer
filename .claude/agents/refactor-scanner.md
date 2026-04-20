@@ -47,10 +47,10 @@ You are an expert code refactoring analyst specializing in identifying duplicate
 - Shared className construction patterns
 - Common event handler patterns that could be custom hooks
 
-### Database & API Patterns
-- Repeated Prisma query patterns
-- Similar server action structures
-- Shared authorization checks
+### API Patterns
+- Repeated fetch/async patterns in `src/lib/`
+- Similar API route structures
+- Shared error handling across fetch calls
 
 ## Output Format
 
