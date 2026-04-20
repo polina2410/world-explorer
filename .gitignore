@@ -7,3 +7,4 @@ npm-debug.log*
 *.tsbuildinfo
 .idea/
 coverage/
+.playwright-mcp/

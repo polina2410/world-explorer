@@ -9,7 +9,7 @@ export async function fetchCountries(): Promise<CountryResponse[]> {
   let res: Response;
   try {
     res = await fetch(
-      'https://restcountries.com/v3.1/all?fields=name,capital,flags,population,continents,maps,independent',
+      'https://restcountries.com/v3.1/all?fields=name,capital,flags,population,continents,maps,independent,latlng',
       {
         headers: { Accept: 'application/json' },
         next: { revalidate: SIX_MONTHS_IN_SECONDS },
@@ -40,6 +40,7 @@ export async function fetchCountries(): Promise<CountryResponse[]> {
       population: c.population ?? 0,
       continents: c.continents ?? '',
       mapUrl: c.maps?.googleMaps ?? '',
+      latlng: c.latlng,
     }));
 
   try {

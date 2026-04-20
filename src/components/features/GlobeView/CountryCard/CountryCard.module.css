@@ -1,0 +1,90 @@
+.card {
+    position: absolute;
+    top: var(--space-md);
+    right: var(--space-md);
+    z-index: var(--z-sticky);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-lg);
+    padding: var(--space-md);
+    width: 200px;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+}
+
+.closeButton {
+    position: absolute;
+    top: var(--space-xs);
+    right: var(--space-sm);
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.25rem;
+    line-height: 1;
+    color: var(--color-text-secondary);
+    padding: var(--space-xs);
+    border-radius: var(--radius-sm);
+    transition: color var(--transition-fast), background-color var(--transition-fast);
+}
+
+.closeButton:hover {
+    color: var(--color-text-primary);
+    background-color: var(--color-bg-alt);
+}
+
+.closeButton:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+}
+
+.flagWrapper {
+    position: relative;
+    width: 100%;
+    height: 88px;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+}
+
+.flagImage {
+    object-fit: contain;
+}
+
+.countryName {
+    font-size: var(--fs-base);
+    font-weight: var(--fw-semibold);
+    color: var(--color-text-primary);
+    margin: 0;
+    padding-right: var(--space-lg);
+}
+
+.details {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+}
+
+.detailRow {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.detailLabel {
+    font-size: 0.75rem;
+    font-weight: var(--fw-semibold);
+    color: var(--color-text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.detailValue {
+    font-size: var(--fs-base);
+    color: var(--color-text-primary);
+    font-variant-numeric: tabular-nums;
+    margin: 0;
+}

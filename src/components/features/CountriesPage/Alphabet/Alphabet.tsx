@@ -23,16 +23,6 @@ export default function Alphabet({ onSelectAction }: AlphabetProps) {
     onSelectAction?.(newLetter);
   };
 
-  const handleKeyDown = (
-    e: React.KeyboardEvent<HTMLAnchorElement>,
-    letter: string
-  ) => {
-    if (e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault();
-      handleClick(letter);
-    }
-  };
-
   return (
     <div
       className={`table ${styles.wrapper}`}
@@ -50,20 +40,14 @@ export default function Alphabet({ onSelectAction }: AlphabetProps) {
           <Tooltip
             content={`Click to show countries that start with the letter "${letter}"`}
           >
-            <a
-              href="#"
-              role="button"
+            <button
+              type="button"
               aria-pressed={activeLetter === letter}
-              tabIndex={0}
-              onClick={(e) => {
-                e.preventDefault();
-                handleClick(letter);
-              }}
-              onKeyDown={(e) => handleKeyDown(e, letter)}
+              onClick={() => handleClick(letter)}
               className={`${styles.letter} ${activeLetter === letter ? styles.active : ''}`}
             >
               {letter}
-            </a>
+            </button>
           </Tooltip>
         </motion.div>
       ))}

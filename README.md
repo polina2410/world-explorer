@@ -15,6 +15,7 @@ Built with Next.js, TypeScript, and Motion to deliver smooth animations and an e
 
 - **Home** - flag mosaic grid with continent filter and real-time search
 - **Countries** - alphabetical list with A–Z filter, population sort, flag zoom, and map links
+- **Globe** - interactive 3D globe with continent-colored country dots, click-to-detail cards, and a continent color legend
 - **Quiz** - customizable capital-guessing quiz with progress tracking, scoring, and confetti
 - **Feedback** - modal form saved to Supabase with rate limiting via Upstash Redis
 - **Theming** - light/dark mode persisted across sessions
@@ -32,6 +33,7 @@ Built with Next.js, TypeScript, and Motion to deliver smooth animations and an e
 - **Rate limiting**: [Upstash Redis](https://upstash.com/)
 - **Confetti**: [canvas-confetti](https://github.com/catdad/canvas-confetti)
 - **Fonts**: [Fontshare](https://www.fontshare.com/) - *Synonym (400), Amulya (700)*
+- **3D Globe**: [react-globe.gl](https://github.com/vasturiano/globe.gl)
 
 ## Installation
 
@@ -99,6 +101,60 @@ Structured logging via `src/lib/logger.ts`:
 - **Production**: JSON per line, visible in Vercel's free function logs (Project → Logs)
 
 Logged events: countries fetch, API route errors, feedback submissions, and rate limit blocks.
+
+## Claude Code Setup
+
+This project includes a Claude Code configuration under `.claude/` with custom agents, skills, and a feature workflow.
+
+### Agents
+
+Specialized sub-agents invoked automatically during the feature workflow or on demand:
+
+| Agent | Purpose |
+|-------|---------|
+| `developer` | Full-stack React/Next.js implementation |
+| `debugger` | Root-cause analysis for TypeScript/React bugs |
+| `qa` | E2E testing with Playwright |
+| `ui-reviewer` | Visual, responsive, and accessibility review via Playwright |
+| `a11y` | WCAG AA accessibility audit |
+| `performance` | Bundle size, Core Web Vitals, and caching audit |
+| `code-scanner` | Code quality, security, and performance issues |
+| `refactor-scanner` | Duplicated logic and DRY violations |
+| `react-refactoring-expert` | Complexity reduction and refactoring |
+| `coverage` | Test coverage gaps by risk |
+| `api` | Next.js API route design and validation audit |
+| `supabase` | Schema, RLS policies, and migration review |
+| `devops` | CI/CD workflows and secret hygiene |
+| `dependency-manager` | npm hygiene, vulnerabilities, upgrade planning |
+| `ba` | Requirements engineering and user story writing |
+| `devil` | Devil's advocate critic for plans and architecture |
+| `docs-writer` | README, architecture guides, and context files |
+
+### Skills (slash commands)
+
+Invokable via `/skill-name` in the Claude Code CLI:
+
+| Skill | Purpose |
+|-------|---------|
+| `/feature` | Full feature lifecycle: load spec → start → review → complete |
+| `/research` | Generate documentation from code and external sources |
+| `/brainstorming` | Structured ideation before implementation |
+| `/plan-writing` | Task decomposition and implementation plans |
+| `/code-reviewer` | Deep review for correctness, patterns, security |
+| `/test-master` | Write Vitest unit and integration tests |
+| `/playwright-expert` | E2E test authoring with Playwright MCP |
+| `/api-design` | API route structure, validation, and error handling |
+| `/github-actions` | CI/CD workflow setup and debugging |
+| `/cleanup` | Remove console logs, unused imports, verify .gitignore |
+
+### Feature Workflow
+
+The `/feature` skill manages the full lifecycle of a feature:
+
+1. `/feature load <description>` — define goals and acceptance criteria
+2. `/feature start` — create branch, begin implementation with quality gates
+3. `/feature review` — verify goals met, run code-scanner and accessibility audit
+4. `/feature complete` — commit, push, open PR, reset working file
 
 ## Open Graph Image
 
