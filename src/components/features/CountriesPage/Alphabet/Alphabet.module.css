@@ -11,6 +11,10 @@
     font-weight: var(--fw-semibold);
     cursor: pointer;
     color: var(--color-accent);
+    background: none;
+    border: none;
+    font-family: inherit;
+    font-size: inherit;
     transition: background-color var(--transition-fast), color var(--transition-fast);
 }
 

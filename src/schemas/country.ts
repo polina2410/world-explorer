@@ -18,6 +18,7 @@ export const CountrySchema = z.object({
     })
     .optional(),
   independent: z.boolean().optional(),
+  latlng: z.tuple([z.number(), z.number()]).optional(),
 });
 
 export const CountriesSchema = z.array(CountrySchema);
@@ -30,6 +31,7 @@ export const CountryResponseSchema = z.object({
   continents: z.array(z.string()),
   mapUrl: z.string().optional(),
   independent: z.boolean().optional(),
+  latlng: z.tuple([z.number(), z.number()]).optional(),
 });
 
 export const CountriesResponseSchema = z.array(CountryResponseSchema);

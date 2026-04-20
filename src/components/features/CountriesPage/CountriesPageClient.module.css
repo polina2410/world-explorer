@@ -1,0 +1,36 @@
+.viewToggle {
+    display: flex;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-lg);
+}
+
+.toggleButton {
+    padding: var(--space-sm) var(--space-md);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-border);
+    background: var(--color-surface);
+    cursor: pointer;
+    font-size: var(--fs-base);
+    font-weight: var(--fw-regular);
+    color: var(--color-text-primary);
+    line-height: var(--lh-st);
+    transition: background var(--transition-fast),
+        color var(--transition-fast),
+        border-color var(--transition-fast),
+        box-shadow var(--transition-fast);
+}
+
+.toggleButton:hover {
+    box-shadow: var(--shadow-md);
+}
+
+.toggleButton:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+}
+
+.toggleButtonActive {
+    background: var(--color-accent);
+    color: var(--color-surface);
+    border-color: var(--color-accent);
+}
