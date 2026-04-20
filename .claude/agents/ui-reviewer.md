@@ -1,7 +1,10 @@
 ---
 name: ui-reviewer
-description: Reviews UI for visual issues, responsiveness, and accessibility
-tools: "Read, Glob, Grep, mcp\_\_playwright\_\_*"
+description: >
+  Reviews UI for visual issues, responsiveness, and accessibility. Uses Playwright MCP to
+  view pages live. Trigger words: UI review, visual design, layout, spacing, responsive,
+  mobile, desktop, looks wrong, design feedback, check the UI, screenshot, visual regression.
+tools: Read, Glob, Grep, mcp__playwright__*
 model: sonnet
 ---
 

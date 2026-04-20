@@ -13,6 +13,12 @@ Review the codebase for cleanup tasks:
 5. Find orphaned/unused files
 6. Check that context files match actual project state
 7. Find `@ts-ignore` comments that might be stale
+8. Verify `.gitignore` covers all sensitive and generated files:
+   - `.env`, `.env.local`, `.env*.local` — secrets must never be committed
+   - `coverage/` — test coverage output
+   - `/.next/` — Next.js build output
+   - `/node_modules` — dependencies
+   - Any new secret or generated file patterns introduced since last check
 
 **Mode: $ARGUMENTS**
 

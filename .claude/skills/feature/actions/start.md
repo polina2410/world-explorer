@@ -10,5 +10,9 @@
 
 6. Run `npm run lint` — fix any errors before continuing
 7. Run `npm run test:run` — fix any failing tests before continuing
+8. Run `npm run build` — fix any TypeScript or Next.js compilation errors before continuing
 8. Use the `ui-reviewer` agent to check the UI visually
-9. Only report the feature as done when all three pass
+9. Use the `ui-reviewer` agent to check the UI visually
+10. If the feature touches interactive elements, forms, or navigation — use the `a11y` agent to audit keyboard navigation and ARIA patterns
+11. If the feature adds or modifies any file in `src/app/api/` — use the `api` agent to verify route design, error shapes, and Zod validation
+12. Only report the feature as done when all checks pass
