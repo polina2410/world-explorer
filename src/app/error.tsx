@@ -1,5 +1,7 @@
 'use client';
 
+import * as Sentry from '@sentry/nextjs';
+import { useEffect } from 'react';
 import Link from 'next/link';
 import { APP_ROUTES } from '@/constants/routes';
 import styles from './not-found.module.css';
@@ -9,7 +11,10 @@ type ErrorProps = {
   reset: () => void;
 };
 
-export default function Error({ reset }: ErrorProps) {
+export default function Error({ error, reset }: ErrorProps) {
+  useEffect(() => {
+    Sentry.captureException(error);
+  }, [error]);
   return (
     <div className={`page container flex-center stack ${styles.wrapper}`}>
       <span className={styles.code}>500</span>
