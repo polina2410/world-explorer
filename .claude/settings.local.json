@@ -22,5 +22,10 @@
       "Bash(grep -v \"^$\")",
       "Bash(git merge *)"
     ]
-  }
+  },
+  "disabledMcpjsonServers": [
+    "playwright",
+    "browser-tools",
+    "context7"
+  ]
 }
